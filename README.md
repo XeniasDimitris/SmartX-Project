@@ -8,6 +8,6 @@
   
  ## Architecture
  
-  We are using ArrangoDB for our database, django framework for the server and ReactJS for the application following a RESTful API architecture wit a MVC model.
+  We are using ArrangoDB for our database, django framework for the server and ReactJS for the application following a RESTful API architecture with a MVC model.
   
   
