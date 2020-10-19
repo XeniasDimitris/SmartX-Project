@@ -1,2 +1,4 @@
 .vscode
 **/.myenv
+**/__pycache__
+**/db.sqlite3
