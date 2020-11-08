@@ -1,7 +1,7 @@
-.vscode
-**/venv
-**/__pycache__
+.vscode/
+**/venv/
+**/__pycache__/
 **/db.sqlite3
 
 **/migrations
-.idea
+.idea/
