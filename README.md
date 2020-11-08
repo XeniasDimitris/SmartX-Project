@@ -1,4 +1,4 @@
-# Analytics-Engine
+# SmartX-Project
 
 ## Summary
   This project aims to creat a dashboard for descriptive analytics of Aarhus Datasets. Even though we could use tools like Tableau for our job, in this project we will create from scratch such a tool in a server-client web-based application.
