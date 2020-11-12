@@ -10,6 +10,8 @@ urlpatterns = [
     path('weather/wind_speed/', views.WeatherWindSpeed.as_view()),
     path('weather/wind_direction/', views.WeatherWindDirection.as_view()),
     path('weather/dew/', views.WeatherDew.as_view()),
+    path('parkings/info/', views.ParkingInfoView.as_view()),
+    path('parkings/records/', views.ParkingRecordsView.as_view())
 
 ]
 

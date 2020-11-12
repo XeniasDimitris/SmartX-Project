@@ -29,7 +29,7 @@ def get_weather_data(file, typeof, request):
     end = request.query_params['end'] if 'end' in request.query_params else None
 
     # Query with datetime index
-    query = df.loc[start:end, ['datetime', 'value']].sort_index()
+    query = df.loc[start:end].sort_index()
     res = query.to_dict('records')
 
     # Free up memory
