@@ -32,7 +32,7 @@ class ParkingRecordsView(APIView):
         query = df.loc[start:end]
         res = query.to_dict('records')
         # clear memory
-        del df1, df2, df
+        del df1, df2, df, query
         gc.collect()
         return Response(res, status=status.HTTP_200_OK)
 

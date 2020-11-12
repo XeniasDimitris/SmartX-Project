@@ -11,7 +11,9 @@ urlpatterns = [
     path('weather/wind_direction/', views.WeatherWindDirection.as_view()),
     path('weather/dew/', views.WeatherDew.as_view()),
     path('parkings/info/', views.ParkingInfoView.as_view()),
-    path('parkings/records/', views.ParkingRecordsView.as_view())
+    path('parkings/records/', views.ParkingRecordsView.as_view()),
+    path('dokk1/sensors/', views.Dokk1SensorsView.as_view()),
+    path('dokk1/records/', views.Dokk1RecordsView.as_view())
 
 ]
 

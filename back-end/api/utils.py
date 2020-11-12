@@ -23,7 +23,7 @@ def get_weather_data(file, typeof, request):
     # Creation of Dataframe
     df = pd.DataFrame(data=data)
     df['datetime_pd'] = pd.to_datetime(df['datetime'], infer_datetime_format=True)
-    df = df.set_index(['datetime_pd'])
+    df.set_index(['datetime_pd'], inplace=True)
 
     start = request.query_params['start'] if 'start' in request.query_params else None
     end = request.query_params['end'] if 'end' in request.query_params else None
