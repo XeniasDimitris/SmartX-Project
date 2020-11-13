@@ -7,6 +7,7 @@ from django.http.response import HttpResponse
 
 data_dir = '/home/dimitris/Desktop/DiplomaThesis/Datasets/Aarhus/Parkings/'
 
+
 class ParkingInfoView(APIView):
 
     def get(self, request, format=None):
@@ -29,7 +30,7 @@ class ParkingRecordsView(APIView):
         # do the default left join
         df = df2.set_index('garagecode').join(df1.set_index('garagecode')).set_index('datetime_pd')
         # do the query
-        query = df.loc[start:end]
+        query = df.loc[start:end].sort_index()
         res = query.to_dict('records')
         # clear memory
         del df1, df2, df, query

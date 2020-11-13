@@ -13,8 +13,9 @@ urlpatterns = [
     path('parkings/info/', views.ParkingInfoView.as_view()),
     path('parkings/records/', views.ParkingRecordsView.as_view()),
     path('dokk1/sensors/', views.Dokk1SensorsView.as_view()),
-    path('dokk1/records/', views.Dokk1RecordsView.as_view())
-
+    path('dokk1/records/', views.Dokk1RecordsView.as_view()),
+    path('traffic/sensors/', views.TrafficSensorsView.as_view()),
+    path('traffic/records/', views.TrafficRecordsView.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
