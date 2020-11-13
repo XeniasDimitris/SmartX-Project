@@ -7,6 +7,7 @@ from django.http.response import HttpResponse
 
 data_dir = '/home/dimitris/Desktop/DiplomaThesis/Datasets/Aarhus/Pollution/pollution'
 
+
 class PollutionRecordsView(APIView):
 
     def get(self, request, format=None):
