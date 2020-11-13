@@ -16,6 +16,7 @@ urlpatterns = [
     path('dokk1/records/', views.Dokk1RecordsView.as_view()),
     path('traffic/sensors/', views.TrafficSensorsView.as_view()),
     path('traffic/records/', views.TrafficRecordsView.as_view()),
+    path('pollution/records/', views.PollutionRecordsView.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

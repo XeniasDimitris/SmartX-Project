@@ -12,7 +12,7 @@ class TrafficSensorsView(APIView):
 
     def get(self, request, format=None):
         columns = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 18, 19, 20, 21, 21]
-        df = pd.read_csv(f'{data_dir}trafficMetaDataNoNAN.csv', usecols=columns )
+        df = pd.read_csv(f'{data_dir}trafficMetaDataNoNAN.csv', usecols=columns)
         res = df.to_dict('records')
         del df
         gc.collect()
