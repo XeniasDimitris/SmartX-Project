@@ -30,7 +30,8 @@ class Dokk1RecordsView(APIView):
         df2['datetime_pd'] = pd.to_datetime(df2['datetime'], infer_datetime_format=True)
 
         df = df2.set_index('sensor').join(df1.set_index('id'), how='inner').set_index('datetime_pd').drop(columns='_id')
-        query = df.loc[start:end]
+        print('ok')
+        query = df.loc[start:end].sort_index()
         res = query.to_dict('records')
         print(len(res))
         del df1, df2, df, query
