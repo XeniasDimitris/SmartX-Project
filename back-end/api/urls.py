@@ -20,5 +20,4 @@ urlpatterns = [
     path('demographics/', views.DemographicsView.as_view()),
     path('events/', views.EventsView.as_view()),
 ]
-
 urlpatterns = format_suffix_patterns(urlpatterns)

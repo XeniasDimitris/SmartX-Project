@@ -17,7 +17,7 @@ class WeatherHumidity(APIView):
 class WeatherTemperature(APIView):
 
     def get(self, request, format=None):
-        res = get_weather_data(f'{data_dir}/Weather/tempm.txt', int, request)
+        res = get_weather_data(f'{data_dir}/Weather/tempm.txt', float, request)
         return Response(res, status=status.HTTP_200_OK)
 
 
@@ -31,7 +31,7 @@ class WeatherPressure(APIView):
 class WeatherWindSpeed(APIView):
 
     def get(self, request, format=None):
-        res = get_weather_data(f'{data_dir}/Weather/wspdm.txt', int, request)
+        res = get_weather_data(f'{data_dir}/Weather/wspdm.txt', float, request)
         return Response(res, status=status.HTTP_200_OK)
 
 
@@ -45,5 +45,5 @@ class WeatherWindDirection(APIView):
 class WeatherDew(APIView):
 
     def get(self, request, format=None):
-        res = get_weather_data(f'{data_dir}/Weather/dewptm.txt', int, request)
+        res = get_weather_data(f'{data_dir}/Weather/dewptm.txt', float, request)
         return Response(res, status=status.HTTP_200_OK)
