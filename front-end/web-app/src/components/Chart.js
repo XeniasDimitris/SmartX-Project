@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from 'react';
-import { useTheme } from '@material-ui/core/styles';
 import Title from './Title';
 
 import * as am4core from "@amcharts/amcharts4/core";

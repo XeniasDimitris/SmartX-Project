@@ -2,7 +2,7 @@ import React from 'react';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Title from './Title';
+import Title from './Title'
 
 function preventDefault(event) {
   event.preventDefault();
@@ -18,16 +18,16 @@ export default function Info() {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Title>Some Stuff</Title>
-      <Typography component="p" variant="h4">
-        Some Stuff
+      <Title>Title</Title>
+      <Typography component="p" variant="p">
+        paragraph
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
-        some stuff
+        deposit
       </Typography>
       <div>
         <Link color="primary" href="#" onClick={preventDefault}>
-          some stuff
+          link
         </Link>
       </div>
     </React.Fragment>

@@ -41,6 +41,10 @@ export const useStyles = makeStyles((theme) => ({
     title: {
         flexGrow: 1,
     },
+    logo: {   
+        height: '40px',
+        marginTop: 12
+    },
     drawerPaper: {
         position: 'fixed',
         whiteSpace: 'nowrap',
@@ -69,7 +73,6 @@ export const useStyles = makeStyles((theme) => ({
     },
     container: {
         marginLeft: '100px',
-        position:'relative',
         maxWidth: '100%',
         width: '93%',
         paddingTop: theme.spacing(4),
@@ -94,6 +97,12 @@ export const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
     },
     fixedHeight: {
-        height: 500,
+        height: 509,
     },
+    style:{
+        color: 'red'
+    },
+    breadcrumbs:{
+        color: 'white'
+    }
 }));

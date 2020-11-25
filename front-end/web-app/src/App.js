@@ -1,12 +1,12 @@
-import React from 'react';
+import React , { useState }from 'react';
 import Dashboard from './components/Dashboard'
+import CssBaseline from '@material-ui/core/CssBaseline';
 import 'fontsource-roboto';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-
-
-
-
+import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import AppDrawer from './components/AppDrawer'
+import { useStyles }  from './css/DashboardCSS'
 
 function App() {
 
@@ -35,14 +35,37 @@ function App() {
   );
   //----------------------------------------------------------------------------
 
-    
-  return (
-    <ThemeProvider theme={theme}>
-    <div>
-      <Dashboard />
-    </div>
-    </ThemeProvider>
+  const classes = useStyles();
 
+  const [open, setOpen] = useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+  return (
+    
+    <ThemeProvider theme={theme}>
+
+      <CssBaseline />
+
+      <div className={classes.root}>
+        <Router>
+          <AppDrawer open={open} 
+                          handleDrawerOpen={handleDrawerOpen} 
+                          handleDrawerClose={handleDrawerClose}
+                            />
+          <main className={classes.content}>
+            <div className={classes.appBarSpacer} />
+            <Switch>
+              <Route path='/dashboard' render={(props) => (<Dashboard {...props} open={open} />)}/>
+            </Switch>
+          </main>
+        </Router>
+      </div>
+    </ThemeProvider>
   );
 }
 
