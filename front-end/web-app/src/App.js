@@ -4,9 +4,18 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import 'fontsource-roboto';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Container from '@material-ui/core/Container';
+
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import AppDrawer from './components/AppDrawer'
+import HomePage from './components/HomePage'
+import Copyright from './components/Copyright'
+import Box from '@material-ui/core/Box';
 import { useStyles }  from './css/DashboardCSS'
+import clsx from 'clsx'
+
+
+
 
 function App() {
 
@@ -19,15 +28,27 @@ function App() {
     () =>
       createMuiTheme({
         typography: {
-          fontSize: 16,
+          fontSize: 14,
         },
         palette: {
           type: prefersDarkMode ? 'dark' : 'light',
           primary:{
-            main: '#2196f3'
+            main: 'rgba(0, 0, 0, 0.9)'
           },
           secondary:{
-            main: '#ec407a'
+            main: '#2196f3'
+          }
+        },
+        overrides: {
+          MuiPickersToolbar: {
+            toolbar: {
+              backgroundColor: '#2196f3',
+            },
+          },
+          MuiPickersDay:{
+            daySelected:{
+              backgroundColor: '#2196f3'
+            }
           }
         },
       }),
@@ -59,9 +80,16 @@ function App() {
                             />
           <main className={classes.content}>
             <div className={classes.appBarSpacer} />
-            <Switch>
-              <Route path='/dashboard' render={(props) => (<Dashboard {...props} open={open} />)}/>
-            </Switch>
+              <Container maxWidth="lg" className={clsx(classes.container, open && classes.containerShift)}>
+                <Switch>
+                  <Route path='/' exact component={HomePage} />
+                  <Route path='/dashboard/weather' exact render={(props) => (<Dashboard {...props} open={open} />)}/>
+                </Switch>
+                <Box pt={4}  className={classes.footer}>
+                    <Copyright />
+                </Box>  
+              </Container>
+              
           </main>
         </Router>
       </div>

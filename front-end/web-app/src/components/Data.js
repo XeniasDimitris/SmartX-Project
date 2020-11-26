@@ -18,32 +18,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Data() {
+export default function Data(props) {
   const classes = useStyles();
+  const data = props.data
   return (
     <React.Fragment>
-      <Title>some stuff</Title>
+      <Title>Raw Data</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>stuff</TableCell>
-            <TableCell>stuff</TableCell>
-            <TableCell>stuff</TableCell>
-            <TableCell>stuff</TableCell>
-            <TableCell align="right">stuff</TableCell>
+            <TableCell>DateTime</TableCell>
+            <TableCell align="right">Value</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
-          {[0,1,2].map((row) => (
-            <TableRow key={row}>
-              <TableCell>some stuff</TableCell>
-              <TableCell>some stuff</TableCell>
-              <TableCell>some stuff</TableCell>
-              <TableCell>some stuff </TableCell>
-              <TableCell align="right">some stuff</TableCell>
+        { data ? 
+          <TableBody>
+          {  data.map((datarow) => (
+            <TableRow >
+              <TableCell>{datarow.datetime}</TableCell>
+              <TableCell align="right">{datarow.value}</TableCell>
             </TableRow>
           ))}
-        </TableBody>
+           </TableBody> : null  
+        }
+          
       </Table>
       <div className={classes.seeMore}>
         <Link color="primary" href="#" onClick={preventDefault}>

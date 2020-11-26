@@ -11,10 +11,13 @@ export const useStyles = makeStyles((theme) => ({
         paddingRight: 24, // keep right padding when drawer closed
     },
     toolbarIcon: {
+        color: 'rgba(255, 255, 255, 0.9)',
+        backgroundColor: 'rgb(35, 47, 62)',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: '0 8px',
+        justifyContent: 'space-between',
+        paddingLeft: '30px',
+        paddingRight: '8px',
         ...theme.mixins.toolbar,
     },
     appBar: {
@@ -46,6 +49,8 @@ export const useStyles = makeStyles((theme) => ({
         marginTop: 12
     },
     drawerPaper: {
+        color: 'rgba(255, 255, 255, 0.8)',
+        backgroundColor: 'rgb(27, 36, 48)',
         position: 'fixed',
         whiteSpace: 'nowrap',
         width: drawerWidth,
@@ -72,6 +77,8 @@ export const useStyles = makeStyles((theme) => ({
         overflow: 'auto',
     },
     container: {
+        position:'relative',
+        minHeight: '100vh',
         marginLeft: '100px',
         maxWidth: '100%',
         width: '93%',
@@ -96,13 +103,17 @@ export const useStyles = makeStyles((theme) => ({
         overflow: 'auto',
         flexDirection: 'column',
     },
-    fixedHeight: {
+    fixedHeightChart: {
         height: 509,
     },
-    style:{
-        color: 'red'
+    link:{
+        color: 'black',
+        textDecoration: 'none',
     },
-    breadcrumbs:{
-        color: 'white'
+    footer:{
+        position:'absolute',
+        bottom: 0,
+        
+        width: '93%',
     }
 }));

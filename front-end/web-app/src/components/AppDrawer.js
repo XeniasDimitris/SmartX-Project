@@ -10,22 +10,21 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-
+import { Link as RouterLink } from 'react-router-dom';
 import { useStyles }  from '../css/DashboardCSS'
 
 import logo from "../Images/SmartX_City-Logo.png"
 
 export default function AppDrawer(props){
     const classes = useStyles();
-    const [listItemClicked, setListItemClicked] = useState('Dashboard')
+    const [listItemClicked, setListItemClicked] = useState(null)
     
     return(
-       
         <React.Fragment>
             {/* ----------------------------------- */}
             {/* App Bar and Drawer in Fixed Positon */}
             {/* ----------------------------------- */}
-            <AppBar position="fixed" className={clsx(classes.appBar, props.open && classes.appBarShift)}>
+            <AppBar position="fixed" color="inherit" className={clsx(classes.appBar, props.open && classes.appBarShift)}>
                 <Toolbar className={classes.toolbar} >
                     <IconButton
                         edge="start"
@@ -37,13 +36,15 @@ export default function AppDrawer(props){
                         <MenuIcon />
                     </IconButton>
                     
-                    <Breadcrumbs aria-label="breadcrumb" className={classes.breadcrumbs}>
-                        <Typography component="h" variant="h6">
-                        <img src={logo} alt = "Logo" className={classes.logo}/> 
-                        </Typography>
-                        <Typography component="h" variant="h6">
-                            {listItemClicked}
-                         </Typography>
+                    <Breadcrumbs aria-label="breadcrumb" >
+                        <RouterLink to='/' onClick={()=>setListItemClicked(null)}>
+                            <img src={logo} alt = "Logo" className={classes.logo} /> 
+                        </RouterLink>
+                        <RouterLink to={listItemClicked ?`/${listItemClicked.toLowerCase()}`: '/'} className={classes.link} >
+                            <Typography component="h1" variant="h6" >
+                                {listItemClicked}
+                            </Typography>
+                        </RouterLink>
                     </Breadcrumbs>
                     
                 </Toolbar>
@@ -56,13 +57,13 @@ export default function AppDrawer(props){
                 open={props.open}
             >
                 <div className={classes.toolbarIcon}>
+                <Typography variant='h6'>Menu</Typography>
                 <IconButton onClick={()=> props.handleDrawerClose()}>
-                    <ChevronLeftIcon />
+                    <ChevronLeftIcon style={{color:'white'}}/>
                 </IconButton>
                 </div>
-                <Divider />
-                    <Menu setListItemClicked={setListItemClicked} />
-                <Divider />
+                <Divider style={{background:'white'}} />
+                <Menu setListItemClicked={setListItemClicked} listItemClicked={listItemClicked}/>
             </Drawer> 
         </React.Fragment>
     )

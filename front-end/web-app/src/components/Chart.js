@@ -1,44 +1,18 @@
 import React, { useRef, useEffect } from 'react';
 import Title from './Title';
-
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
 am4core.useTheme(am4themes_animated);
 
-const data = [
-  {
-    year: "1990",
-    population: 730830065,
-  },
-  {
-    year: "1995",
-    population: 732194921,
-  },
-  {
-    year: "2000",
-    population: 735281836,
-  },
-  {
-    year: "2005",
-    population: 736717375,
-   },
-   {
-    year: "2010",
-    population: 743090810,
-   },
-   {
-    year: "2018",
-    population: 751612093,
-   },
-];
 
-const CHART_ID = 'population_chart';
+const CHART_ID = 'chart';
 
-export default function Chart() {
+export default function Chart(props) {
   const chartRef= useRef(null);
-
+  const chartID = props.chartID
+  const data = props.data
   useEffect(() => {
     if (!chartRef.current) {
       chartRef.current = am4core.create(CHART_ID, am4charts.XYChart);
@@ -63,8 +37,8 @@ export default function Chart() {
       
       // Create series
       let series = chartRef.current.series.push(new am4charts.ColumnSeries());
-      series.dataFields.valueY = "population";
-      series.dataFields.categoryX = "year";
+      series.dataFields.valueY = "value";
+      series.dataFields.categoryX = "datetime";
       series.name = "Population";
       series.fillOpacity = 1;
       series.fill = am4core.color('#e5408f');
@@ -105,6 +79,9 @@ export default function Chart() {
   }, [data]);
 
   useEffect(() => {
+  });
+
+  useEffect(() => {
     return () => {
       chartRef.current && chartRef.current.dispose();
     };
@@ -112,9 +89,10 @@ export default function Chart() {
 
 
   return (
+    
     <React.Fragment>
       <Title>Today</Title>
-        <div id={CHART_ID}  style={{ width: "100%", height: "100%" }}></div>
+        <div id={chartID || CHART_ID }  style={{ width: "100%", height: "100%" }}></div>
     </React.Fragment>
   );
 }
