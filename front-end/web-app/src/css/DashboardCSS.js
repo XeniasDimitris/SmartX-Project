@@ -104,7 +104,7 @@ export const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
     },
     fixedHeightChart: {
-        height: 509,
+        height: 700,
     },
     link:{
         color: 'black',

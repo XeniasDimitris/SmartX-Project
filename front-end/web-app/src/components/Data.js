@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,9 +7,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Title from './Title';
 
-function preventDefault(event) {
-  event.preventDefault();
-}
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -20,34 +16,34 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Data(props) {
   const classes = useStyles();
-  const data = props.data
+  let data = props.data
+  console.log('data',data)
   return (
     <React.Fragment>
       <Title>Raw Data</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>DateTime</TableCell>
+            <TableCell>Year</TableCell>
+            <TableCell>Month</TableCell>
+            <TableCell>Date</TableCell>
+            <TableCell>Time</TableCell>
             <TableCell align="right">Value</TableCell>
           </TableRow>
         </TableHead>
-        { data ? 
           <TableBody>
-          {  data.map((datarow) => (
-            <TableRow >
-              <TableCell>{datarow.datetime}</TableCell>
-              <TableCell align="right">{datarow.value}</TableCell>
-            </TableRow>
-          ))}
-           </TableBody> : null  
-        }
-          
-      </Table>
-      <div className={classes.seeMore}>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          See more 
-        </Link>
-      </div>
+          {  data ? data.map((datarow) => (
+              <TableRow >
+                <TableCell>{datarow.datetime.getFullYear()}</TableCell>
+                <TableCell>{datarow.datetime.getMonth()+1}</TableCell>
+                <TableCell>{datarow.datetime.getDate()}</TableCell>
+                <TableCell>{datarow.datetime.toTimeString().split(' ')[0]}</TableCell>
+                <TableCell align="right">{datarow.value}</TableCell>
+              </TableRow>
+            )): null}
+          </TableBody>
+        
+      </Table> 
     </React.Fragment>
   );
 }
