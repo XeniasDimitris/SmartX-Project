@@ -3,18 +3,21 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import List from '@material-ui/core/List';
 import clsx from 'clsx';
 import { Link as RouterLink } from 'react-router-dom';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Collapse from '@material-ui/core/Collapse';
-
+import LocalParkingIcon from '@material-ui/icons/LocalParking';
+import ApartmentIcon from '@material-ui/icons/Apartment';
+import EventIcon from '@material-ui/icons/Event';
+import EcoIcon from '@material-ui/icons/Eco';
+import TrafficIcon from '@material-ui/icons/Traffic';
+import PeopleIcon from '@material-ui/icons/People';
+import CloudIcon from '@material-ui/icons/Cloud';
 import { makeStyles } from '@material-ui/core/styles';
 
 
@@ -51,7 +54,7 @@ function ListItemLink(props) {
                           listItemClicked===primary && classes.buttonClicked,
                           nested && classes.nestedMenu)
                 }>
-          <ListItemIcon>
+          <ListItemIcon style={{minWidth:"40px"}}>
             {icon}
           </ListItemIcon>
           <ListItemText primary={primary}/>
@@ -77,30 +80,55 @@ export default function MainListItems(props) {
   return (
     <List>
         <ListItem button onClick={handleClick} className={clsx(classes.button)}>
-        <ListItemIcon>
+        <ListItemIcon  style={{minWidth:"40px"}}>
             <DashboardIcon className={classes.icons} />
           </ListItemIcon>
           <ListItemText primary='Dashboard'/>
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         
-        <Collapse in={open} timeout="auto" unmountOnExit>
+        <Collapse in={open} timeout={50} unmountOnExit>
           <List component="div" disablePadding >
             <ListItemLink to="/dashboard/weather" primary="Weather" 
                           setListItemClicked={setListItemClicked} 
                           listItemClicked={listItemClicked}
-                          icon={<BarChartIcon className={classes.icons}/>}
+                          icon={<CloudIcon className={classes.icons}/>}
                           nested={true}  />
+            <ListItemLink to="/dashboard/demographics" primary="Demographics" 
+                          setListItemClicked={setListItemClicked} 
+                          listItemClicked={listItemClicked} 
+                          icon={<PeopleIcon className={classes.icons}/>}
+                          nested={true} />
+            <ListItemLink to="/dashboard/traffic" primary="Traffic" 
+                          setListItemClicked={setListItemClicked} 
+                          listItemClicked={listItemClicked} 
+                          icon={<TrafficIcon className={classes.icons}/>}
+                          nested={true} />
             <ListItemLink to="/dashboard/pollution" primary="Pollution" 
                           setListItemClicked={setListItemClicked} 
                           listItemClicked={listItemClicked} 
-                          icon={<LayersIcon className={classes.icons}/>}
+                          icon={<EcoIcon className={classes.icons}/>}
+                          nested={true} />
+            <ListItemLink to="/dashboard/dokk1" primary="Dokk1" 
+                          setListItemClicked={setListItemClicked} 
+                          listItemClicked={listItemClicked} 
+                          icon={<ApartmentIcon className={classes.icons}/>}
+                          nested={true} />
+            <ListItemLink to="/dashboard/events" primary="Events" 
+                          setListItemClicked={setListItemClicked} 
+                          listItemClicked={listItemClicked} 
+                          icon={<EventIcon className={classes.icons}/>}
+                          nested={true} />
+            <ListItemLink to="/dashboard/parkings" primary="Parkings" 
+                          setListItemClicked={setListItemClicked} 
+                          listItemClicked={listItemClicked} 
+                          icon={<LocalParkingIcon className={classes.icons}/>}
                           nested={true} />
           </List>
         </Collapse>
         
         
-      <ListItemLink to="/hey2" primary="Hey2" 
+      {/* <ListItemLink to="/hey2" primary="Hey2" 
                     setListItemClicked={setListItemClicked} 
                     listItemClicked={listItemClicked}
                     icon={<ShoppingCartIcon className={classes.icons}/>} />
@@ -109,32 +137,9 @@ export default function MainListItems(props) {
                     icon={<PeopleIcon  className={classes.icons}/>} />
       <ListItemLink to="/hey4" primary="Hey4" setListItemClicked={setListItemClicked} 
                     listItemClicked={listItemClicked}
-                    icon={<LayersIcon  className={classes.icons}/>} />
+                    icon={<LayersIcon  className={classes.icons}/>} /> */}
                     
     </List>
   )
 }
 
-// export  secondaryListItems = (
-//   <div>
-//     <ListSubheader inset>some stuff</ListSubheader>
-//     <ListItem button>
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="some stuff" />
-//     </ListItem>
-//     <ListItem button>
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="some stuff" />
-//     </ListItem>
-//     <ListItem button>
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="some stuff" />
-//     </ListItem>
-//   </div>
-// );

@@ -58,9 +58,9 @@ export default function AppDrawer(props){
             >
                 <div className={classes.toolbarIcon}>
                 <Typography variant='h6'>Menu</Typography>
-                <IconButton onClick={()=> props.handleDrawerClose()}>
+                {/* <IconButton onClick={()=> props.handleDrawerClose()}>
                     <ChevronLeftIcon style={{color:'white'}}/>
-                </IconButton>
+                </IconButton> */}
                 </div>
                 <Divider style={{background:'white'}} />
                 <Menu setListItemClicked={setListItemClicked} listItemClicked={listItemClicked}/>

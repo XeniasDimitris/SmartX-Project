@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 
-const drawerWidth = 204;
+const drawerWidth = 210;
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -112,8 +112,12 @@ export const useStyles = makeStyles((theme) => ({
     },
     footer:{
         position:'absolute',
-        bottom: 0,
-        
+        bottom:0,
         width: '93%',
-    }
+    },
+    loading:{
+        position:'relative',
+        left: '50%',
+        top: '50%'
+    },
 }));

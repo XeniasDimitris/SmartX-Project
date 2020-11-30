@@ -1,21 +1,22 @@
 import React , { useState }from 'react';
-import Dashboard from './components/Dashboard'
+import WeatherDashboard from './components/Weather/WeatherDashboard'
+import DemographicsDash from './components/Demographics/DemographicsDash'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import 'fontsource-roboto';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Container from '@material-ui/core/Container';
-
 import {BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import AppDrawer from './components/AppDrawer'
 import HomePage from './components/HomePage'
 import Copyright from './components/Copyright'
 import Box from '@material-ui/core/Box';
-import { useStyles }  from './css/DashboardCSS'
 import clsx from 'clsx'
+import TrafficDash from './components/Traffic/TrafficDash'
 
 
 
+import { useStyles }  from './css/DashboardCSS'
 
 function App() {
 
@@ -58,7 +59,7 @@ function App() {
 
   const classes = useStyles();
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -83,7 +84,10 @@ function App() {
               <Container maxWidth="lg" className={clsx(classes.container, open && classes.containerShift)}>
                 <Switch>
                   <Route path='/' exact component={HomePage} />
-                  <Route path='/dashboard/weather' exact render={(props) => (<Dashboard {...props} open={open} />)}/>
+                  <Route path='/dashboard/weather' exact component={WeatherDashboard}/>
+                  <Route path='/dashboard/demographics' exact component={DemographicsDash}/>
+                  <Route path='/dashboard/traffic' exact component={TrafficDash}/>
+                  <Route path='/dashboard/test' exact render={(props) => (<WeatherDashboard {...props} />)}/>
                 </Switch>
                 <Box pt={4}  className={classes.footer}>
                     <Copyright />
