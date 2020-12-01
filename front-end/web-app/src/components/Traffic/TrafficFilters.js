@@ -38,7 +38,7 @@ export default function Filters(props) {
 
 
   const handleClick = (e) =>{
-   //do stuff
+   props.handleSetFilters({start: selectedStartDate, end:selectedEndDate})
   }
 
   return (
@@ -80,6 +80,7 @@ export default function Filters(props) {
    <Button  style={{display:'flex',marginTop: 40}}
             color='secondary'
             variant='contained'
+            disabled={props.disabledFilters}
             onClick={handleClick}>
                <Typography>See Diagram</Typography>
    </Button>

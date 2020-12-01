@@ -14,6 +14,7 @@ urlpatterns = [
     path('parkings/records/', views.ParkingRecordsView.as_view()),
     path('dokk1/sensors/', views.Dokk1SensorsView.as_view()),
     path('dokk1/records/', views.Dokk1RecordsView.as_view()),
+    path('traffic/cor_sensors/', views.TrafficCorrelatedSensorsView.as_view()),
     path('traffic/sensors/', views.TrafficSensorsView.as_view()),
     path('traffic/records/', views.TrafficRecordsView.as_view()),
     path('pollution/records/', views.PollutionRecordsView.as_view()),

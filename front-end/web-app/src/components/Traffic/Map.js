@@ -8,7 +8,6 @@ import PlaceIcon from '@material-ui/icons/Place';
 import IconButton from '@material-ui/core/IconButton'
 import API from '../../api-services'
 import clsx from 'clsx'
-import 'mapbox-gl/dist/mapbox-gl.css';
 import { makeStyles } from '@material-ui/core';
 import PopupMsg from './PopupMsg'
 import MapLegend from './MapLegend'
@@ -31,6 +30,8 @@ import './Map.css'
       const [selectedSensor, setSelectedSensor] = useState(null)
       const [neighborSensors, setNeighborSensors] = useState([])
       const [submitedSensor, setSubmitedSensor] = useState(null)
+      const [disabledButton, setDisabledButton] = useState(false)
+
       const setReportIdData = props.setReportIdData
 
       const sensors = props.sensors
@@ -39,15 +40,25 @@ import './Map.css'
       } 
       const handleClickButton = (popupSensor) => (e) =>{
         setSelectedSensor(popupSensor)
+        props.setDisabledMap(false)
         setPopupSensor(null)    
       }
+
       const handleResetClick = ()=>{
         setSelectedSensor(null)
         setNeighborSensors([])
+        setDisabledButton(false)
+        props.setFilters(null)
+        props.setDisabledMap(true)
+        props.setDisabledFilters(true)
+        props.setData(null)
       }
 
       const handleSubmitClick = () =>{
         setSubmitedSensor(selectedSensor.id)
+        setDisabledButton(true)
+        props.setDisabledMap(true)
+        props.setDisabledFilters(false)
       }
 
       useEffect( ()=>{
@@ -55,12 +66,11 @@ import './Map.css'
           API.trafficCorSensorsAPI()
           .then( resp => {
             let data = []
-            resp.forEach( item =>{
+            resp.map( item =>{
               if (item['POINT_1_NAME'] === submitedSensor || item['POINT_2_NAME'] === submitedSensor){
                 data.push({rep_id: item['REPORT_ID'], point_1: item['POINT_1_NAME'], point_2: item['POINT_2_NAME']})
               }
             })
-            console.log(data)
             setReportIdData(data)
           }
           )
@@ -128,11 +138,11 @@ import './Map.css'
                   closeOnClick={false}
                   onClose= { (e)=> {setPopupSensor(null)}}
                   >
-                  <PopupMsg popupSensor={popupSensor} handleClickButton={handleClickButton}/>
+                  <PopupMsg popupSensor={popupSensor} handleClickButton={handleClickButton} disabledButton={disabledButton}/>
               </Popup>
             ): null}
   
-              <MapLegend handleResetClick={handleResetClick} handleSubmitClick={handleSubmitClick}/>
+              <MapLegend handleResetClick={handleResetClick} handleSubmitClick={handleSubmitClick} disabledMap={props.disabledMap} />
           </ReactMapGL>
 
         );

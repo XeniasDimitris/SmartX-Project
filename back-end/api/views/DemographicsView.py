@@ -13,7 +13,6 @@ class DemographicsView(APIView):
     def get(self, request, format=None):
         df = pd.read_csv(f'{data_dir}/Demographics--januar-2013.csv').fillna(-1)
         res = df.to_dict('records')
-        print(res)
         del df
         gc.collect()
         return Response(res, status=status.HTTP_200_OK)

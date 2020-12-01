@@ -13,7 +13,8 @@ import Copyright from './components/Copyright'
 import Box from '@material-ui/core/Box';
 import clsx from 'clsx'
 import TrafficDash from './components/Traffic/TrafficDash'
-
+import ParkingsDash from './components/Parkings/ParkingsDash'
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 import { useStyles }  from './css/DashboardCSS'
 
@@ -86,6 +87,7 @@ function App() {
                   <Route path='/dashboard/weather' exact component={WeatherDashboard}/>
                   <Route path='/dashboard/demographics' exact component={DemographicsDash}/>
                   <Route path='/dashboard/traffic' exact component={TrafficDash}/>
+                  <Route path='/dashboard/parkings' exact component={ParkingsDash}/>
                   <Route path='/dashboard/test' exact render={(props) => (<WeatherDashboard {...props} />)}/>
                 </Switch>
                 <Box pt={4}  className={classes.footer}>

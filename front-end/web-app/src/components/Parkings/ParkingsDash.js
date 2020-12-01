@@ -5,10 +5,9 @@ import { CardContent, Typography, useTheme } from '@material-ui/core';
 import Title from '../Title'
 import clsx from 'clsx';
 import API from '../../api-services'
-import Map from './Map'
-import Filters from './TrafficFilters'
+import Map from './ParkingsMap'
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Chart from './Chart'
+import Filters from './ParkingsFilters'
 import { useStyles }  from '../../css/DashboardCSS'
 
 function formatDate(start,end){
@@ -21,48 +20,18 @@ function formatDate(start,end){
 export default function TrafficDash(props){
     const classes = useStyles()
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeightChart);
-    const [sensors, setSensors] = useState(null)
-    const [reportIdData, setReportIdData] = useState(null)
-    const [data,setData] = useState(null)
+    const [parkings, setParkings] = useState(null)
     const [filters,setFilters] = useState(null)
-    const [disabledMap, setDisabledMap] = useState(true)
-    const [disabledFilters, setDisabledFilters] = useState(true)
-    const [loading, setLoading] = useState(null)
 
-    const handleSetFilters = ({start,end}) =>{
-      let ret = formatDate(start,end)
-      start = ret.start
-      end = ret.end
-      setFilters({start,end})
-      setLoading(true)
+    const handleSetFilters = (filters) => (e) =>{
+
     }
-
+    
     useEffect(()=>{
-      API.trafficSensorsAPI()
-      .then( (res) => setSensors(res))
+        API.ParkingsInfoAPI()
+        .then( (res) => setParkings(res))
     },[])
-
-
-    useEffect( async ()=>{
-      if (filters){
-        let data = []
-        await Promise.all(reportIdData.map( async (item) =>{
-          let res = await API.trafficRecordsAPI({rep_id: item.rep_id, start: filters.start, end: filters.end})
-          res.map( i =>{
-            i.datetime = new Date(i.datetime)
-          })
-          data.push({item, res})
-        }))
-        setData(data)
-        setLoading(false)
-      }
-    }, [filters])
-
-    useEffect( ()=>{
-      if (reportIdData){
-      }
-    }, [reportIdData])
-
+  
     return(
         <React.Fragment>
         {/* ----------------------------------- */}
@@ -70,34 +39,27 @@ export default function TrafficDash(props){
         {/* ----------------------------------- */}
   
           <Grid container  spacing={2}>
-  
-            <Grid item  xs={12} md={4} lg={12} > 
+            
+            <Grid item  xs={12} md={4} lg={3} >      
+                   <Paper className={classes.paper}>
+                    <CardContent>
+                      <Filters handleSetFilters={handleSetFilters}/>
+                    </CardContent>
+                   </Paper>
+            </Grid>
+            <Grid item  xs={12} md={4} lg={9} > 
                 <Paper>                  
                   <CardContent>
-                    <Title>Sensors across the town</Title>
+                    <Title>Parkings across the town</Title>
                   </CardContent>  
                 </Paper>     
                 <Paper>
-                    <Map sensors={sensors} 
-                        setReportIdData={setReportIdData} 
-                        disabledMap={disabledMap} 
-                        setDisabledMap={setDisabledMap}
-                        setDisabledFilters={setDisabledFilters}
-                        setData={setData}
-                        setFilters={setFilters}/>
+                    <Map parkings={parkings}/>
                 </Paper>
             </Grid>
              
 
-            <Grid item  xs={12} md={4} lg={3} >      
-                   <Paper className={classes.paper}>
-                    <CardContent>
-                      <Filters handleSetFilters={handleSetFilters} disabledFilters={disabledFilters}/>
-                    </CardContent>
-                   </Paper>
-            </Grid>
-
-            { filters && (
+            {/* { filters && (
                 loading ? 
                   <Grid item  xs={12} md={4} lg={9} >
                     <Paper className={classes.paper}>
@@ -124,7 +86,7 @@ export default function TrafficDash(props){
                           )})}
                     </Grid>
                   </Grid> )
-            }
+            } */}
           </Grid>
         
   

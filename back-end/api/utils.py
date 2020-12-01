@@ -6,6 +6,7 @@ import gc
 def get_weather_data(file, typeof, request):
 
     # As we have one json for each day, we concatenate them into an appropriate format for DF constructor
+
     data = {'datetime': [], 'value': []}
     with open(file, 'r') as f:
         for line in f:
@@ -15,16 +16,15 @@ def get_weather_data(file, typeof, request):
                     pass
                 elif dictionary[key] == '':
                     data['datetime'].append(key)
-                    data['value'].append(-1)
+                    data['value'].append('')
                 else:
                     data['datetime'].append(key)
-                    data['value'].append(typeof(dictionary[key]))
+                    data['value'].append(float(dictionary[key]))
 
     # Creation of Dataframe
     df = pd.DataFrame(data=data)
     df['datetime_pd'] = pd.to_datetime(df['datetime'], infer_datetime_format=True)
     df.set_index(['datetime_pd'], inplace=True)
-
     start = request.query_params['start'] if 'start' in request.query_params else None
     end = request.query_params['end'] if 'end' in request.query_params else None
 

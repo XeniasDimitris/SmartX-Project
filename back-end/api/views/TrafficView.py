@@ -7,8 +7,42 @@ from django.http.response import HttpResponse
 
 data_dir = '/home/dimitris/Desktop/DiplomaThesis/Datasets/Aarhus/Traffic/'
 
-
 class TrafficSensorsView(APIView):
+
+    def get(self, request, format=None):
+        columns = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 18, 19, 20, 21, 21]
+        df = pd.read_csv(f'{data_dir}trafficMetaDataNoNAN.csv', usecols=columns)
+        res = []
+        data = df.to_dict('records')
+        havevisited = []
+        for x in data:
+            if x['POINT_1_NAME'] not in havevisited:
+                res.append({
+                    'id': x['POINT_1_NAME'],
+                    'lng': x['POINT_1_LNG'],
+                    'lat': x['POINT_1_LAT'],
+                    'street': x['POINT_1_STREET'],
+                    'city': x['POINT_1_CITY'],
+                    'number': x['POINT_1_STREET_NUMBER'],
+                    }
+                )
+                havevisited.append(x['POINT_1_NAME'])
+            if x['POINT_2_NAME'] not in havevisited:
+                res.append({
+                    'id': x['POINT_2_NAME'],
+                    'lng': x['POINT_2_LNG'],
+                    'lat': x['POINT_2_LAT'],
+                    'street': x['POINT_2_STREET'],
+                    'city': x['POINT_2_CITY'],
+                    'number': x['POINT_2_STREET_NUMBER']
+                })
+                havevisited.append(x['POINT_2_NAME'])
+
+        del df
+        gc.collect()
+        return Response(res, status=status.HTTP_200_OK)
+
+class TrafficCorrelatedSensorsView(APIView):
 
     def get(self, request, format=None):
         columns = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 18, 19, 20, 21, 21]

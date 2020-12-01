@@ -44,7 +44,6 @@ export default function WeatherDashboard(props) {
     
     if (filters){
       let {start, end, datasets} = filters
-      console.log(datasets)
       setTimeout( ()=>{
         let cum_data = []
         for (let key in datasets){
@@ -100,7 +99,7 @@ export default function WeatherDashboard(props) {
                     : (
                   <React.Fragment>
                       <Title>Weather from {filters.start} to {filters.end}</Title>
-                      <Chart data={data} />
+                      <Chart data={data} chartID={'weather'}/>
                     </React.Fragment>
                 )} 
               </CardContent>

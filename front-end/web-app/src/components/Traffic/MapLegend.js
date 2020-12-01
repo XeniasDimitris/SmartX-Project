@@ -68,9 +68,10 @@ export default function MapLegend(props){
           <Button variant="contained" 
                   color='secondary' 
                   style={submitButtonStyle}
+                  disabled={props.disabledMap}
                   onClick={props.handleSubmitClick}
                   >
-                    <Typography>See Diagrams</Typography>
+                    <Typography>Lock Sensor</Typography>
           </Button>
           <Button variant="contained" 
                   color='secondary' 

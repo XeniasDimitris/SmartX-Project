@@ -5,7 +5,6 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
 am4core.useTheme(am4themes_animated);
 
-const CHART_ID = 'chart';
 
 export default function BarChart(props) {
   const chartRef= useRef(null);
@@ -50,7 +49,7 @@ export default function BarChart(props) {
   return (
     
     <React.Fragment>
-      <div id={chartID || CHART_ID }  style={{ width: "100%", height: "100%" }}></div>
+      <div id={chartID}  style={{ width: "100%", height: "100%" }}></div>
     </React.Fragment>
   );
 }

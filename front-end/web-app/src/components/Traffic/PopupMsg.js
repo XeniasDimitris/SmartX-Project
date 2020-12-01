@@ -28,7 +28,7 @@ export default function PopupMsg(props){
             <Box fontWeight='fontWeightBold'>{popupSensor.city}</Box>
             </Typography>
             </Box>
-            <Button color='secondary' onClick={handleClickButton(popupSensor)}> <Typography>Choose</Typography></Button>
+            <Button color='secondary' disabled={props.disabledButton} onClick={handleClickButton(popupSensor)}> <Typography>Choose</Typography></Button>
         </React.Fragment>
     )
 }
