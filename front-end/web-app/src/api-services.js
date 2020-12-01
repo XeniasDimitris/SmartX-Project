@@ -26,4 +26,26 @@ export default class API{
       })
       .then( resp => resp.json())
     }
+
+    static trafficSensorsAPI(){
+      let url = baseURL+`traffic/sensors/`
+      return fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+      .then( resp => resp.json())
+    }
+
+    static trafficCorSensorsAPI(){
+      let url = baseURL+`traffic/cor_sensors/`
+      return fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+      .then( resp => resp.json())
+    }
   }

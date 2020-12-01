@@ -148,7 +148,7 @@ export default function Filters(props) {
             variant='contained'
             disabled={disabled}
             onClick={handleClick}>
-               See Diagram
+              <Typography>See Diagram</Typography>
    </Button>
 
   </div>

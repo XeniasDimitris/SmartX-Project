@@ -84,7 +84,7 @@ export default function Filters(props) {
                 variant='contained'
                 disabled={disabled}
                 onClick={handleClick}>
-                    See Demographics
+                    <Typography>See Demographics</Typography>
         </Button>
         </div>
     )
