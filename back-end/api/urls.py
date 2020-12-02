@@ -18,6 +18,7 @@ urlpatterns = [
     path('traffic/sensors/', views.TrafficSensorsView.as_view()),
     path('traffic/records/', views.TrafficRecordsView.as_view()),
     path('pollution/records/', views.PollutionRecordsView.as_view()),
+    path('pollution/sensors/', views.PollutionSensorsView.as_view()),
     path('demographics/', views.DemographicsView.as_view()),
     path('events/', views.EventsView.as_view()),
 ]

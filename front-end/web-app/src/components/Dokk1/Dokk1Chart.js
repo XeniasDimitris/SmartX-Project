@@ -13,7 +13,6 @@ export default function Chart(props) {
   const chartID = props.chartID
   const data = props.data
 
-  console.log('chart', data)
   useEffect(() => {
     
     if (!chartRef.current) {
@@ -31,7 +30,7 @@ export default function Chart(props) {
       xAxis.renderer.labels.template.fontSize = 14;
       xAxis.title.text = "DateTime";
       xAxis.groupData = true;
-      xAxis.groupCount = 1500;
+      xAxis.groupCount = 4000;
 
       function createAxisAndSeries(field, name, opposite ) {
        
@@ -74,8 +73,11 @@ export default function Chart(props) {
         yAxis.renderer.line.stroke = series.stroke;
       }
       
-      createAxisAndSeries(props.field[0], props.field[0], false);
-      createAxisAndSeries(props.field[1], props.field[1], true);
+      let op = false
+      props.field.map(f =>{
+        createAxisAndSeries(f, f, op);
+        op = !op
+      })
 
       // Add cursor
       chartRef.current.cursor = new am4charts.XYCursor();

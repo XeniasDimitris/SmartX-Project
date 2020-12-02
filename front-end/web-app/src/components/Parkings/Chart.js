@@ -33,24 +33,19 @@ export default function Chart(props) {
       xAxis.groupData = true;
       xAxis.groupCount = 1500;
 
-      function createAxisAndSeries(field, name, opposite ) {
-       
-        // Add Y Axis
-        var yAxis = chartRef.current.yAxes.push(new am4charts.ValueAxis());
-       
-        if(chartRef.current.yAxes.indexOf(yAxis) != 0){
-          yAxis.syncWithAxis = chartRef.current.yAxes.getIndex(0);
-        }
+      // Add Y Axis
+      var yAxis = chartRef.current.yAxes.push(new am4charts.ValueAxis());
+      yAxis.renderer.grid.template.stroke = am4core.color('#f0f2fa');
+      yAxis.renderer.labels.template.fill = am4core.color('#ced1e0');
+      yAxis.renderer.labels.template.fontSize = 14;
+      yAxis.renderer.grid.template.strokeOpacity = 1;
+      yAxis.title.text = 'Spaces';
+      yAxis.cursorTooltipEnabled = false;
 
-        yAxis.renderer.grid.template.stroke = am4core.color('#f0f2fa');
-        yAxis.renderer.grid.template.strokeOpacity = 1;
-        yAxis.renderer.labels.template.fontSize = 14;
-        yAxis.title.text = field;
-        yAxis.renderer.opposite = opposite;
-        yAxis.renderer.line.strokeOpacity = 1;
-        yAxis.renderer.line.strokeWidth = 2;
-        yAxis.cursorTooltipEnabled = false;
 
+
+      function createSeries(field, name, opposite ) {
+      
         // Create Series
         var series = chartRef.current.series.push(new am4charts.LineSeries());
         series.dataFields.valueY = field;
@@ -69,13 +64,10 @@ export default function Chart(props) {
         series.tooltip.pointerOrientation = 'down';
         series.tooltip.dy = -5;
 
-
-        yAxis.renderer.labels.template.fill = series.stroke;
-        yAxis.renderer.line.stroke = series.stroke;
       }
       
-      createAxisAndSeries(props.field[0], props.field[0], false);
-      createAxisAndSeries(props.field[1], props.field[1], true);
+      createSeries(props.field[0], props.field[0], false);
+      createSeries(props.field[1], props.field[1], true);
 
       // Add cursor
       chartRef.current.cursor = new am4charts.XYCursor();

@@ -14,8 +14,9 @@ import Box from '@material-ui/core/Box';
 import clsx from 'clsx'
 import TrafficDash from './components/Traffic/TrafficDash'
 import ParkingsDash from './components/Parkings/ParkingsDash'
+import Dokk1Dash from './components/Dokk1/Dokk1Dash'
 import 'mapbox-gl/dist/mapbox-gl.css';
-
+import PollutionDash from './components/Pollution/PollutionDash';
 import { useStyles }  from './css/DashboardCSS'
 
 function App() {
@@ -88,7 +89,9 @@ function App() {
                   <Route path='/dashboard/demographics' exact component={DemographicsDash}/>
                   <Route path='/dashboard/traffic' exact component={TrafficDash}/>
                   <Route path='/dashboard/parkings' exact component={ParkingsDash}/>
-                  <Route path='/dashboard/test' exact render={(props) => (<WeatherDashboard {...props} />)}/>
+                  <Route path='/dashboard/dokk1' exact component={Dokk1Dash}/>
+                  <Route path='/dashboard/pollution' exact component={PollutionDash}/>
+                  {/* <Route path='/dashboard/test' exact render={(props) => (<WeatherDashboard {...props} />)}/> */}
                 </Switch>
                 <Box pt={4}  className={classes.footer}>
                     <Copyright />

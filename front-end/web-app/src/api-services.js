@@ -50,7 +50,7 @@ export default class API{
     }
 
     static async trafficRecordsAPI(queries){
-      let url = baseURL+`traffic/records/?id=${queries.rep_id}`
+      let url = baseURL+`traffic/records/?report_id=${queries.rep_id}`
       if (queries.start)  {url+=`&start=${queries.start}`}
       if (queries.end) {url+=`&end=${queries.end}`}
       const resp = await fetch(url, {
@@ -65,7 +65,72 @@ export default class API{
 
 
     static ParkingsInfoAPI(){
-      let url = baseURL+`parkings/info`
+      let url = baseURL+`parkings/info/`
+      return fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+      .then( resp => resp.json())
+    }
+
+    static ParkingsRecsAPI(queries){
+      let url = baseURL+`parkings/records?`
+      if (queries.start)  {url+=`start=${queries.start}`}
+      if (queries.end) {url+=`&end=${queries.end}`}
+      return fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+      .then( resp => resp.json())
+    }
+
+    static SensorsDokk1API(){
+      let url = baseURL+`dokk1/sensors/`
+      return fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+      .then( resp => resp.json())
+    }
+
+
+    static Dokk1RecsAPI(queries){
+      let url = baseURL+`dokk1/records?`
+      if (queries.start)  {url+=`start=${queries.start}`}
+      if (queries.end) {url+=`&end=${queries.end}`}
+      if (queries.report_id) {url+=`&report_id=${queries.report_id}`}
+      return fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+      .then( resp => resp.json())
+    }
+
+    static PollutionSensorsAPI(){
+      let url = baseURL + 'pollution/sensors'
+      return fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+      .then( resp => resp.json())
+    }
+
+
+    static PollutionRecsAPI(queries){
+      let url = baseURL+`pollution/records?`
+      if (queries.start)  {url+=`start=${queries.start}`}
+      if (queries.end) {url+=`&end=${queries.end}`}
+      if (queries.report_id) {url+=`&id=${queries.report_id}`}
       return fetch(url, {
         method: 'GET',
         headers: {

@@ -8,6 +8,7 @@ import API from '../../api-services'
 import Map from './ParkingsMap'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Filters from './ParkingsFilters'
+import Chart from './Chart'
 import { useStyles }  from '../../css/DashboardCSS'
 
 function formatDate(start,end){
@@ -22,11 +23,64 @@ export default function TrafficDash(props){
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeightChart);
     const [parkings, setParkings] = useState(null)
     const [filters,setFilters] = useState(null)
+    const [loading, setLoading] = useState(null)
+    const [data, setData] = useState(null)
 
-    const handleSetFilters = (filters) => (e) =>{
 
+    const handleSetFilters = ({start,end,datasets}) =>{
+      let ret = formatDate(start,end)
+      start = ret.start
+      end = ret.end
+      setFilters({start,end,datasets})
+      setLoading(true)
     }
-    
+
+
+    useEffect( () =>{
+      if (filters){
+        let {start, end, datasets} = filters
+        setTimeout( ()=>{
+              API.ParkingsRecsAPI({start,end})
+              .then(resp => {
+                  let cum_data = [] 
+                  for (let key in datasets){
+                    if  ((key==='All') && (datasets[key]===true)){
+                      for (var i = 0; i < resp.length; i++){ 
+                          let item = resp[i]
+                          item.datetime = new Date(item.datetime)
+                          if (cum_data.length===0) {
+                            cum_data.push(item)
+                            continue
+                          }
+                          if(item.datetime.toString() === cum_data[cum_data.length-1].datetime.toString()){
+                            cum_data[cum_data.length-1].totalspaces += item.totalspaces
+                            cum_data[cum_data.length-1].vehiclecount += item.vehiclecount
+                            continue
+                          }
+                          cum_data.push(item)
+                          
+                      }
+
+                      break;
+                    }
+                    if (datasets[key]===true){ // pernei mono to prwto checked
+                      for (var i = 0; i < resp.length; i++) {
+                        let item = resp[i]
+                        if (key === item['garagecode']){
+                          item.datetime = new Date(item.datetime)
+                          cum_data.push(item)
+                        }
+                      }
+                      break;
+                    }
+                  }   
+                  setData(cum_data)
+                  setLoading(false)
+              })
+              .catch(error => error)
+            }, 500 )} 
+      },[filters])
+
     useEffect(()=>{
         API.ParkingsInfoAPI()
         .then( (res) => setParkings(res))
@@ -59,9 +113,9 @@ export default function TrafficDash(props){
             </Grid>
              
 
-            {/* { filters && (
+            { filters && (
                 loading ? 
-                  <Grid item  xs={12} md={4} lg={9} >
+                  <Grid item  xs={12} md={4} lg={12} >
                     <Paper className={classes.paper}>
                       <CardContent>
                         <CircularProgress color="secondary" className={classes.loading}/>
@@ -69,24 +123,18 @@ export default function TrafficDash(props){
                     </Paper>
                   </Grid>
                 :
-                  <Grid item  xs={12} md={4} lg={9} >      
-                    <Grid container spacing={2}>
-                      {data.map((obj,index)=> {
-                          return (
-                          <Grid key={index} item xs={12} md={4} lg={12} >
-                              <Paper className={classes.paper}>
-                                <CardContent >
-                                  <Title> From sensor {obj.item.point_1} to sensor {obj.item.point_2}</Title>
-                                  <Chart field={['vehicleCount','avgSpeed']} 
-                                        data={obj.res} 
-                                        chartID={obj.item.rep_id.toString()}/>
-                                </CardContent>
-                              </Paper>
-                          </Grid>
-                          )})}
-                    </Grid>
-                  </Grid> )
-            } */}
+                  <Grid item  xs={12} md={4} lg={12} >      
+                    <Paper className={classes.paper}>
+                      <CardContent >
+                        <Title> Parking Spaces </Title>
+                        <Chart field={['vehiclecount','totalspaces']} 
+                              data={data} 
+                              chartID='parkings'/> 
+                      </CardContent>
+                    </Paper>
+                  </Grid>
+            )}
+
           </Grid>
         
   

@@ -7,6 +7,19 @@ from django.http.response import HttpResponse
 
 data_dir = '/home/dimitris/Desktop/DiplomaThesis/Datasets/Aarhus/Pollution/pollution'
 
+class PollutionSensorsView(APIView):
+    def get(self, request, format=None):
+
+        df = pd.read_csv('/home/dimitris/Desktop/DiplomaThesis/Datasets/Aarhus/Traffic/trafficMetaDataNoNAN.csv')
+        res = df[['REPORT_ID', 'POINT_1_LNG']].to_dict('records')
+        arr = []
+        for item in res:
+            with open(f'{data_dir}/pollutionData{item["REPORT_ID"]}.csv') as f:
+                f.readline()
+                lng = f.readline().split(',')[5]
+                lat = f.readline().split(',')[6]
+                arr.append({'longitude': float(lng), 'latitude': float(lat), 'report_id': item["REPORT_ID"]})
+        return Response(arr, status=status.HTTP_200_OK)
 
 class PollutionRecordsView(APIView):
 

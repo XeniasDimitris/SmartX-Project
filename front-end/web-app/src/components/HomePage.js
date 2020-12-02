@@ -1,7 +1,7 @@
 import React from 'react'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
-
+import logo from "../Images/SmartX_City-Logo.png"
 
 import { useStyles }  from '../css/DashboardCSS'
 
@@ -11,7 +11,7 @@ export default function HomePage(){
     return(
         <Paper className={classes.paper}>
             <Typography variant='h4'align='center'>
-                HOME
+            <img src={logo} alt = "Logo"  />
             </Typography>
             <Typography variant='body1'>
             Lorem Ipsum

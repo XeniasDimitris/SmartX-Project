@@ -32,7 +32,7 @@ function FormItem(props){
             {name==='All' && 
                 (<React.Fragment> 
                     <Divider style={{marginBottom: '20px'}}/>
-                    <FormHelperText>or pick one or many local communites</FormHelperText>
+                    <FormHelperText>or pick one or many Parking stations</FormHelperText>
                 </React.Fragment>
                 )
             }
@@ -75,7 +75,6 @@ export default function Filters(props) {
     setDisabled(disable)
   },[checkboxState])
 
-  const { temperature, dew, humidity, pressure, wind_direction, wind_speed } = checkboxState;
 
   //-------------------------------
   //All about dates selection
@@ -139,7 +138,7 @@ export default function Filters(props) {
         />
     </MuiPickersUtilsProvider>
     <FormControl component="fieldset" style={{marginTop: 40, display:'flex'}}>
-     <FormLabel required component="legend"  style={{color:'black'}} > <Title>Select Dataset</Title> 
+     <FormLabel required component="legend"  style={{color:'black'}} > <Title>Select a Parking</Title> 
                 <Typography component='span'variant='body1' style={{color:'black'}}> (At least 1)</Typography> 
     </FormLabel>
      <FormGroup style={{marginTop: 10}}>

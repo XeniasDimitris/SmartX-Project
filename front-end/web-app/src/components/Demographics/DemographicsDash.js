@@ -77,7 +77,6 @@ export default function WeatherDashboard(props) {
                     for (var i = 0; i < resp.length; i++) {
                       let item = resp[i]
                       if (key === item['Local community']){
-                        console.log('brika')
                         dat.gender[0]['value'] += item['Men']
                         dat.gender[1]['value'] += item['Women']
                         dat.years[0]['value'] += item['0-2  yr']
@@ -132,7 +131,7 @@ export default function WeatherDashboard(props) {
                           <CircularProgress color="secondary" className={classes.loading}/>
                           : (
                         <React.Fragment>
-                            {/* <Title>Weather from {filters.start} to {filters.end}</Title> */}
+                            <Title>Pie chart of gender distribution</Title> 
                             <PieChart data={data.gender} category='gender'  chartID='gender pie'/>
                           </React.Fragment>
                       )} 
@@ -147,7 +146,7 @@ export default function WeatherDashboard(props) {
                           <CircularProgress color="secondary" className={classes.loading}/>
                           : (
                         <React.Fragment>
-                            {/* <Title>Weather from {filters.start} to {filters.end}</Title> */}
+                            <Title>Bar chart of gender distribution</Title> 
                             <BarChart data={data.gender} category='gender'  chartID='gender bar'/>
                           </React.Fragment>
                       )} 
@@ -162,7 +161,7 @@ export default function WeatherDashboard(props) {
                           <CircularProgress color="secondary" className={classes.loading}/>
                           : (
                         <React.Fragment>
-                            {/* <Title>Weather from {filters.start} to {filters.end}</Title> */}
+                            <Title>Pie chart of age distribution</Title> 
                             <PieChart data={data.years} category="year" chartID='year pi'/>
                           </React.Fragment>
                       )} 
@@ -176,7 +175,7 @@ export default function WeatherDashboard(props) {
                           <CircularProgress color="secondary" className={classes.loading}/>
                           : (
                         <React.Fragment>
-                            {/* <Title>Weather from {filters.start} to {filters.end}</Title> */}
+                            <Title>Bar chart of age distribution</Title> 
                             <BarChart data={data.years} category="year" chartID='year bar'/>
                           </React.Fragment>
                       )} 

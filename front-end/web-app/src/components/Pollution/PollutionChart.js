@@ -13,7 +13,6 @@ export default function Chart(props) {
   const chartID = props.chartID
   const data = props.data
 
-  console.log('chart', data)
   useEffect(() => {
     
     if (!chartRef.current) {
@@ -74,8 +73,11 @@ export default function Chart(props) {
         yAxis.renderer.line.stroke = series.stroke;
       }
       
-      createAxisAndSeries(props.field[0], props.field[0], false);
-      createAxisAndSeries(props.field[1], props.field[1], true);
+      let op = false
+      props.field.map(f =>{
+        createAxisAndSeries(f, f, op);
+        op = !op
+      })
 
       // Add cursor
       chartRef.current.cursor = new am4charts.XYCursor();

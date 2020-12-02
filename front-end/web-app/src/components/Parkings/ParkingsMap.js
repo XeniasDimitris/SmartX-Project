@@ -1,7 +1,11 @@
 import React, { useState,useEffect } from 'react'
 import ReactMapGL, { 
     Marker, 
-    Popup,
+    Popup,    
+    NavigationControl,
+    FullscreenControl,
+    ScaleControl,
+    GeolocateControl
   } 
 from 'react-map-gl';
 import PlaceIcon from '@material-ui/icons/Place';
@@ -9,8 +13,35 @@ import IconButton from '@material-ui/core/IconButton'
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 
+const geolocateStyle = {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  padding: '10px'
+};
 
-  export default function Map(props){
+const fullscreenControlStyle = {
+  position: 'absolute',
+  top: 36,
+  left: 0,
+  padding: '10px'
+};
+
+const navStyle = {
+  position: 'absolute',
+  top: 72,
+  left: 0,
+  padding: '10px'
+};
+
+const scaleControlStyle = {
+  position: 'absolute',
+  bottom: 36,
+  left: 0,
+  padding: '10px'
+};
+
+export default function Map(props){
       const [popupParking, setPopupParking] = useState(null)
 
       const parkings = props.parkings
@@ -21,8 +52,8 @@ import Typography from '@material-ui/core/Typography'
       const [viewport, setViewport] = React.useState({
           width:  '100%',
           height: 750,
-          latitude: 56.1496278,
-          longitude: 10.2134046,
+          latitude: 56.15385440357377,
+          longitude: 10.209113055098777,
           zoom: 14
         });
 
@@ -82,7 +113,18 @@ import Typography from '@material-ui/core/Typography'
                     </Box>
               </Popup>
             ): null}
-  
+            <div style={geolocateStyle}>
+              <GeolocateControl />
+            </div>
+            <div style={fullscreenControlStyle}>
+              <FullscreenControl />
+            </div>
+            <div style={navStyle}>
+              <NavigationControl />
+            </div>
+            <div style={scaleControlStyle}>
+              <ScaleControl />
+            </div>
           </ReactMapGL>
 
         );
