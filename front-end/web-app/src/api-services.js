@@ -50,7 +50,7 @@ export default class API{
     }
 
     static async trafficRecordsAPI(queries){
-      let url = baseURL+`traffic/records/?report_id=${queries.rep_id}`
+      let url = baseURL+`traffic/records/?id=${queries.rep_id}`
       if (queries.start)  {url+=`&start=${queries.start}`}
       if (queries.end) {url+=`&end=${queries.end}`}
       const resp = await fetch(url, {
@@ -104,7 +104,7 @@ export default class API{
       let url = baseURL+`dokk1/records?`
       if (queries.start)  {url+=`start=${queries.start}`}
       if (queries.end) {url+=`&end=${queries.end}`}
-      if (queries.report_id) {url+=`&report_id=${queries.report_id}`}
+      if (queries.id) {url+=`&id=${queries.id}`}
       return fetch(url, {
         method: 'GET',
         headers: {

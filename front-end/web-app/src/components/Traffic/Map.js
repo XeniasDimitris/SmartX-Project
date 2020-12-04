@@ -66,7 +66,7 @@ import './Map.css'
           API.trafficCorSensorsAPI()
           .then( resp => {
             let data = []
-            resp.map( item =>{
+            resp.forEach( item =>{
               if (item['POINT_1_NAME'] === submitedSensor || item['POINT_2_NAME'] === submitedSensor){
                 data.push({rep_id: item['REPORT_ID'], point_1: item['POINT_1_NAME'], point_2: item['POINT_2_NAME']})
               }

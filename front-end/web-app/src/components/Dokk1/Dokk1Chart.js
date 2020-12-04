@@ -1,10 +1,7 @@
 import React, { useRef, useEffect } from 'react';
-import Title from '../Title';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
-import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
-am4core.useTheme(am4themes_animated);
 
 
 
@@ -37,7 +34,7 @@ export default function Chart(props) {
         // Add Y Axis
         var yAxis = chartRef.current.yAxes.push(new am4charts.ValueAxis());
        
-        if(chartRef.current.yAxes.indexOf(yAxis) != 0){
+        if(chartRef.current.yAxes.indexOf(yAxis) !== 0){
           yAxis.syncWithAxis = chartRef.current.yAxes.getIndex(0);
         }
 
@@ -74,7 +71,7 @@ export default function Chart(props) {
       }
       
       let op = false
-      props.field.map(f =>{
+      props.field.forEach(f =>{
         createAxisAndSeries(f, f, op);
         op = !op
       })

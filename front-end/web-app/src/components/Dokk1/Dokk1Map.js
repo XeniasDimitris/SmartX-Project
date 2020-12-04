@@ -1,11 +1,7 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, } from 'react'
 import ReactMapGL, { 
     Marker, 
     Popup,    
-    NavigationControl,
-    FullscreenControl,
-    ScaleControl,
-    GeolocateControl
   } 
 from 'react-map-gl';
 import PlaceIcon from '@material-ui/icons/Place';

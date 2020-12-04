@@ -1,15 +1,16 @@
 import React, { useState} from 'react'
 import AppBar from '@material-ui/core/AppBar';
 import Drawer from '@material-ui/core/Drawer';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import clsx from 'clsx';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import Menu from './Menu.js';
 import MenuIcon from '@material-ui/icons/Menu';
 import Divider from '@material-ui/core/Divider';
+import Box from '@material-ui/core/Box';
 import IconButton from '@material-ui/core/IconButton';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import { Link as RouterLink } from 'react-router-dom';
 import { useStyles }  from '../css/DashboardCSS'
 
@@ -40,13 +41,23 @@ export default function AppDrawer(props){
                         <RouterLink to='/' onClick={()=>setListItemClicked(null)}>
                             <img src={logo} alt = "Logo" className={classes.logo} /> 
                         </RouterLink>
-                        <RouterLink to={listItemClicked ?`/${listItemClicked.toLowerCase()}`: '/'} className={classes.link} >
+                        {listItemClicked && <Typography>Dashboard</Typography>}
+                        <RouterLink to={listItemClicked ?`/dashboard/${listItemClicked.toLowerCase()}`: '/'} className={classes.link} >
                             <Typography component="h1" variant="h6" >
                                 {listItemClicked}
                             </Typography>
                         </RouterLink>
                     </Breadcrumbs>
-                    
+                    <div style={{position:'absolute', right: '10px', display:"flex"}}>
+                        <Typography >
+                            <Box letterSpacing={5} fontStyle="oblique" style={{position:'relative', top:12}} >  Welcome</Box>
+                        </Typography>
+                        <IconButton
+                            color="inherit">
+                            <AccountCircle />
+                        </IconButton>
+                    </div>
+
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -64,6 +75,7 @@ export default function AppDrawer(props){
                 </div>
                 <Divider style={{background:'white'}} />
                 <Menu setListItemClicked={setListItemClicked} listItemClicked={listItemClicked}/>
+                
             </Drawer> 
         </React.Fragment>
     )

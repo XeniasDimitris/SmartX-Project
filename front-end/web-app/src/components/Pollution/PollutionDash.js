@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import { CardContent, Typography, useTheme } from '@material-ui/core';
+import { CardContent} from '@material-ui/core';
 import Title from '../Title'
-import clsx from 'clsx';
 import API from '../../api-services'
 import Map from './PollutionMap'
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -20,7 +19,6 @@ function formatDate(start,end){
 
 export default function PollutionDash(props){
     const classes = useStyles()
-    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeightChart);
     const [sensors, setSensors] = useState(null)
     const [filters,setFilters] = useState(null)
     const [loading, setLoading] = useState(null)
@@ -45,10 +43,9 @@ export default function PollutionDash(props){
         setTimeout( ()=>{
               API.PollutionRecsAPI({start,end,report_id})
               .then(resp => {
-                  resp.map(item =>{
+                  resp.forEach(item =>{
                     item.datetime = new Date(item.datetime)
                   })
-                  console.log(resp)
                   setData(resp)
                   setLoading(false)
               })
@@ -73,7 +70,7 @@ export default function PollutionDash(props){
           <Grid item  xs={12} md={4} lg={12} > 
                 <Paper>                  
                   <CardContent>
-                    <Title>Dokk1's Sensors</Title>
+                    <Title>1) Selecet Pollution Sensor</Title>
                   </CardContent>  
                 </Paper>     
                 <Paper>
@@ -106,21 +103,33 @@ export default function PollutionDash(props){
                     </Paper>
                   </Grid>
                 :
-                  <Grid item  xs={12} md={4} lg={9} >      
-                    <Paper className={classes.paper}>
-                      <CardContent >
-                        <Title> Sensor's Records </Title>
-                        <Chart  
-                              data={data} 
-                              field={['carbon_monoxide', 'nitrogen_dioxide','sulfure_dioxide']}
-                              chartID='carbon_nitr_diox'/> 
-                        <Chart 
-                              data={data} 
-                              field={['ozone','particullate_matter']}
-                              chartID='ozone_parmat'/> 
+                  <Grid item  xs={12} md={4} lg={9} >    
+                    <Grid container spacing={2}>  
+                      <Grid item xs={12} md={4} lg={12}>
+                        <Paper className={classes.paper}>
+                        <CardContent >
+                          <Title>Carbon Monoxide, Nitrogen Dioxide and Sulfure Dioxide </Title>
+                          <Chart  
+                                data={data} 
+                                field={['carbon_monoxide', 'nitrogen_dioxide','sulfure_dioxide']}
+                                chartID='carbon_nitr_diox'/> 
 
-                      </CardContent>
-                    </Paper>
+                        </CardContent>
+                        </Paper>
+                      </Grid>
+                      <Grid item xs={12} md={4} lg={12}>
+                        <Paper className={classes.paper}>
+                        <CardContent >
+                          <Title>Ozone and particullate matter </Title>
+                          <Chart 
+                                data={data} 
+                                field={['ozone','particullate_matter']}
+                                chartID='ozone_parmat'/> 
+
+                        </CardContent>
+                        </Paper>
+                      </Grid>
+                    </Grid>
                   </Grid>
             )}
 

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import { CardContent, Typography, useTheme } from '@material-ui/core';
+import { CardContent  } from '@material-ui/core';
 import Title from '../Title'
-import clsx from 'clsx';
 import API from '../../api-services'
 import Map from './ParkingsMap'
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -20,12 +19,11 @@ function formatDate(start,end){
 
 export default function TrafficDash(props){
     const classes = useStyles()
-    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeightChart);
     const [parkings, setParkings] = useState(null)
     const [filters,setFilters] = useState(null)
     const [loading, setLoading] = useState(null)
     const [data, setData] = useState(null)
-
+    const [selectedParking, setSelectedParking] = useState(null)
 
     const handleSetFilters = ({start,end,datasets}) =>{
       let ret = formatDate(start,end)
@@ -45,7 +43,8 @@ export default function TrafficDash(props){
                   let cum_data = [] 
                   for (let key in datasets){
                     if  ((key==='All') && (datasets[key]===true)){
-                      for (var i = 0; i < resp.length; i++){ 
+                      setSelectedParking('All')
+                      for (let i = 0; i < resp.length; i++){ 
                           let item = resp[i]
                           item.datetime = new Date(item.datetime)
                           if (cum_data.length===0) {
@@ -64,7 +63,8 @@ export default function TrafficDash(props){
                       break;
                     }
                     if (datasets[key]===true){ // pernei mono to prwto checked
-                      for (var i = 0; i < resp.length; i++) {
+                      setSelectedParking(key)
+                      for (let i = 0; i < resp.length; i++) {
                         let item = resp[i]
                         if (key === item['garagecode']){
                           item.datetime = new Date(item.datetime)
@@ -126,7 +126,7 @@ export default function TrafficDash(props){
                   <Grid item  xs={12} md={4} lg={12} >      
                     <Paper className={classes.paper}>
                       <CardContent >
-                        <Title> Parking Spaces </Title>
+                        <Title> Parking Spaces of {selectedParking} </Title>
                         <Chart field={['vehiclecount','totalspaces']} 
                               data={data} 
                               chartID='parkings'/> 

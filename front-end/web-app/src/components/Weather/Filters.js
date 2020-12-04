@@ -5,21 +5,17 @@ import Title from '../Title';
 import 'date-fns'
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-import useTheme from '@material-ui/core/styles/useTheme'
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button'
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Divider from '@material-ui/core/Divider';
 import { Typography } from '@material-ui/core';
 
 export default function Filters(props) {
-  const theme = useTheme()
   //-------------------------------
   // All about checkboxes
   //-------------------------------
@@ -79,7 +75,7 @@ export default function Filters(props) {
   return (
     <div>
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <Title >Select a Date Window </Title>
+        <Title >1) Select a Date Window </Title> 
         <KeyboardDatePicker
           clearable
           disableFuture
@@ -87,7 +83,7 @@ export default function Filters(props) {
           format="dd/MM/yyyy"
           margin="normal"
           id="start-date-picker-dialog"
-          label="Select Start"
+          label="Select Initial"
           value={selectedStartDate}
           onChange={handleDateStartChange}
           KeyboardButtonProps={{
@@ -101,7 +97,7 @@ export default function Filters(props) {
           margin="normal"
           placeholder="dd/MM/YYYY"
           id="end-date-picker-dialog"
-          label="Select End"
+          label="Select Last"
           value={selectedEndDate}
           format="dd/MM/yyyy"
           onChange={handleDateEndChange}
@@ -113,8 +109,8 @@ export default function Filters(props) {
         />
     </MuiPickersUtilsProvider>
     <FormControl component="fieldset" style={{marginTop: 40, display:'flex'}}>
-     <FormLabel required component="legend"  style={{color:'black'}} > <Title>Select Dataset</Title> 
-                <Typography component='span'variant='body1' style={{color:'black'}}> (At least 1)</Typography> 
+     <FormLabel required component="legend"  style={{color:'black'}} > <Title>2) Select Dataset</Title> 
+                <Typography component='span'variant='body2' > (At least 1)</Typography> 
     </FormLabel>
      <FormGroup style={{marginTop: 10}}>
         <FormControlLabel

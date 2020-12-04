@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from 'react';
-import Title from '../Title';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
@@ -12,7 +11,7 @@ export default function Chart(props) {
   const chartRef= useRef(null);
   const chartID = props.chartID
   const data = props.data
-
+  const measure = props.measure
   
   console.log('chart', data)
   useEffect(() => {
@@ -36,13 +35,13 @@ export default function Chart(props) {
         // Add Y Axis
         var yAxis = chartRef.current.yAxes.push(new am4charts.ValueAxis());
         
-        if(chartRef.current.yAxes.indexOf(yAxis) != 0){
+        if(chartRef.current.yAxes.indexOf(yAxis) !== 0){
           yAxis.syncWithAxis = chartRef.current.yAxes.getIndex(0);
         }
         yAxis.renderer.grid.template.stroke = am4core.color('#f0f2fa');
         yAxis.renderer.grid.template.strokeOpacity = 1;
         yAxis.renderer.labels.template.fontSize = 14;
-        yAxis.title.text = "Celsium";
+        yAxis.title.text = measure;
         yAxis.renderer.opposite = opposite;
         yAxis.renderer.line.strokeOpacity = 1;
         yAxis.renderer.line.strokeWidth = 2;
@@ -82,7 +81,7 @@ export default function Chart(props) {
         chartRef.current.scrollbarX = scrollbarX;
       }
       
-      createAxisAndSeries(props.field, "Weather", false);
+      createAxisAndSeries(props.field, chartID, false);
       // Add cursor
       chartRef.current.cursor = new am4charts.XYCursor();
 

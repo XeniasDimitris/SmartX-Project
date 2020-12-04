@@ -1,5 +1,4 @@
 import React from 'react'
-import useTheme from '@material-ui/core/styles/useTheme'
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button'
 import FormLabel from '@material-ui/core/FormLabel';
@@ -36,7 +35,6 @@ function FormItem(props){
 
 
 export default function Filters(props) {
-    const theme = useTheme()
     //-------------------------------
     // All about checkboxes
     //-------------------------------
@@ -65,7 +63,7 @@ export default function Filters(props) {
     return(
         <div > 
           <FormControl component="fieldset" >
-            <FormLabel required component="legend"  style={{color:'black'}} > <Title>Select Local Community</Title> 
+            <FormLabel required component="legend"  style={{color:'black'}} > <Title>1) Select Local Community</Title> 
                     <Typography component='span'variant='body1' style={{color:'black'}}> (At least 1)</Typography> 
             </FormLabel>
             <FormGroup style={{marginTop: 10,}}>

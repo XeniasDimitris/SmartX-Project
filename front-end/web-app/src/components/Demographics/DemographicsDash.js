@@ -1,10 +1,8 @@
 import React , { useEffect }from 'react';
 import clsx from 'clsx';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Data from './Data';
-import { CardContent, useTheme } from '@material-ui/core';
+import { CardContent } from '@material-ui/core';
 import Title from '../Title'
 import API from '../../api-services'
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -26,7 +24,6 @@ export default function WeatherDashboard(props) {
   const classes = useStyles();
   const classes2 = useStyles2()
   const fixedHeightPaper = clsx(classes.paper, classes2.fixedHeightChart);
-  const theme = useTheme()
   //--------------------------------
   //All about fetching data from API
   //---------------------------------

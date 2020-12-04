@@ -1,12 +1,10 @@
 import React , { useEffect }from 'react';
 import clsx from 'clsx';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Chart from './Chart';
-import Info from '../Info';
 import Data from './Data';
-import { CardContent, useTheme } from '@material-ui/core';
+import { CardContent } from '@material-ui/core';
 import Filters from './Filters'
 import Title from '../Title'
 import { useStyles }  from '../../css/DashboardCSS'
@@ -19,17 +17,24 @@ function formatDate(start,end){
   return {start,end}
 }
 
-
+const measure = {
+  temperature: ['Temperature','Celsium'],
+  humidity: ['Humidity','%'],
+  pressure: ['Pressure','mBar'],
+  dew: ['Dew Point','Celsium'],
+  wind_direction:['Wind Direction','degrees'],
+  wind_speed: ['Wind Speed','kph']
+}
 export default function WeatherDashboard(props) {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeightChart);
-  const theme = useTheme()
   //--------------------------------
   //All about fetching data from API
   //---------------------------------
   const [data,setData] = React.useState(null)
   const [filters,setFilters] = React.useState(null)
   const [loading, setLoading] = React.useState(false)
+  const [selectedDataset,setSelectedDataset] = React.useState(null)
 
   const handleSetFilters = ({start,end,datasets})=>{
       let ret = formatDate(start,end)
@@ -45,10 +50,9 @@ export default function WeatherDashboard(props) {
     if (filters){
       let {start, end, datasets} = filters
       setTimeout( ()=>{
-        let cum_data = []
         for (let key in datasets){
           if (datasets[key]===true){ 
-            console.log('mpika',key) 
+            setSelectedDataset(key)
             API.weatherAPI({start,end, dataset: key})
             .then(resp => {
                 resp.forEach((item)=>{
@@ -98,8 +102,16 @@ export default function WeatherDashboard(props) {
                     <CircularProgress color="secondary" className={classes.loading}/>
                     : (
                   <React.Fragment>
-                      <Title>Weather from {filters.start} to {filters.end}</Title>
-                      <Chart data={data} chartID={'weather'}/>
+                      {selectedDataset  && <Title>{measure[selectedDataset][0]} 
+                        { filters.start ? 
+                          <React.Fragment> from {filters.start}  </React.Fragment>: 
+                          <React.Fragment> from the first record </React.Fragment>}
+                        { filters.end ? 
+                          <React.Fragment> to {filters.end} </React.Fragment>: 
+                          <React.Fragment> to the last record </React.Fragment>}
+                        </Title>
+                      }
+                      <Chart data={data} chartID={measure[selectedDataset][0]} measure={measure[selectedDataset][1]}/>
                     </React.Fragment>
                 )} 
               </CardContent>

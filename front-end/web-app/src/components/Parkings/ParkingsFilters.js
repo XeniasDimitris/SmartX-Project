@@ -5,10 +5,8 @@ import Title from '../Title';
 import 'date-fns'
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-import useTheme from '@material-ui/core/styles/useTheme'
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button'
 import FormLabel from '@material-ui/core/FormLabel';
@@ -42,7 +40,6 @@ function FormItem(props){
 
 
 export default function Filters(props) {
-  const theme = useTheme()
   //-------------------------------
   // All about checkboxes
   //-------------------------------
@@ -104,7 +101,7 @@ export default function Filters(props) {
   return (
     <div>
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <Title >Select a Date Window </Title>
+        <Title >1) Select a Date Window </Title>
         <KeyboardDatePicker
           clearable
           disableFuture
@@ -138,7 +135,7 @@ export default function Filters(props) {
         />
     </MuiPickersUtilsProvider>
     <FormControl component="fieldset" style={{marginTop: 40, display:'flex'}}>
-     <FormLabel required component="legend"  style={{color:'black'}} > <Title>Select a Parking</Title> 
+     <FormLabel required component="legend"  style={{color:'black'}} > <Title>2) Select a Parking</Title> 
                 <Typography component='span'variant='body1' style={{color:'black'}}> (At least 1)</Typography> 
     </FormLabel>
      <FormGroup style={{marginTop: 10}}>

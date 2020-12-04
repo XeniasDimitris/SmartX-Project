@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import { CardContent, Typography, useTheme } from '@material-ui/core';
+import { CardContent } from '@material-ui/core';
 import Title from '../Title'
-import clsx from 'clsx';
 import API from '../../api-services'
 import Map from './Map'
 import Filters from './TrafficFilters'
@@ -20,7 +19,6 @@ function formatDate(start,end){
 
 export default function TrafficDash(props){
     const classes = useStyles()
-    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeightChart);
     const [sensors, setSensors] = useState(null)
     const [reportIdData, setReportIdData] = useState(null)
     const [data,setData] = useState(null)
@@ -43,19 +41,22 @@ export default function TrafficDash(props){
     },[])
 
 
-    useEffect( async ()=>{
-      if (filters){
-        let data = []
-        await Promise.all(reportIdData.map( async (item) =>{
-          let res = await API.trafficRecordsAPI({rep_id: item.rep_id, start: filters.start, end: filters.end})
-          res.map( i =>{
-            i.datetime = new Date(i.datetime)
-          })
-          data.push({item, res})
-        }))
-        setData(data)
-        setLoading(false)
+    useEffect( ()=>{
+      async function fetchData(){
+        if (filters){
+          let data = []
+          await Promise.all(reportIdData.map( async (item) =>{
+            let res = await API.trafficRecordsAPI({rep_id: item.rep_id, start: filters.start, end: filters.end})
+            res.forEach( i =>{
+              i.datetime = new Date(i.datetime)
+            })
+            data.push({item, res})
+          }))
+          setData(data)
+          setLoading(false)
+        }
       }
+      fetchData()
     }, [filters])
 
     useEffect( ()=>{
@@ -74,7 +75,7 @@ export default function TrafficDash(props){
             <Grid item  xs={12} md={4} lg={12} > 
                 <Paper>                  
                   <CardContent>
-                    <Title>Sensors across the town</Title>
+                    <Title>1) Select Traffic Sensor</Title>
                   </CardContent>  
                 </Paper>     
                 <Paper>
@@ -114,7 +115,7 @@ export default function TrafficDash(props){
                           <Grid key={index} item xs={12} md={4} lg={12} >
                               <Paper className={classes.paper}>
                                 <CardContent >
-                                  <Title> From sensor {obj.item.point_1} to sensor {obj.item.point_2}</Title>
+                                  <Title> Average Speed and Vehicle Count from sensor {obj.item.point_1} to sensor {obj.item.point_2}</Title>
                                   <Chart field={['vehicleCount','avgSpeed']} 
                                         data={obj.res} 
                                         chartID={obj.item.rep_id.toString()}/>

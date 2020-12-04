@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from 'react';
-import Title from '../Title';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
@@ -33,19 +32,19 @@ export default function Chart(props) {
       xAxis.groupData = true;
       xAxis.groupCount = 1500;
 
-      function createAxisAndSeries(field, name, opposite ) {
+      function createAxisAndSeries(yax, field, opposite ) {
        
         // Add Y Axis
         var yAxis = chartRef.current.yAxes.push(new am4charts.ValueAxis());
        
-        if(chartRef.current.yAxes.indexOf(yAxis) != 0){
+        if(chartRef.current.yAxes.indexOf(yAxis) !== 0){
           yAxis.syncWithAxis = chartRef.current.yAxes.getIndex(0);
         }
 
         yAxis.renderer.grid.template.stroke = am4core.color('#f0f2fa');
         yAxis.renderer.grid.template.strokeOpacity = 1;
         yAxis.renderer.labels.template.fontSize = 14;
-        yAxis.title.text = field;
+        yAxis.title.text = yax;
         yAxis.renderer.opposite = opposite;
         yAxis.renderer.line.strokeOpacity = 1;
         yAxis.renderer.line.strokeWidth = 2;
@@ -57,7 +56,7 @@ export default function Chart(props) {
         series.dataFields.dateX = "datetime";
         series.strokeWidth = 0.5; // 3px
         series.yAxis = yAxis;
-        series.name = name;
+        series.name = field;
         series.showOnInit = true;
         series.tensionX = 0.8;
         series.fillOpacity = 0.1;
@@ -74,8 +73,8 @@ export default function Chart(props) {
         yAxis.renderer.line.stroke = series.stroke;
       }
       
-      createAxisAndSeries(props.field[0], props.field[0], false);
-      createAxisAndSeries(props.field[1], props.field[1], true);
+      createAxisAndSeries('count', props.field[0], false);
+      createAxisAndSeries('kph', props.field[1], true);
 
       // Add cursor
       chartRef.current.cursor = new am4charts.XYCursor();

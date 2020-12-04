@@ -7,13 +7,11 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-import useTheme from '@material-ui/core/styles/useTheme'
 import Button from '@material-ui/core/Button'
 import { Typography } from '@material-ui/core';
 
 
 export default function Filters(props) {
-  const theme = useTheme()
 
 
   //-------------------------------
@@ -44,7 +42,7 @@ export default function Filters(props) {
   return (
     <div>
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <Title >Select a Date Window </Title>
+        <Title >2) Select a Date Window </Title>
         <KeyboardDatePicker
           clearable
           disableFuture

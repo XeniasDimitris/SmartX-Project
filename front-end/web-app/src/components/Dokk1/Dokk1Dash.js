@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import { CardContent, Typography, useTheme } from '@material-ui/core';
+import { CardContent } from '@material-ui/core';
 import Title from '../Title'
-import clsx from 'clsx';
 import API from '../../api-services'
 import Map from './Dokk1Map'
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -20,7 +19,6 @@ function formatDate(start,end){
 
 export default function Dokk1Dash(props){
     const classes = useStyles()
-    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeightChart);
     const [sensors, setSensors] = useState(null)
     const [filters,setFilters] = useState(null)
     const [loading, setLoading] = useState(null)
@@ -45,10 +43,9 @@ export default function Dokk1Dash(props){
         setTimeout( ()=>{
               API.Dokk1RecsAPI({start,end,id})
               .then(resp => {
-                  resp.map(item =>{
+                  resp.forEach(item =>{
                     item.datetime = new Date(item.datetime)
                   })
-                  console.log('dash',resp)
                   setData(resp)
                   setLoading(false)
               })
@@ -72,7 +69,7 @@ export default function Dokk1Dash(props){
           <Grid item  xs={12} md={4} lg={12} > 
                 <Paper>                  
                   <CardContent>
-                    <Title>Dokk1's Sensors</Title>
+                    <Title>1) Select Dokk1's Sensor</Title>
                   </CardContent>  
                 </Paper>     
                 <Paper>
@@ -105,30 +102,54 @@ export default function Dokk1Dash(props){
                     </Paper>
                   </Grid>
                 :
+
                   <Grid item  xs={12} md={4} lg={9} >      
-                    <Paper className={classes.paper}>
-                      <CardContent >
-                        <Title> Sensor's Records </Title>
-                        <Chart  
-                              data={data} 
-                              field={['humidity', 'temperature']}
-                              chartID='hum_temp'/> 
-                        <Chart 
-                              data={data} 
-                              field={['co2']}
-                              chartID='co2'/> 
-                        <Chart 
-                              data={data} 
-                              field={['light_level', 'light_colour']}
-                              chartID='light'/> 
-                        <Chart 
-                              data={data} 
-                              field={['occupancy']}
-                              chartID='occ'/> 
-
-
-                      </CardContent>
-                    </Paper>
+                    <Grid container spacing={2}>
+                      <Grid item  xs={12} md={4} lg={12} >      
+                        <Paper className={classes.paper}>
+                          <CardContent >
+                            <Title> Humidity and Temperature of Sensor {selectedSensor.id}  </Title>
+                            <Chart  
+                                  data={data} 
+                                  field={['humidity', 'temperature']}
+                                  chartID='hum_temp'/> 
+                          </CardContent>
+                        </Paper>
+                      </Grid>
+                      <Grid item  xs={12} md={4} lg={12} >      
+                        <Paper className={classes.paper}>
+                          <CardContent >
+                            <Title> Co2 of Sensor {selectedSensor.id} </Title>
+                            <Chart 
+                                  data={data} 
+                                  field={['co2']}
+                                  chartID='co2'/> 
+                          </CardContent>
+                        </Paper>
+                      </Grid>
+                      <Grid item  xs={12} md={4} lg={12} >      
+                        <Paper className={classes.paper}>
+                          <CardContent >
+                            <Title>Light Level and Color of Sensor {selectedSensor.id} </Title>
+                            <Chart 
+                                  data={data} 
+                                  field={['light_level', 'light_colour']}
+                                  chartID='light'/> 
+                          </CardContent>
+                        </Paper>
+                      </Grid>
+                      <Grid item  xs={12} md={4} lg={12} >      
+                        <Paper className={classes.paper}>
+                          <CardContent >
+                            <Title> Occupancy of Sensor {selectedSensor.id} </Title>
+                            <Chart 
+                                  data={data} 
+                                  field={['occupancy']}
+                                  chartID='occ'/> 
+                          </CardContent>
+                        </Paper>
+                      </Grid>
+                    </Grid>
                   </Grid>
             )}
 
