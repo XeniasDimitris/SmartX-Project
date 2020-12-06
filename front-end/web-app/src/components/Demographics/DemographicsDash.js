@@ -18,25 +18,34 @@ const useStyles2 = makeStyles(()=>({
   }
 }))
 
-export default function WeatherDashboard(props) {
- 
+export default function DemographicsDashboard(props) {
+
   
   const classes = useStyles();
   const classes2 = useStyles2()
   const fixedHeightPaper = clsx(classes.paper, classes2.fixedHeightChart);
-  //--------------------------------
-  //All about fetching data from API
-  //---------------------------------
+
+
+  /* ----------------------------------- */
+  /* Define States of Component */
+  /* ----------------------------------- */
   const [data,setData] = React.useState(null)
   const [filters,setFilters] = React.useState(null)
   const [loading, setLoading] = React.useState(false)
 
+  /* ----------------------------------- */
+  /* Handle Filter Submission */
+  /* ----------------------------------- */
   const handleSetFilters = (filt)=>{
       setFilters(filt)
       setLoading(true)
   }
 
-  // API CALL for given filters from Filter Form
+  
+  
+  /* ------------------------------------------- */
+  /* Fetch data when filters have been submitted  */
+  /* ------------------------------------------- */
   useEffect( () =>{
     
     if (filters){
@@ -105,7 +114,10 @@ export default function WeatherDashboard(props) {
 
         <Grid container  spacing={2}>
 
-          {/* Filters */}
+          
+          {/* ----------------------------------- */}
+          {/* Filters Component */}
+          {/* ----------------------------------- */}
           <Grid item  xs={12} md={4} lg={3} >
 
                 <Paper className={classes.paper}>
@@ -116,7 +128,10 @@ export default function WeatherDashboard(props) {
                 </Paper>
           </Grid>
 
-          {/* PieChart */}
+          
+          {/* ----------------------------------- */}
+          {/* BarCharts and Piecharts */}
+          {/* ----------------------------------- */}
            { filters && 
             <Grid item xs={12} md={8} lg={9}>
               <Grid container spacing={2}>

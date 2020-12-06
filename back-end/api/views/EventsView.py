@@ -11,6 +11,8 @@ data_dir = '/home/dimitris/Desktop/DiplomaThesis/Datasets/Aarhus/Events'
 class EventsView(APIView):
 
     def get(self, request, format=None):
+        # Get all events records
+
         start = request.query_params['start'] if 'start' in request.query_params else None
         end = request.query_params['end'] if 'end' in request.query_params else None
         columns = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16]

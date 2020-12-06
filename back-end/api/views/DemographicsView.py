@@ -11,6 +11,8 @@ data_dir = '/home/dimitris/Desktop/DiplomaThesis/Datasets/Aarhus/Demographics'
 class DemographicsView(APIView):
 
     def get(self, request, format=None):
+        # Get demographics
+
         df = pd.read_csv(f'{data_dir}/Demographics--januar-2013.csv').fillna(-1)
         res = df.to_dict('records')
         del df

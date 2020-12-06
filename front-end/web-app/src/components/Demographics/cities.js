@@ -1,3 +1,8 @@
+
+
+/* ----------------------------------- */
+/* Checkboxes initial state */
+/* ----------------------------------- */
 const cities = {
     'All' : false,
     'City ': false,

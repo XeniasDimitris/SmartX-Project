@@ -17,7 +17,11 @@ function formatDate(start,end){
 }
 
 
-export default function TrafficDash(props){
+export default function ParkingDash(props){
+
+    /* ----------------------------------- */
+    /* Define States of Component */
+    /* ----------------------------------- */
     const classes = useStyles()
     const [parkings, setParkings] = useState(null)
     const [filters,setFilters] = useState(null)
@@ -25,6 +29,10 @@ export default function TrafficDash(props){
     const [data, setData] = useState(null)
     const [selectedParking, setSelectedParking] = useState(null)
 
+    
+    /* ----------------------------------- */
+    /* Handle Filter Submission */
+    /* ----------------------------------- */
     const handleSetFilters = ({start,end,datasets}) =>{
       let ret = formatDate(start,end)
       start = ret.start
@@ -34,6 +42,10 @@ export default function TrafficDash(props){
     }
 
 
+
+    /* ---------------------------------------------------------- */
+    /* Fetch Data for Parking Areas when filters will be submitted  */
+    /* ---------------------------------------------------------- */
     useEffect( () =>{
       if (filters){
         let {start, end, datasets} = filters
@@ -42,6 +54,9 @@ export default function TrafficDash(props){
               .then(resp => {
                   let cum_data = [] 
                   for (let key in datasets){
+                    /* ---------------------------------------------------------- */
+                    /* if 'All' is selected,  calculate cumulative results   */
+                    /* ---------------------------------------------------------- */
                     if  ((key==='All') && (datasets[key]===true)){
                       setSelectedParking('All')
                       for (let i = 0; i < resp.length; i++){ 
@@ -62,7 +77,11 @@ export default function TrafficDash(props){
 
                       break;
                     }
-                    if (datasets[key]===true){ // pernei mono to prwto checked
+                    /* ---------------------------------------------------------- */
+                    /* if particular Parking Area is selected, calculate results  */
+                    /* ---------------------------------------------------------- */
+                    // TODO multiple parking area selection
+                    if (datasets[key]===true){ 
                       setSelectedParking(key)
                       for (let i = 0; i < resp.length; i++) {
                         let item = resp[i]
@@ -81,6 +100,10 @@ export default function TrafficDash(props){
             }, 500 )} 
       },[filters])
 
+    
+    /* ------------------------------------------- */
+    /* Fetch parking areas info when page will be loaded  */
+    /* ------------------------------------------- */
     useEffect(()=>{
         API.ParkingsInfoAPI()
         .then( (res) => setParkings(res))
@@ -94,6 +117,11 @@ export default function TrafficDash(props){
   
           <Grid container  spacing={2}>
             
+
+
+            {/* ----------------------------------- */}
+            {/* Filters Component */}
+            {/* ----------------------------------- */}
             <Grid item  xs={12} md={4} lg={3} >      
                    <Paper className={classes.paper}>
                     <CardContent>
@@ -101,6 +129,10 @@ export default function TrafficDash(props){
                     </CardContent>
                    </Paper>
             </Grid>
+
+            {/* ----------------------------------- */}
+            {/* Map Component */}
+            {/* ----------------------------------- */}
             <Grid item  xs={12} md={4} lg={9} > 
                 <Paper>                  
                   <CardContent>
@@ -113,6 +145,9 @@ export default function TrafficDash(props){
             </Grid>
              
 
+            {/* -------------------------------------------------*/}
+            {/* if we have a submitted parking area, load charts */}
+            {/* ------------------------------------------------ */}
             { filters && (
                 loading ? 
                   <Grid item  xs={12} md={4} lg={12} >

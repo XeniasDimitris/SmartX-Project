@@ -22,12 +22,20 @@ const useStyles = makeStyles(()=>({
 
 
 export default function Map(props){
+
+   
+      /* ----------------------------------- */
+      /* Define States of Component */
+      /* ----------------------------------- */
       const classes = useStyles()
       const [popupSensor, setPopupSensor] = useState(null)
       const selectedSensor = props.selectedSensor
       const setSelectedSensor = props.setSelectedSensor
       const sensors = props.sensors
 
+      /* ----------------------------------- */
+      /* Handle Markers,Buttons clicks */
+      /* ----------------------------------- */
       const handleClickMarker = (sensor) => (e) => {
         setPopupSensor(sensor)
       } 
@@ -51,6 +59,9 @@ export default function Map(props){
       }
 
       
+      /* -------------------------------------------*/
+      /* Define the center of Map and more settings */
+      /* -------------------------------------------*/
       const [viewport, setViewport] = React.useState({
           width:  '100%',
           height: 750,
@@ -67,6 +78,9 @@ export default function Map(props){
             onViewportChange={nextViewport => setViewport(nextViewport)}
             onClick={(e)=>setPopupSensor(null)}
           >
+          {/* ----------------------------------- */}
+          {/* Define Markers */}
+          {/* ----------------------------------- */}
             {sensors && (
              sensors.map(sensor => (
               <Marker key={sensor.id} latitude={sensor.latitude} longitude={sensor.longitude} >
@@ -83,6 +97,9 @@ export default function Map(props){
              ) 
             ))}
   
+            {/* ----------------------------------- */}
+            {/* Define Popup Messages */}
+            {/* ----------------------------------- */}
             { popupSensor ? (
               <Popup 
                   tipSize={10}
@@ -113,6 +130,9 @@ export default function Map(props){
                     <Button color='secondary' onClick={handleClickButton(popupSensor)}> <Typography>Choose</Typography></Button>
               </Popup>
             ): null}
+            {/* ----------------------------------- */}
+            {/* Map's Helping Buttons */}
+            {/* ----------------------------------- */}
             <MapLegend handleResetClick={handleResetClick} handleSubmitClick={handleSubmitClick} disabledMap={props.disabledMap} />
           </ReactMapGL>
 

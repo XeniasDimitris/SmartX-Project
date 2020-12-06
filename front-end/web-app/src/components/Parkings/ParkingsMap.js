@@ -13,6 +13,10 @@ import IconButton from '@material-ui/core/IconButton'
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 
+
+/* ----------------------------------- */
+/* Set styles for Map's Control buttons */
+/* ----------------------------------- */
 const geolocateStyle = {
   position: 'absolute',
   top: 0,
@@ -65,6 +69,10 @@ export default function Map(props){
             onViewportChange={nextViewport => setViewport(nextViewport)}
             onClick={(e)=>setPopupParking(null)}
           >
+
+            {/* ----------------------------------- */}
+            {/* Define Markers */}
+            {/* ----------------------------------- */}
             {parkings && (
              parkings.map(parking => (
               <Marker key={parking.garacode} latitude={parking.latitude} longitude={parking.longitude} >
@@ -80,6 +88,10 @@ export default function Map(props){
              ) 
             ))}
   
+  
+            {/* ----------------------------------- */}
+            {/* Define Popup Messages */}
+            {/* ----------------------------------- */}
             { popupParking ? (
               <Popup 
                   tipSize={10}
@@ -113,15 +125,31 @@ export default function Map(props){
                     </Box>
               </Popup>
             ): null}
+
+            {/* ----------------------------------- */}
+            {/* Button for for using user's location */}
+            {/* ----------------------------------- */}
             <div style={geolocateStyle}>
               <GeolocateControl />
             </div>
+
+            {/* ----------------------------------- */}
+            {/* Map Fullscreen button */}
+            {/* ----------------------------------- */}
             <div style={fullscreenControlStyle}>
               <FullscreenControl />
             </div>
+
+            {/* ----------------------------------- */}
+            {/* Map's Compass */}
+            {/* ----------------------------------- */}
             <div style={navStyle}>
               <NavigationControl />
             </div>
+
+            {/* ----------------------------------- */}
+            {/* Zoom In/Out button */}
+            {/* ----------------------------------- */}
             <div style={scaleControlStyle}>
               <ScaleControl />
             </div>

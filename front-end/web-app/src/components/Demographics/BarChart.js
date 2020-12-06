@@ -18,12 +18,17 @@ export default function BarChart(props) {
         chartRef.current = am4core.create(chartID, am4charts.XYChart);
         chartRef.current.data = data;
         
+        //----------------------------------------------------
+        // Create Category Axis (xAxis) and Value Axis (yAxis)
+        //-----------------------------------------------------
         let categoryAxis = chartRef.current.xAxes.push(new am4charts.CategoryAxis());
         categoryAxis.dataFields.category = props.category;
         
         var valueAxis = chartRef.current.yAxes.push(new am4charts.ValueAxis());
-
+        
+        //---------------------
         // Create Series
+        //---------------------
         var series = chartRef.current.series.push(new am4charts.ColumnSeries());
         series.dataFields.valueY = "value";
         series.dataFields.categoryX = props.category;

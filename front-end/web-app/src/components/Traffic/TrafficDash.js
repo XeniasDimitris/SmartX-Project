@@ -18,6 +18,11 @@ function formatDate(start,end){
 
 
 export default function TrafficDash(props){
+      
+    /* ----------------------------------- */
+    /* Define States of Component */
+    /* ----------------------------------- */
+
     const classes = useStyles()
     const [sensors, setSensors] = useState(null)
     const [reportIdData, setReportIdData] = useState(null)
@@ -27,6 +32,10 @@ export default function TrafficDash(props){
     const [disabledFilters, setDisabledFilters] = useState(true)
     const [loading, setLoading] = useState(null)
 
+    
+    /* ----------------------------------- */
+    /* Handle Filter Submission */
+    /* ----------------------------------- */
     const handleSetFilters = ({start,end}) =>{
       let ret = formatDate(start,end)
       start = ret.start
@@ -35,12 +44,19 @@ export default function TrafficDash(props){
       setLoading(true)
     }
 
+    
+    /* ------------------------------------------- */
+    /* Fetch sensors info when page has been loaded  */
+    /* ------------------------------------------- */
     useEffect(()=>{
       API.trafficSensorsAPI()
       .then( (res) => setSensors(res))
     },[])
 
 
+    /* ---------------------------------------------------------- */
+    /* Fetch Data for each record when filters have been submitted */
+    /* ---------------------------------------------------------- */
     useEffect( ()=>{
       async function fetchData(){
         if (filters){
@@ -59,11 +75,6 @@ export default function TrafficDash(props){
       fetchData()
     }, [filters])
 
-    useEffect( ()=>{
-      if (reportIdData){
-      }
-    }, [reportIdData])
-
     return(
         <React.Fragment>
         {/* ----------------------------------- */}
@@ -71,7 +82,11 @@ export default function TrafficDash(props){
         {/* ----------------------------------- */}
   
           <Grid container  spacing={2}>
-  
+            
+            
+            {/* ----------------------------------- */}
+            {/* Map Component */}
+            {/* ----------------------------------- */}
             <Grid item  xs={12} md={4} lg={12} > 
                 <Paper>                  
                   <CardContent>
@@ -90,6 +105,9 @@ export default function TrafficDash(props){
             </Grid>
              
 
+            {/* ----------------------------------- */}
+            {/* Filters Component */}
+            {/* ----------------------------------- */}
             <Grid item  xs={12} md={4} lg={3} >      
                    <Paper className={classes.paper}>
                     <CardContent>
@@ -98,6 +116,10 @@ export default function TrafficDash(props){
                    </Paper>
             </Grid>
 
+
+            {/* ----------------------------------------- */}
+            {/* if we have a submitted sensor, load charts */}
+            {/* ----------------------------------------- */}
             { filters && (
                 loading ? 
                   <Grid item  xs={12} md={4} lg={9} >

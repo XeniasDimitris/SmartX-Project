@@ -12,6 +12,10 @@ import { cities } from './cities'
 import FormHelperText from '@material-ui/core/FormHelperText';
 
 
+
+//-------------------------------
+// Component for each Checkobox
+//-------------------------------
 function FormItem(props){
     let handleCheckboxChange = props.handleCheckboxChange
     let name = props.name
@@ -38,7 +42,6 @@ export default function Filters(props) {
     //-------------------------------
     // All about checkboxes
     //-------------------------------
-  
     const [disabled,setDisabled] = React.useState(true)
     const [checkboxState, setcheckboxState] = React.useState(cities);
   
@@ -62,6 +65,10 @@ export default function Filters(props) {
 
     return(
         <div > 
+        
+          {/* ----------------------------------- */}
+          {/* Checkboxes Form */}
+          {/* ----------------------------------- */}
           <FormControl component="fieldset" >
             <FormLabel required component="legend"  style={{color:'black'}} > <Title>1) Select Local Community</Title> 
                     <Typography component='span'variant='body1' style={{color:'black'}}> (At least 1)</Typography> 
@@ -77,6 +84,10 @@ export default function Filters(props) {
                 })}
             </FormGroup>
           </FormControl>
+        
+        {/* ----------------------------------- */}
+        {/* Submit Button */}
+        {/* ----------------------------------- */}
         <Button  style={{display:'flex',marginTop: 40}}
                 color='secondary'
                 variant='contained'

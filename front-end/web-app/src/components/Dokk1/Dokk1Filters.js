@@ -19,8 +19,6 @@ export default function Filters(props) {
   const [selectedStartDate, setSelectedStartDate] = React.useState(null);
   const [selectedEndDate, setSelectedEndDate] = React.useState(null);
 
-
-
   const handleDateStartChange = (date) => {
     setSelectedStartDate(date);
   };  
@@ -33,13 +31,16 @@ export default function Filters(props) {
   //All about Button click
   //-------------------------------
 
-
   const handleClick = (e) =>{
     props.handleSetFilters({start:selectedStartDate, end:selectedEndDate})
   }
 
   return (
     <div>
+
+    {/* ----------------------------------------- */}
+    {/* Date Pickers */}
+    {/* ----------------------------------------- */}
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Title >2) Select a Date Window </Title>
         <KeyboardDatePicker
@@ -75,6 +76,9 @@ export default function Filters(props) {
         />
     </MuiPickersUtilsProvider>
 
+  {/* ----------------------------------------- */}
+  {/* Submission button */}
+  {/* ----------------------------------------- */}
    <Button  style={{display:'flex',marginTop: 40}}
             color='secondary'
             variant='contained'

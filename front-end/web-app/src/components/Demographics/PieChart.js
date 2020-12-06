@@ -18,13 +18,17 @@ export default function PieChart(props) {
       
         chartRef.current = am4core.create(chartID, am4charts.PieChart);
         chartRef.current.data = data;
-      
+        
+        //---------------------
         // Create Series
+        //---------------------
         let pieSeries = chartRef.current.series.push(new am4charts.PieSeries());
         pieSeries.dataFields.value = "value";
         pieSeries.dataFields.category = props.category;
-
+        
+        //---------------------
         // Disable ticks and labels
+        //---------------------
         pieSeries.labels.template.disabled = true;
         pieSeries.ticks.template.disabled = true;
 

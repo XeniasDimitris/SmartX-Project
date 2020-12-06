@@ -1,6 +1,9 @@
 
 let baseURL = 'http://127.0.0.1:8000/api/'
 
+/* ----------------------------------- */
+/* All API calls*/
+/* ----------------------------------- */
 export default class API{
     static weatherAPI(queries){
       let dataset = queries.dataset

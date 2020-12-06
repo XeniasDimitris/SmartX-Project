@@ -33,6 +33,10 @@ export default function Data(props) {
 
   return (
     <React.Fragment>
+
+    {/* ----------------------------------------- */}
+    {/* Table with the raw data  */}
+    {/* ----------------------------------------- */}
      <TableContainer className={classes.dataPresentation}>
       <Table stickyHeader  aria-label="sticky table" >
         <TableHead >

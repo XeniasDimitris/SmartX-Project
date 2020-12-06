@@ -6,6 +6,9 @@ import logo from "../Images/SmartX_City-Logo.png"
 
 import { useStyles }  from '../css/DashboardCSS'
 
+/* ----------------------------------- */
+/* Home Page with site description */
+/* ----------------------------------- */
 export default function HomePage(){
     const classes = useStyles()
 

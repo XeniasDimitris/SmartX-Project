@@ -28,6 +28,7 @@ const measure = {
 export default function WeatherDashboard(props) {
   const classes = useStyles();
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeightChart);
+  
   //--------------------------------
   //All about fetching data from API
   //---------------------------------
@@ -44,7 +45,9 @@ export default function WeatherDashboard(props) {
       setLoading(true)
   }
 
+  //---------------------------------------------
   // API CALL for given filters from Filter Form
+  //---------------------------------------------
   useEffect( () =>{
     
     if (filters){
@@ -93,7 +96,10 @@ export default function WeatherDashboard(props) {
                 </Paper>
           </Grid>
 
-          {/* Chart */}
+          
+            {/* ----------------------------------------- */}
+            {/* Chart Component */}
+            {/* ----------------------------------------- */}
            { filters && 
             <Grid item xs={12} md={8} lg={9}>
             <Paper className={classes.paper}>
@@ -122,7 +128,10 @@ export default function WeatherDashboard(props) {
         </Grid>
 
 
-        {/* Raw Data */}
+    
+        {/* ----------------------------------------- */}
+        {/* Raw Data Component */}
+        {/* ----------------------------------------- */}
         {filters && 
         <Grid container style={{paddingTop:10}}spacing={2}>
           <Grid item xs={12} md={12} lg={12}>

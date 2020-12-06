@@ -21,6 +21,7 @@ import { useStyles }  from './css/DashboardCSS'
 
 function App() {
 
+//-----------------------------------------------------------------------------
 // Use dark mode for those who have dark mode as global settings of their device 
 // Also added some custom theme for material UI
 //----------------------------------------------------------------------------
@@ -76,12 +77,20 @@ function App() {
 
       <div className={classes.root}>
         <Router>
+
+          {/* ---------------------------------------------- */}
+          {/* Use Application's Navbar and Menu in left side */}
+          {/* ---------------------------------------------- */}
           <AppDrawer open={open} 
                           handleDrawerOpen={handleDrawerOpen} 
                           handleDrawerClose={handleDrawerClose}
                             />
           <main className={classes.content}>
             <div className={classes.appBarSpacer} />
+
+              {/* ----------------------------------- */}
+              {/* Define Site's Routes */}
+              {/* ----------------------------------- */}
               <Container maxWidth="lg" className={clsx(classes.container, open && classes.containerShift)}>
                 <Switch>
                   <Route path='/' exact component={HomePage} />

@@ -19,7 +19,6 @@ export default function Filters(props) {
   //-------------------------------
   // All about checkboxes
   //-------------------------------
-
   const [disabled,setDisabled] = React.useState(true)
   const [checkboxState, setcheckboxState] = React.useState({
     temperature: false,
@@ -66,14 +65,16 @@ export default function Filters(props) {
   //-------------------------------
   //All about Button click
   //-------------------------------
-
-
   const handleClick = (e) =>{
     props.handleSetFilters({start:selectedStartDate, end:selectedEndDate, datasets: checkboxState})
   }
 
   return (
     <div>
+
+    {/* ----------------------------------------- */}
+    {/* Date Pickers */}
+    {/* ----------------------------------------- */}
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Title >1) Select a Date Window </Title> 
         <KeyboardDatePicker
@@ -112,6 +113,10 @@ export default function Filters(props) {
      <FormLabel required component="legend"  style={{color:'black'}} > <Title>2) Select Dataset</Title> 
                 <Typography component='span'variant='body2' > (At least 1)</Typography> 
     </FormLabel>
+
+    {/* ----------------------------------------- */}
+    {/* Checkboxes */}
+    {/* ----------------------------------------- */}
      <FormGroup style={{marginTop: 10}}>
         <FormControlLabel
          control={<Checkbox checked={temperature} onChange={handleCheckboxChange} name="temperature" />}
@@ -139,6 +144,10 @@ export default function Filters(props) {
        />
      </FormGroup>
    </FormControl>
+
+  {/* ----------------------------------------- */}
+  {/* Submission button */}
+  {/* ----------------------------------------- */}
    <Button  style={{display:'flex',marginTop: 40}}
             color='secondary'
             variant='contained'

@@ -18,6 +18,10 @@ function formatDate(start,end){
 
 
 export default function Dokk1Dash(props){
+
+    /* ----------------------------------- */
+    /* Define States of Component */
+    /* ----------------------------------- */
     const classes = useStyles()
     const [sensors, setSensors] = useState(null)
     const [filters,setFilters] = useState(null)
@@ -27,6 +31,10 @@ export default function Dokk1Dash(props){
     const [disabledMap, setDisabledMap] = useState(true)
     const [selectedSensor, setSelectedSensor] = useState(null)
 
+
+    /* ----------------------------------- */
+    /* Handle Filter Submission */
+    /* ----------------------------------- */
     const handleSetFilters = ({start,end}) =>{
       let ret = formatDate(start,end)
       start = ret.start
@@ -36,6 +44,9 @@ export default function Dokk1Dash(props){
     }
 
 
+    /* -------------------------------------------------------------- */
+    /* Fetch Data for sensor's records when filters will be submitted */
+    /* -------------------------------------------------------------- */
     useEffect( () =>{
       if (filters){
         let {start, end} = filters
@@ -53,6 +64,9 @@ export default function Dokk1Dash(props){
             }, 500 )} 
       },[filters])
 
+    /* ------------------------------------------- */
+    /* Fetch sensors info when page will be loaded  */
+    /* ------------------------------------------- */
     useEffect(()=>{
         API.SensorsDokk1API()
         .then( (res) => setSensors(res))
@@ -66,6 +80,9 @@ export default function Dokk1Dash(props){
   
           <Grid container  spacing={2}>
             
+          {/* ----------------------------------- */}
+          {/* Map Component */}
+          {/* ----------------------------------- */}
           <Grid item  xs={12} md={4} lg={12} > 
                 <Paper>                  
                   <CardContent>
@@ -83,6 +100,10 @@ export default function Dokk1Dash(props){
                         />
                 </Paper>
             </Grid>
+
+            {/* ----------------------------------- */}
+            {/* Filters Component */}
+            {/* ----------------------------------- */}
             <Grid item  xs={12} md={4} lg={3} >      
                    <Paper className={classes.paper}>
                     <CardContent>
@@ -92,6 +113,10 @@ export default function Dokk1Dash(props){
             </Grid>
              
 
+
+            {/* ----------------------------------------- */}
+            {/* if we have a submitted sensor, load charts */}
+            {/* ----------------------------------------- */}
             { filters && (
                 loading ? 
                   <Grid item  xs={12} md={4} lg={9} >

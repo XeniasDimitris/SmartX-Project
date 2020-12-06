@@ -6,6 +6,9 @@ from ..utils import get_weather_data
 
 data_dir = '/home/dimitris/Desktop/DiplomaThesis/Datasets/Aarhus'
 
+'''
+ Get Weather records 
+'''
 
 class WeatherHumidity(APIView):
 

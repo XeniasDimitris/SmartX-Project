@@ -37,6 +37,9 @@ export default function AppDrawer(props){
                         <MenuIcon />
                     </IconButton>
                     
+                    {/* ----------------------------------- */}
+                    {/* Breadcrumbs */}
+                    {/* ----------------------------------- */}
                     <Breadcrumbs aria-label="breadcrumb" >
                         <RouterLink to='/' onClick={()=>setListItemClicked(null)}>
                             <img src={logo} alt = "Logo" className={classes.logo} /> 
@@ -48,6 +51,10 @@ export default function AppDrawer(props){
                             </Typography>
                         </RouterLink>
                     </Breadcrumbs>
+
+                    {/* ----------------------------------- */}
+                    {/* Welcome and Profile Button */}
+                    {/* ----------------------------------- */}
                     <div style={{position:'absolute', right: '10px', display:"flex"}}>
                         <Typography >
                             <Box letterSpacing={5} fontStyle="oblique" style={{position:'relative', top:12}} >  Welcome</Box>
@@ -60,6 +67,10 @@ export default function AppDrawer(props){
 
                 </Toolbar>
             </AppBar>
+
+            {/* ----------------------------------- */}
+            {/* Drawer with menu */}
+            {/* ----------------------------------- */}
             <Drawer
                 variant="permanent"
                 classes={{

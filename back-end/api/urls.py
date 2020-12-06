@@ -3,6 +3,7 @@ from django.urls import path
 from . import views
 from rest_framework.urlpatterns import format_suffix_patterns
 
+# Api's routes
 urlpatterns = [
     path('weather/humidity/', views.WeatherHumidity.as_view()),
     path('weather/temperature/', views.WeatherTemperature.as_view()),

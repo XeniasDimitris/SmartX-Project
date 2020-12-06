@@ -7,8 +7,10 @@ from django.http.response import HttpResponse
 
 data_dir = '/home/dimitris/Desktop/DiplomaThesis/Datasets/Aarhus/Pollution/pollution'
 
+
 class PollutionSensorsView(APIView):
     def get(self, request, format=None):
+        # Get Pollution Sensors Info
 
         df = pd.read_csv('/home/dimitris/Desktop/DiplomaThesis/Datasets/Aarhus/Traffic/trafficMetaDataNoNAN.csv')
         res = df[['REPORT_ID', 'POINT_1_LNG']].to_dict('records')
@@ -21,9 +23,12 @@ class PollutionSensorsView(APIView):
                 arr.append({'longitude': float(lng), 'latitude': float(lat), 'report_id': item["REPORT_ID"]})
         return Response(arr, status=status.HTTP_200_OK)
 
+
 class PollutionRecordsView(APIView):
 
     def get(self, request, format=None):
+        # Get Pollution Sensor's records (with particular id) in a date window
+
         start = request.query_params['start'] if 'start' in request.query_params else None
         end = request.query_params['end'] if 'end' in request.query_params else None
         report_id = request.query_params['id'] if 'id' in request.query_params else None

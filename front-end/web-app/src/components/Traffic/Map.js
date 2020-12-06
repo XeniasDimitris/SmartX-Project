@@ -25,6 +25,10 @@ import './Map.css'
   }))
   
   export default function Map(props){
+   
+      /* ----------------------------------- */
+      /* Define States of Component */
+      /* ----------------------------------- */
       const classes = useStyles()
       const [popupSensor, setPopupSensor] = useState(null)
       const [selectedSensor, setSelectedSensor] = useState(null)
@@ -35,6 +39,11 @@ import './Map.css'
       const setReportIdData = props.setReportIdData
 
       const sensors = props.sensors
+
+    
+      /* ----------------------------------- */
+      /* Handle Markers,Buttons clicks */
+      /* ----------------------------------- */
       const handleClickMarker = (sensor) => (e) => {
         setPopupSensor(sensor)
       } 
@@ -61,6 +70,10 @@ import './Map.css'
         props.setDisabledFilters(false)
       }
 
+      
+      /* ----------------------------------- */
+      /* Fetch data for the submitted sensor */
+      /* ----------------------------------- */
       useEffect( ()=>{
         if (submitedSensor){
           API.trafficCorSensorsAPI()
@@ -77,6 +90,10 @@ import './Map.css'
         }
       }, [submitedSensor])
 
+      
+      /* --------------------------------------------------- */
+      /* Fetch data about the neighboors of selected sensor */
+      /* --------------------------------------------------- */
       useEffect( ()=>{
         if (selectedSensor){
           API.trafficCorSensorsAPI()
@@ -95,6 +112,10 @@ import './Map.css'
         }
       }, [selectedSensor])
       
+
+      /* -------------------------------------------*/
+      /* Define the center of Map and more settings */
+      /* -------------------------------------------*/
       const [viewport, setViewport] = React.useState({
           width:  '100%',
           height: 750,
@@ -111,6 +132,10 @@ import './Map.css'
             onViewportChange={nextViewport => setViewport(nextViewport)}
             onClick={(e)=>setPopupSensor(null)}
           >
+
+            {/* ----------------------------------- */}
+            {/* Define Markers */}
+            {/* ----------------------------------- */}
             {sensors && (
              sensors.map(sensor => (
               <Marker key={sensor.id} latitude={sensor.lat} longitude={sensor.lng} >
@@ -127,7 +152,10 @@ import './Map.css'
               </Marker>
              ) 
             ))}
-  
+            
+            {/* ----------------------------------- */}
+            {/* Define Popup Messages */}
+            {/* ----------------------------------- */}
             { popupSensor ? (
               <Popup 
                   tipSize={10}
@@ -141,8 +169,11 @@ import './Map.css'
                   <PopupMsg popupSensor={popupSensor} handleClickButton={handleClickButton} disabledButton={disabledButton}/>
               </Popup>
             ): null}
-  
-              <MapLegend handleResetClick={handleResetClick} handleSubmitClick={handleSubmitClick} disabledMap={props.disabledMap} />
+
+            {/* ----------------------------------- */}
+            {/* Map's Helping Buttons */}
+            {/* ----------------------------------- */}
+            <MapLegend handleResetClick={handleResetClick} handleSubmitClick={handleSubmitClick} disabledMap={props.disabledMap} />
           </ReactMapGL>
 
         );

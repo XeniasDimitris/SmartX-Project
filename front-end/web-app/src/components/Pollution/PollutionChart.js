@@ -19,7 +19,9 @@ export default function Chart(props) {
       chartRef.current.colors.step = 2;
 
       
+      //-----------------------
       // Add X Axis
+      //-----------------------
       let xAxis = chartRef.current.xAxes.push(new am4charts.DateAxis());
       xAxis.renderer.grid.template.strokeOpacity = 0;
       xAxis.renderer.minGridDistance = 50;
@@ -31,7 +33,9 @@ export default function Chart(props) {
 
       function createAxisAndSeries(field, name, opposite ) {
        
+        //-----------------------
         // Add Y Axis
+        //-----------------------
         var yAxis = chartRef.current.yAxes.push(new am4charts.ValueAxis());
        
         if(chartRef.current.yAxes.indexOf(yAxis) !== 0){
@@ -47,7 +51,9 @@ export default function Chart(props) {
         yAxis.renderer.line.strokeWidth = 2;
         yAxis.cursorTooltipEnabled = false;
 
+        //-----------------------
         // Create Series
+       //-----------------------
         var series = chartRef.current.series.push(new am4charts.LineSeries());
         series.dataFields.valueY = field;
         series.dataFields.dateX = "datetime";
@@ -60,7 +66,9 @@ export default function Chart(props) {
         series.connect = false
         series.autoGapCount = 40
         
+        //-----------------------
         // Series tooltip
+        //-----------------------
         series.tooltipText = 'date: {dateX}\n {name}: [bold]{valueY}[/]';
         series.tooltip.pointerOrientation = 'down';
         series.tooltip.dy = -5;
@@ -76,10 +84,14 @@ export default function Chart(props) {
         op = !op
       })
 
+      //-----------------------
       // Add cursor
+      //-----------------------
       chartRef.current.cursor = new am4charts.XYCursor();
 
+      //-----------------------
       // Disable axis lines
+      //-----------------------
       chartRef.current.cursor.lineX.disabled = true;
       chartRef.current.cursor.lineY.disabled = true;
 
@@ -87,7 +99,9 @@ export default function Chart(props) {
       // chartRef.current.cursor.behavior = 'none';
     }
 
-    // Create scrollbars
+      //-----------------------
+      // Create scrollbars
+      //-----------------------
       chartRef.current.scrollbarX = new am4core.Scrollbar();
       chartRef.current.scrollbarY = new am4core.Scrollbar();
 

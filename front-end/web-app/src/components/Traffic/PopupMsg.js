@@ -5,6 +5,10 @@ import Button from '@material-ui/core/Button'
 export default function PopupMsg(props){
     let popupSensor = props.popupSensor
     let handleClickButton = props.handleClickButton
+
+    /* ----------------------------------- */
+    /* Define content of Popup Marker */
+    /* ----------------------------------- */
     return (
         <React.Fragment>
             <Box m={1}>

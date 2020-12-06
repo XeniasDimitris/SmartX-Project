@@ -10,6 +10,8 @@ data_dir = '/home/dimitris/Desktop/DiplomaThesis/Datasets/Aarhus/Traffic/'
 class TrafficSensorsView(APIView):
 
     def get(self, request, format=None):
+        # Get Traffic Sensors Info
+
         columns = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 18, 19, 20, 21, 21]
         df = pd.read_csv(f'{data_dir}trafficMetaDataNoNAN.csv', usecols=columns)
         res = []
@@ -45,6 +47,8 @@ class TrafficSensorsView(APIView):
 class TrafficCorrelatedSensorsView(APIView):
 
     def get(self, request, format=None):
+        # Get All Traffic Sensor information for existed records
+
         columns = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 18, 19, 20, 21, 21]
         df = pd.read_csv(f'{data_dir}trafficMetaDataNoNAN.csv', usecols=columns)
         res = df.to_dict('records')
@@ -56,6 +60,8 @@ class TrafficCorrelatedSensorsView(APIView):
 class TrafficRecordsView(APIView):
 
     def get(self, request, format=None):
+        # Get records for a specific report_id in a date window
+        
         start = request.query_params['start'] if 'start' in request.query_params else None
         end = request.query_params['end'] if 'end' in request.query_params else None
         report_id = request.query_params['id'] if 'id' in request.query_params else None

@@ -11,6 +11,8 @@ data_dir = '/home/dimitris/Desktop/DiplomaThesis/Datasets/Aarhus/DOKK1_Sensors/'
 class Dokk1SensorsView(APIView):
 
     def get(self, request, format=None):
+        # Get Dokk1's sensors info
+
         columns = [1, 4, 5, 6, 7]
         df = pd.read_csv(f'{data_dir}DOKK1_Sensors_meta.csv', usecols=columns)
         res = df.to_dict('records')
@@ -22,6 +24,8 @@ class Dokk1SensorsView(APIView):
 class Dokk1RecordsView(APIView):
 
     def get(self, request, format=None):
+        # Get records for a specific id sensor in a date window
+
         start = request.query_params['start'] if 'start' in request.query_params else None
         end = request.query_params['end'] if 'end' in request.query_params else None
         id = request.query_params['id'] if 'id' in request.query_params else None

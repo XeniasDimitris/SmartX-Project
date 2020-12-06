@@ -21,8 +21,10 @@ export default function Chart(props) {
       chartRef.current = am4core.create(chartID, am4charts.XYChart);
       chartRef.current.colors.step = 2;
       chartRef.current.data = data;
-      
+
+      //---------------------------------
       // Add X Axis
+      //---------------------------------
       let xAxis = chartRef.current.xAxes.push(new am4charts.DateAxis());
       xAxis.renderer.grid.template.strokeOpacity = 0;
       xAxis.renderer.minGridDistance = 50;
@@ -32,7 +34,9 @@ export default function Chart(props) {
       
       function createAxisAndSeries(field, name, opposite ) {
        
+        //---------------------------------
         // Add Y Axis
+        //---------------------------------
         var yAxis = chartRef.current.yAxes.push(new am4charts.ValueAxis());
         
         if(chartRef.current.yAxes.indexOf(yAxis) !== 0){
@@ -48,11 +52,14 @@ export default function Chart(props) {
 
         yAxis.cursorTooltipEnabled = false;
 
+
+        //---------------------------------
         // Create Series
+        //---------------------------------
         var series = chartRef.current.series.push(new am4charts.LineSeries());
         series.dataFields.valueY = 'value';
         series.dataFields.dateX = "datetime";
-        series.strokeWidth = 0.5; // 3px
+        series.strokeWidth = 0.5; 
         series.yAxis = yAxis;
         series.name = name;
         series.showOnInit = true;
@@ -61,7 +68,10 @@ export default function Chart(props) {
         series.connect = false
         series.autoGapCount = 40
         
+
+        //---------------------------------
         // Series tooltip
+        //---------------------------------
         series.tooltipText = 'date: {dateX}\n value: [bold]{valueY}[/]';
         series.tooltip.pointerOrientation = 'down';
         series.tooltip.dy = -5;
@@ -74,7 +84,10 @@ export default function Chart(props) {
         yAxis.renderer.labels.template.fill = series.stroke;
         yAxis.renderer.line.stroke = series.stroke;
 
-      // Create scrollbars
+
+        //--------------------------------- 
+        // Create scrollbars
+        //---------------------------------
         var scrollbarX = new am4charts.XYChartScrollbar();
         scrollbarX.series.push(series);
         scrollbarX.marginBottom = 20;
@@ -82,10 +95,15 @@ export default function Chart(props) {
       }
       
       createAxisAndSeries(props.field, chartID, false);
+      
+      //---------------------------------
       // Add cursor
+      //---------------------------------
       chartRef.current.cursor = new am4charts.XYCursor();
 
+      //---------------------------------
       // Disable axis lines
+      //---------------------------------
       chartRef.current.cursor.lineX.disabled = true;
       chartRef.current.cursor.lineY.disabled = true;
 

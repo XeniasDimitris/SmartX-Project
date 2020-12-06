@@ -19,6 +19,11 @@ import CloudIcon from '@material-ui/icons/Cloud';
 import { makeStyles } from '@material-ui/core/styles';
 
 
+
+/* ----------------------------------- */
+/* Menu Styles */
+/* ----------------------------------- */
+
 const useStyles = makeStyles((theme)=> ({
   link:{
     color: 'inherit',
@@ -42,6 +47,9 @@ const useStyles = makeStyles((theme)=> ({
 }))
 
 
+/* ----------------------------------- */
+/* Component for each Menu button */
+/* ----------------------------------- */
 function ListItemLink(props) {
   const classes = useStyles()
   const { to, primary, setListItemClicked, icon, listItemClicked, nested} = props
@@ -61,6 +69,10 @@ function ListItemLink(props) {
   )
 }
 
+
+{/* ----------------------------------- */}
+{/* Main Menu Component*/}
+{/* ----------------------------------- */}
 export default function MainListItems(props) {
   const [open, setOpen] = React.useState(false);
 

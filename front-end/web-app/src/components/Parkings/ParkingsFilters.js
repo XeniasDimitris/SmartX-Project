@@ -93,13 +93,16 @@ export default function Filters(props) {
   //All about Button click
   //-------------------------------
 
-
   const handleClick = (e) =>{
     props.handleSetFilters({start:selectedStartDate, end:selectedEndDate, datasets: checkboxState})
   }
 
   return (
     <div>
+
+    {/* ----------------------------------------- */}
+    {/* Date Pickers */}
+    {/* ----------------------------------------- */}
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Title >1) Select a Date Window </Title>
         <KeyboardDatePicker
@@ -134,6 +137,11 @@ export default function Filters(props) {
           style={{display:'flex'}}
         />
     </MuiPickersUtilsProvider>
+
+
+    {/* ----------------------------------------- */}
+    {/* Checkboxes */}
+    {/* ----------------------------------------- */}
     <FormControl component="fieldset" style={{marginTop: 40, display:'flex'}}>
      <FormLabel required component="legend"  style={{color:'black'}} > <Title>2) Select a Parking</Title> 
                 <Typography component='span'variant='body1' style={{color:'black'}}> (At least 1)</Typography> 
@@ -148,6 +156,10 @@ export default function Filters(props) {
         })}
      </FormGroup>
    </FormControl>
+
+  {/* ----------------------------------------- */}
+  {/* Submission button */}
+  {/* ----------------------------------------- */}
    <Button  style={{display:'flex',marginTop: 40}}
             color='secondary'
             variant='contained'
