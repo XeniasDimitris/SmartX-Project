@@ -16,7 +16,7 @@
   The first step is to run the server for serving the API Requests. As we are using Django, first of all you need to create a virtual environment and download the dependecies.
   
   ### Create Python's Virtual Environment and start server
-  You need to have python >=3.6 installed in your environment (tested with python 3.8.5). Then create the virtual environment typing under **./back-end** directory `$ python3 -m venv venv` and activate it with `source venv/bin/activate`. For the dependecies just run `$ pip install -r dev-requirements.txt`. The start the server typing `python manage.py runserver` and you are ready!
+  You need to have python >=3.6 installed in your environment (tested with python 3.8.5). Then create the virtual environment typing under **./back-end** directory `$ python3 -m venv venv` and activate it with `source venv/bin/activate`. For the dependecies just run `$ pip install -r dev-requirements.txt`. Then, start the server typing `python manage.py runserver` and you are ready!
   
  ### Download React's dependecies and start React's development server
  Under **./front-end/web-app** type `$ npm install` in order to download all node modules needed for the app. Before that confirm that you have **node** and **npm** downloaded in your environment (tested with node v10.19.0 and npm v6.14.4). Then just type `$ npm start` and the application will open in your browser.
