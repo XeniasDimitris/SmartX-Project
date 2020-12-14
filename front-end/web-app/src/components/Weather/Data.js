@@ -22,6 +22,7 @@ export default function Data(props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(72);
   let data = props.data
+  
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };

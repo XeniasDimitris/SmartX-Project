@@ -17,6 +17,7 @@ import ParkingsDash from './components/Parkings/ParkingsDash'
 import Dokk1Dash from './components/Dokk1/Dokk1Dash'
 import 'mapbox-gl/dist/mapbox-gl.css';
 import PollutionDash from './components/Pollution/PollutionDash';
+import EventsDash from './components/Events/EventsDash'
 import { useStyles }  from './css/DashboardCSS'
 
 function App() {
@@ -100,6 +101,7 @@ function App() {
                   <Route path='/dashboard/parkings' exact component={ParkingsDash}/>
                   <Route path='/dashboard/dokk1' exact component={Dokk1Dash}/>
                   <Route path='/dashboard/pollution' exact component={PollutionDash}/>
+                  <Route path='/dashboard/events' exact component={EventsDash}/>
                   {/* <Route path='/dashboard/test' exact render={(props) => (<WeatherDashboard {...props} />)}/> */}
                 </Switch>
                 <Box pt={4}  className={classes.footer}>

@@ -64,7 +64,6 @@ export default function WeatherDashboard(props) {
                     delete item.value
                   }
                 })
-                console.log()
                 setData(resp)
                 setLoading(false)
             })

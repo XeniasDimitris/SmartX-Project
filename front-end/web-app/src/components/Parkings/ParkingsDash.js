@@ -161,7 +161,7 @@ export default function ParkingDash(props){
                   <Grid item  xs={12} md={4} lg={12} >      
                     <Paper className={classes.paper}>
                       <CardContent >
-                        <Title> Parking Spaces of {selectedParking} </Title>
+                        <Title> Parking Spaces at {selectedParking} </Title>
                         <Chart field={['vehiclecount','totalspaces']} 
                               data={data} 
                               chartID='parkings'/> 

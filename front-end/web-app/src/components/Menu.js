@@ -70,9 +70,9 @@ function ListItemLink(props) {
 }
 
 
-{/* ----------------------------------- */}
-{/* Main Menu Component*/}
-{/* ----------------------------------- */}
+/* ----------------------------------- */
+/* Main Menu Component*/
+/* ----------------------------------- */
 export default function MainListItems(props) {
   const [open, setOpen] = React.useState(false);
 
