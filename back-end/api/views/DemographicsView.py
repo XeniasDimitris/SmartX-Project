@@ -1,11 +1,10 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-import pandas as pd
-import gc
-from django.http.response import HttpResponse
+from django.conf import settings
+from ..DataController.DemographicsController import get_demographics
 
-data_dir = '/home/dimitris/Desktop/DiplomaThesis/Datasets/Aarhus/Demographics'
+data_dir = settings.DATA_DIR+'Demographics'
 
 
 class DemographicsView(APIView):
@@ -13,8 +12,5 @@ class DemographicsView(APIView):
     def get(self, request, format=None):
         # Get demographics
 
-        df = pd.read_csv(f'{data_dir}/Demographics--januar-2013.csv').fillna(-1)
-        res = df.to_dict('records')
-        del df
-        gc.collect()
+        res = get_demographics(data_dir)
         return Response(res, status=status.HTTP_200_OK)

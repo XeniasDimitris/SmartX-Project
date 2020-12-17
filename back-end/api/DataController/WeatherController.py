@@ -19,7 +19,7 @@ def get_weather_data(file, typeof, request):
                     data['value'].append('')
                 else:
                     data['datetime'].append(key)
-                    data['value'].append(float(dictionary[key]))
+                    data['value'].append(typeof(dictionary[key]))
 
     # Creation of Dataframe
     df = pd.DataFrame(data=data)

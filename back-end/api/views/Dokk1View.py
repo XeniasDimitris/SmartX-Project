@@ -1,11 +1,10 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-import pandas as pd
-import gc
-from django.http.response import HttpResponse
+from django.conf import settings
+from ..DataController.Dokk1Controller import get_sensors_info, get_sensor_records
 
-data_dir = '/home/dimitris/Desktop/DiplomaThesis/Datasets/Aarhus/DOKK1_Sensors/'
+data_dir = settings.DATA_DIR+'DOKK1_Sensors'
 
 
 class Dokk1SensorsView(APIView):
@@ -13,11 +12,7 @@ class Dokk1SensorsView(APIView):
     def get(self, request, format=None):
         # Get Dokk1's sensors info
 
-        columns = [1, 4, 5, 6, 7]
-        df = pd.read_csv(f'{data_dir}DOKK1_Sensors_meta.csv', usecols=columns)
-        res = df.to_dict('records')
-        del df
-        gc.collect()
+        res = get_sensors_info(data_dir)
         return Response(res, status=status.HTTP_200_OK)
 
 
@@ -30,14 +25,6 @@ class Dokk1RecordsView(APIView):
         end = request.query_params['end'] if 'end' in request.query_params else None
         id = request.query_params['id'] if 'id' in request.query_params else None
         if not id:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-        columns = [1, 4, 5, 6, 7]
-        df = pd.read_csv(f'{data_dir}DOKK1_Sensors.csv').rename(columns={'date': 'datetime'})
-        df['datetime_pd'] = pd.to_datetime(df['datetime'], infer_datetime_format=True)
-
-        query = df.loc[start:end].sort_index().loc[df['sensor'] == id]
-        res = query.to_dict('records')
-        print(len(res))
-        del df, query
-        gc.collect()
+            return Response({'error': 'no id is given'},status=status.HTTP_400_BAD_REQUEST)
+        res = get_sensor_records(data_dir, start, end, id)
         return Response(res, status=status.HTTP_200_OK)
