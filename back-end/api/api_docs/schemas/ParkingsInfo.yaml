@@ -1,0 +1,19 @@
+type: array
+items:
+  type: object
+  properties:
+    garagecode:
+      type: string
+    city:
+      type: string
+    postalcode:
+      type: string
+    housenumber:
+      type: number
+      format: int32
+    latitude:
+      type: number
+      format: float
+    longtitude:
+      type: number
+      format: float

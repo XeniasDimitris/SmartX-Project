@@ -1,0 +1,22 @@
+type: array
+items:
+  type: object
+  properties:
+    ozone:
+      type: number
+      format: int32
+    particullate_matter:
+      type: number
+      format: int32
+    carbon_monoxide:
+      type: number
+      format: int32
+    sulfure_dioxide:
+      type: number
+      format: int32
+    nitrogen_dioxide:
+      type: number
+      format: int32
+    datetime:
+      type: string
+      format: date-time

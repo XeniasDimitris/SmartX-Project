@@ -1,0 +1,48 @@
+type: array
+items:
+  type: object
+  properties:
+    _id:
+      type: number
+      format: int32
+    datetime:
+      type: string
+      format: date-time
+    sensor:
+      type: string
+    temperature:
+      type: number
+      format: float
+    humidity:
+      type: number
+      format: float
+    co2:
+      type: number
+      format: int32
+    voc:
+      type: number
+      format: float
+    light_level:
+      type: number
+      format: int32
+    light_colour":
+      type: number
+      format: int32
+    sound:
+      type: number
+      format: int32
+    sound_low:
+      type: number
+      format: int32
+    sound_high:
+      type: number
+      format: int32
+    occupancy:
+      type: number
+      format: int32
+    voltage:
+      type: number
+      format: int32
+    rssi:
+      type: number
+      format: int32

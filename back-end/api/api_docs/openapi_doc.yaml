@@ -1,0 +1,1003 @@
+openapi: 3.0.0
+info:
+  description: |
+    This is the API Documentation for SmartX-City Project and is compliant with the OpenAPI Specification v3.0. The source code of the project is [here (Github)](https://github.com/XeniasDimitris/SmartX-Project) .
+  version: 1.0.0
+  title: SmartX-City Project
+  contact:
+    name: Xenias Dimitris
+    email: dimitrisxenias@gmail.com
+servers:
+  - url: 'http://localhost:8000/api'
+    description: SmartX City API server
+tags:
+  - name: Weather
+    description: Get info about weather records
+  - name: Parkings
+    description: Get info about Aarhus' Parking Areas
+  - name: Dokk1
+    description: Get sensors info about Dokk1 building
+  - name: Demographics
+    description: Get demographics for all local communities of Aarhus
+  - name: Traffic
+    description: Get info about Traffic Sensors
+  - name: Pollution
+    description: Get info about Pollution Sensors
+  - name: Events
+    description: Get events that happen in Town
+paths:
+  /weather/humidity:
+    get:
+      tags:
+        - Weather
+      summary: Get Humidity records
+      operationId: getHumidity
+      parameters:
+        - name: start
+          in: query
+          description: 'The first Date of requesting records. If it''s not filled, it will be auto-filled the first available datetime (here  *2014-08-01*)'
+          required: false
+          schema:
+            type: string
+          examples:
+            YYYY-MM-dd:
+              value: '2014-08-01'
+            YYYY-MM:
+              value: 2014-08
+            YYYY:
+              value: '2014'
+        - name: end
+          in: query
+          description: 'The final Date of requesting records. If it''s not filled, it will be auto-filled  the last available datetime. (here *2014-09-31*)  </br> **!!!NOTE that end datetime  MUST be bigger than start datetime.**'
+          required: false
+          schema:
+            type: string
+          examples:
+            YYYY-MM-dd:
+              value: '2014-08-01'
+            YYYY-MM:
+              value: 2014-08
+            YYYY:
+              value: '2014'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    datetime:
+                      type: string
+                      format: date-time
+                    value:
+                      type: number
+                      format: float
+              example:
+                - datetime: '2014-08-01T00:00:00'
+                  value: 56
+                - datetime: '2014-08-01T00:20:00'
+                  value: 68
+  /weather/temperature:
+    get:
+      tags:
+        - Weather
+      summary: Get Temperature records
+      operationId: getTemperature
+      parameters:
+        - name: start
+          in: query
+          description: 'The first Date of requesting records. If it''s not filled, it will be auto-filled the first available datetime (here  *2014-08-01*)'
+          required: false
+          schema:
+            type: string
+          examples:
+            YYYY-MM-dd:
+              value: '2014-08-01'
+            YYYY-MM:
+              value: 2014-08
+            YYYY:
+              value: '2014'
+        - name: end
+          in: query
+          description: 'The final Date of requesting records. If it''s not filled, it will be auto-filled  the last available datetime. (here *2014-09-31*)  </br> **!!!NOTE that end datetime  MUST be bigger than start datetime.**'
+          required: false
+          schema:
+            type: string
+          examples:
+            YYYY-MM-dd:
+              value: '2014-08-01'
+            YYYY-MM:
+              value: 2014-08
+            YYYY:
+              value: '2014'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    datetime:
+                      type: string
+                      format: date-time
+                    value:
+                      type: number
+                      format: float
+              example:
+                - datetime: '2014-08-01T00:00:00'
+                  value: 18.2
+                - datetime: '2014-08-01T00:20:00'
+                  value: 19.5
+  /weather/pressure:
+    get:
+      tags:
+        - Weather
+      summary: Get Pressure records
+      operationId: getPressure
+      parameters:
+        - name: start
+          in: query
+          description: 'The first Date of requesting records. If it''s not filled, it will be auto-filled the first available datetime (here  *2014-08-01*)'
+          required: false
+          schema:
+            type: string
+          examples:
+            YYYY-MM-dd:
+              value: '2014-08-01'
+            YYYY-MM:
+              value: 2014-08
+            YYYY:
+              value: '2014'
+        - name: end
+          in: query
+          description: 'The final Date of requesting records. If it''s not filled, it will be auto-filled  the last available datetime. (here *2014-09-31*)  </br> **!!!NOTE that end datetime  MUST be bigger than start datetime.**'
+          required: false
+          schema:
+            type: string
+          examples:
+            YYYY-MM-dd:
+              value: '2014-08-01'
+            YYYY-MM:
+              value: 2014-08
+            YYYY:
+              value: '2014'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    datetime:
+                      type: string
+                      format: date-time
+                    value:
+                      type: number
+                      format: int32
+              example:
+                - datetime: '2014-08-01T00:00:00'
+                  value: 1012
+                - datetime: '2014-08-01T00:20:00'
+                  value: 1013
+  /weather/wind_speed:
+    get:
+      tags:
+        - Weather
+      summary: Get Wind Speed records
+      operationId: getWindSpeed
+      parameters:
+        - name: start
+          in: query
+          description: 'The first Date of requesting records. If it''s not filled, it will be auto-filled the first available datetime (here  *2014-08-01*)'
+          required: false
+          schema:
+            type: string
+          examples:
+            YYYY-MM-dd:
+              value: '2014-08-01'
+            YYYY-MM:
+              value: 2014-08
+            YYYY:
+              value: '2014'
+        - name: end
+          in: query
+          description: 'The final Date of requesting records. If it''s not filled, it will be auto-filled  the last available datetime. (here *2014-09-31*)  </br> **!!!NOTE that end datetime  MUST be bigger than start datetime.**'
+          required: false
+          schema:
+            type: string
+          examples:
+            YYYY-MM-dd:
+              value: '2014-08-01'
+            YYYY-MM:
+              value: 2014-08
+            YYYY:
+              value: '2014'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    datetime:
+                      type: string
+                      format: date-time
+                    value:
+                      type: number
+                      format: float
+              example:
+                - datetime: '2014-08-01T00:00:00'
+                  value: 7.4
+                - datetime: '2014-08-01T00:20:00'
+                  value: 7.5
+  /weather/wind_direction:
+    get:
+      tags:
+        - Weather
+      summary: Get Wind Direction records
+      operationId: getWindDirection
+      parameters:
+        - name: start
+          in: query
+          description: 'The first Date of requesting records. If it''s not filled, it will be auto-filled the first available datetime (here  *2014-08-01*)'
+          required: false
+          schema:
+            type: string
+          examples:
+            YYYY-MM-dd:
+              value: '2014-08-01'
+            YYYY-MM:
+              value: 2014-08
+            YYYY:
+              value: '2014'
+        - name: end
+          in: query
+          description: 'The final Date of requesting records. If it''s not filled, it will be auto-filled  the last available datetime. (here *2014-09-31*)  </br> **!!!NOTE that end datetime  MUST be bigger than start datetime.**'
+          required: false
+          schema:
+            type: string
+          examples:
+            YYYY-MM-dd:
+              value: '2014-08-01'
+            YYYY-MM:
+              value: 2014-08
+            YYYY:
+              value: '2014'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    datetime:
+                      type: string
+                      format: date-time
+                    value:
+                      type: number
+                      format: int32
+              example:
+                - datetime: '2014-08-01T00:00:00'
+                  value: 220
+                - datetime: '2014-08-01T00:20:00'
+                  value: 210
+  /parkings/info:
+    get:
+      tags:
+        - Parkings
+      summary: Get metadata about Aarhus' Parking Areas
+      operationId: getParkingsInfo
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    garagecode:
+                      type: string
+                    city:
+                      type: string
+                    postalcode:
+                      type: string
+                    housenumber:
+                      type: number
+                      format: int32
+                    latitude:
+                      type: number
+                      format: float
+                    longtitude:
+                      type: number
+                      format: float
+              example:
+                - garagecode: NORREPORT
+                  city: Aarhus
+                  postalcode: 8000
+                  street: Kærlighedsstien
+                  housenumber: 0
+                  latitude: 56.161840000000005
+                  longitude: 10.21284
+                - garagecode: BUSGADEHUSET
+                  city: Aarhus
+                  postalcode: 8000
+                  street: Frederiksgade
+                  housenumber: 25
+                  latitude: 56.155609999999996
+                  longitude: 10.206
+  /parkings/records:
+    get:
+      tags:
+        - Parkings
+      summary: Get Aarhus' Parking Areas Records
+      operationId: getParkingRecords
+      parameters:
+        - name: start
+          in: query
+          description: 'The first Date of requesting records. If it''s not filled, it will be auto-filled the first available datetime (here  *2014-05-22*)'
+          required: false
+          schema:
+            type: string
+          examples:
+            YYYY-MM-dd:
+              value: 2014-05-22'
+            YYYY-MM:
+              value: 2014-05
+            YYYY:
+              value: '2014'
+        - name: end
+          in: query
+          description: 'The final Date of requesting records. If it''s not filled, it will be auto-filled  the last available datetime. (here *2014-11-04*)  </br> **!!!NOTE that end datetime  MUST be bigger than start datetime.**'
+          required: false
+          schema:
+            type: string
+          examples:
+            YYYY-MM-dd:
+              value: '2014-11-04'
+            YYYY-MM:
+              value: 2014-11
+            YYYY:
+              value: '2014'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    vehiclecount:
+                      type: number
+                      format: int32
+                    datetime:
+                      type: string
+                      format: date-time
+                    totalspaces:
+                      type: number
+                      format: int32
+                    garagecode:
+                      type: string
+              example:
+                - vehiclecount: 0
+                  datetime: '2014-05-22 09:09:04.145'
+                  totalspaces: 65
+                  garagecode: NORREPORT
+                - vehiclecount: 0
+                  datetime: '2014-05-22 09:09:04.145'
+                  totalspaces: 512
+                  garagecode: SKOLEBAKKEN
+  /dokk1/sensors:
+    get:
+      tags:
+        - Dokk1
+      summary: Get metadata about Dokk1's sensors
+      operationId: getDokk1Info
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    location:
+                      type: string
+                    room:
+                      type: string
+                    latitude:
+                      type: number
+                      format: float
+                    longtitude:
+                      type: number
+                      format: float
+              example:
+                - id: 72f3d
+                  location: DOKK1
+                  room: A2-1
+                  latitude: 56.1534
+                  longitude: 10.2139
+                - id: 72e3c
+                  location: DOKK1
+                  room: A2-2
+                  latitude: 56.1534
+                  longitude: 10.214
+  /dokk1/records:
+    get:
+      tags:
+        - Dokk1
+      summary: Get Dokk1's records for a particular sensor
+      operationId: getDokk1Records
+      parameters:
+        - name: start
+          in: query
+          description: 'The first Date of requesting records. If it''s not filled, it will be auto-filled the first available datetime (here  *2020-05-04*)'
+          required: false
+          schema:
+            type: string
+          examples:
+            YYYY-MM-dd:
+              value: '2020-05-04'
+            YYYY-MM:
+              value: 2020-05
+            YYYY:
+              value: '2020'
+        - name: end
+          in: query
+          description: 'The final Date of requesting records. If it''s not filled, it will be auto-filled  the last available datetime. (here *2020-09-19*)  </br> **!!!NOTE that end datetime  MUST be bigger than start datetime.**'
+          required: false
+          schema:
+            type: string
+          examples:
+            YYYY-MM-dd:
+              value: '2020-09-19'
+            YYYY-MM:
+              value: 2020-09
+            YYYY:
+              value: '2020'
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The sensor's id from which to retrieve records.
+          examples:
+            Sensor:
+              value: 71c3e
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: number
+                      format: int32
+                    datetime:
+                      type: string
+                      format: date-time
+                    sensor:
+                      type: string
+                    temperature:
+                      type: number
+                      format: float
+                    humidity:
+                      type: number
+                      format: float
+                    co2:
+                      type: number
+                      format: int32
+                    voc:
+                      type: number
+                      format: float
+                    light_level:
+                      type: number
+                      format: int32
+                    light_colour":
+                      type: number
+                      format: int32
+                    sound:
+                      type: number
+                      format: int32
+                    sound_low:
+                      type: number
+                      format: int32
+                    sound_high:
+                      type: number
+                      format: int32
+                    occupancy:
+                      type: number
+                      format: int32
+                    voltage:
+                      type: number
+                      format: int32
+                    rssi:
+                      type: number
+                      format: int32
+              example:
+                - _id: '3831,'
+                  datetime: '2020-05-10T00:10:41'
+                  sensor: 71c3e
+                  temperature: 24.76
+                  humidity: 32.99
+                  co2: 465
+                  voc: 87
+                  light_level: 0
+                  light_colour: 0
+                  sound: 40
+                  sound_low: 40
+                  sound_high: 42
+                  occupancy: 0
+                  voltage: 2853
+                  rssi: -80
+  /demographics:
+    get:
+      tags:
+        - Demographics
+      summary: Get demographics
+      operationId: Demographics
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    Local community:
+                      type: string
+                    Women:
+                      type: number
+                      format: int32
+                    Men:
+                      type: number
+                      format: int32
+                    Total:
+                      type: number
+                      format: int32
+                    0-2 yr:
+                      type: number
+                      format: int32
+                    3-5 yr:
+                      type: number
+                      format: int32
+                    6-15:
+                      type: number
+                      format: int32
+                    16-19 yr:
+                      type: number
+                      format: int32
+                    20-24 yr:
+                      type: number
+                      format: int32
+                    25-64 yr:
+                      type: number
+                      format: int32
+                    65 yr -:
+                      type: number
+                      format: int32
+                    total:
+                      type: number
+                      format: int32
+              example:
+                - Local community: 'City '
+                  Women: 5092
+                  Men: 5711
+                  Total: 10803
+                  0-2  yr: 251
+                  3-5 yr: 124
+                  6-15 yr: 287
+                  16-19 yr: 256
+                  20-24 yr: 3086
+                  25-64 yr: 6126
+                  65 yr -: 673
+                  total: 10803
+  /traffic/sensors:
+    get:
+      tags:
+        - Traffic
+      summary: Get Meta Data about Traffic Sensors across Town
+      operationId: TrafficSensors
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      format: int32
+                    city:
+                      type: string
+                    street:
+                      type: string
+                    lng:
+                      type: number
+                      format: float
+                    lat:
+                      type: number
+                      format: float
+              example:
+                - id: 4364
+                  lng: 10.13969570304107
+                  lat: 56.214978916354895
+                  street: Søftenvej
+                  city: Aarhus
+                  number: '0'
+  /traffic/cor_sensors:
+    get:
+      tags:
+        - Traffic
+      summary: Get Meta Data about Traffic Records
+      operationId: TrafficCorSensors
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    POINT_1_STREET:
+                      type: string
+                    DURATION_IN_SEC:
+                      type: number
+                      format: int32
+                    POINT_1_NAME:
+                      type: number
+                      format: int32
+                    POINT_1_CITY:
+                      type: string
+                    POINT_2_NAME:
+                      type: number
+                      format: int32
+                    POINT_2_LNG:
+                      type: number
+                      format: float
+                    POINT_2_STREET:
+                      type: string
+                    NDT_IN_KMH:
+                      type: number
+                      format: int32
+                    POINT_2_POSTAL_CODE:
+                      type: number
+                      format: int32
+                    POINT_2_COUNTRY:
+                      type: string
+                    POINT_1_STREET_NUMBER:
+                      type: string
+                    POINT_1_LAT:
+                      type: number
+                      format: float
+                    POINT_2_LAT:
+                      type: number
+                      format: float
+                    POINT_1_POSTAL_CODE:
+                      type: number
+                      format: int32
+                    POINT_2_STREET_NUMBER:
+                      type: string
+                    POINT_2_CITY:
+                      type: string
+                    ROAD_TYPE:
+                      type: string
+                    POINT_1_LNG:
+                      type: number
+                      format: float
+                    REPORT_ID:
+                      type: number
+                      format: int32
+                    POINT_1_COUNTRY:
+                      type: string
+              example:
+                - POINT_1_STREET: Søftenvej
+                  DURATION_IN_SEC: 77
+                  POINT_1_NAME: 4364
+                  POINT_1_CITY: Aarhus
+                  POINT_2_NAME: 4349
+                  POINT_2_LNG: 10.161038385250095
+                  POINT_2_STREET: Søftenvej
+                  NDT_IN_KMH: 70
+                  POINT_2_POSTAL_CODE: 8200
+                  POINT_2_COUNTRY: Denmark
+                  POINT_1_STREET_NUMBER: '0'
+                  POINT_1_LAT: 56.214978916354895
+                  POINT_2_LAT: 56.20852026816215
+                  POINT_1_POSTAL_CODE: 8200
+                  POINT_2_STREET_NUMBER: '0'
+                  POINT_2_CITY: Aarhus
+                  ROAD_TYPE: MAJOR_ROAD
+                  POINT_1_LNG: 10.13969570304107
+                  REPORT_ID: 158895
+                  POINT_1_COUNTRY: Denmark
+  /traffic/records:
+    get:
+      tags:
+        - Traffic
+      summary: Get Traffic records from a particular traffic report_id
+      operationId: TrafficRecords
+      parameters:
+        - name: start
+          in: query
+          description: 'The first Date of requesting records. If it''s not filled, it will be auto-filled the first available datetime (here  *2014-08-01*)'
+          required: false
+          schema:
+            type: string
+          examples:
+            YYYY-MM-dd:
+              value: '2014-08-01'
+            YYYY-MM:
+              value: 2014-08
+            YYYY:
+              value: '2014'
+        - name: end
+          in: query
+          description: 'The final Date of requesting records. If it''s not filled, it will be auto-filled  the last available datetime. (here *2014-09-31*)  </br> **!!!NOTE that end datetime  MUST be bigger than start datetime.**'
+          required: false
+          schema:
+            type: string
+          examples:
+            YYYY-MM-dd:
+              value: '2014-08-01'
+            YYYY-MM:
+              value: 2014-08
+            YYYY:
+              value: '2014'
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The report id from which to retrieve records.
+          examples:
+            Sensor:
+              value: '158895'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    avgMeasuredTime:
+                      type: number
+                      format: int32
+                    avgSpeed:
+                      type: number
+                      format: int32
+                    medianMeasuredTime:
+                      type: number
+                      format: int32
+                    datetime:
+                      type: string
+                      format: date-time
+                    vehicleCount:
+                      type: number
+                      format: int32
+              example:
+                - avgMeasuredTime: 0
+                  avgSpeed: 0
+                  medianMeasuredTime: 0
+                  datetime: '2014-09-30T23:50:00'
+                  vehicleCount: 0
+  /pollution/sensors:
+    get:
+      tags:
+        - Pollution
+      summary: Get Meta Data about Pollution Sensors across Town
+      operationId: PollutionSensors
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    report_id:
+                      type: number
+                      format: int32
+                    longitude:
+                      type: number
+                      format: float
+                    latitude:
+                      type: number
+                      format: float
+              example:
+                - longitude: 10.13969570304107
+                  latitude: 56.2149789163549
+                  report_id: 158895
+  /pollution/records:
+    get:
+      tags:
+        - Pollution
+      summary: Get Pollution Records from a given report_id
+      operationId: PollutionRecords
+      parameters:
+        - name: start
+          in: query
+          description: 'The first Date of requesting records. If it''s not filled, it will be auto-filled the first available datetime (here  *2014-08-01*)'
+          required: false
+          schema:
+            type: string
+          examples:
+            YYYY-MM-dd:
+              value: '2014-08-01'
+            YYYY-MM:
+              value: 2014-08
+            YYYY:
+              value: '2014'
+        - name: end
+          in: query
+          description: 'The final Date of requesting records. If it''s not filled, it will be auto-filled  the last available datetime. (here *2014-09-31*)  </br> **!!!NOTE that end datetime  MUST be bigger than start datetime.**'
+          required: false
+          schema:
+            type: string
+          examples:
+            YYYY-MM-dd:
+              value: '2014-08-01'
+            YYYY-MM:
+              value: 2014-08
+            YYYY:
+              value: '2014'
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The report id from which to retrieve records.
+          examples:
+            Sensor:
+              value: '158895'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    ozone:
+                      type: number
+                      format: int32
+                    particullate_matter:
+                      type: number
+                      format: int32
+                    carbon_monoxide:
+                      type: number
+                      format: int32
+                    sulfure_dioxide:
+                      type: number
+                      format: int32
+                    nitrogen_dioxide:
+                      type: number
+                      format: int32
+                    datetime:
+                      type: string
+                      format: date-time
+              example:
+                - ozone: 34
+                  particullate_matter: 90
+                  carbon_monoxide: 69
+                  sulfure_dioxide: 75
+                  nitrogen_dioxide: 80
+                  datetime: '2014-08-01 00:05:00'
+  /events:
+    get:
+      tags:
+        - Events
+      summary: Get Events
+      operationId: Events
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    city:
+                      type: string
+                    endtime:
+                      type: string
+                      format: date-time
+                    title:
+                      type: string
+                    url:
+                      type: string
+                    price:
+                      type: number
+                      format: int32
+                    content:
+                      type: string
+                    zipcode:
+                      type: number
+                      format: int32
+                    library:
+                      type: string
+                    imageurl:
+                      type: string
+                    teaser:
+                      type: string
+                    street:
+                      type: string
+                    longitude:
+                      type: number
+                      format: float
+                    starttime:
+                      type: string
+                      format: date-time
+                    latitude:
+                      type: number
+                      format: float
+              example:
+                - city: Aarhus
+                  endtime: '2013-11-05 17:00:00'
+                  title: "Lav din egen 'bogæder'\t\t"
+                  url: 'https://www.aakb.dk/node/8989'
+                  price: 0
+                  changed: '2013-11-04T11:53:11'
+                  content: |
+
+                    <p><img title="" src="https://www.aakb.dk/files/content_images/bogmaerkertilweb.jpg" alt="" width="267" height="200" /></p>
+                    <p>&nbsp;</p>
+                    <p>Har du nogensinde læst en bog, der var så god, at du nærmest slugte den?</p>
+                    <p>&nbsp;</p>
+                    <p>En god bog, kan næsten blive endnu bedre, hvis du har et sjovt bogmærke.</p>
+                    <p>&nbsp;</p>
+                    <p>Derfor laver vi ’bogædere’ på Hovedbiblioteket denne tirsdag fra klokken 15.00 til 17.00 i børnebiblioteket.</p>
+                    <p>&nbsp;</p>
+                    <p>Tag din fantasi med, og lav dit eget søde, sjove, uhyggelige eller skøre bogmærke.</p>
+                    <p>&nbsp;</p>
+                    <p>Du er selvfølgelig også velkommen til at låne en god bog eller to med hjem til det bogmærke, du får lavet :-)</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                  zipcode: 8000
+                  library: Hovedbiblioteket
+                  imageurl: 'https://www.aakb.dk/files/list_images/bogmaerkertilweb.jpg'
+                  teaser: 'Kom og vær med, når vi tirsdag eftermiddag laver vores egne bogmærker.'
+                  street: Møllegade 1
+                  longitude: 10.200178999999999
+                  starttime: '2013-11-05 15:00:00'
+                  latitude: 56.156617000000004

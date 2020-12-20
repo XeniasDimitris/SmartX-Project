@@ -1,0 +1,533 @@
+openapi: 3.0.0
+info:
+  description: |
+   This is the API Documentation for SmartX-City Project and is compliant with the OpenAPI Specification v3.0. The source code of the project is [here (Github)](https://github.com/XeniasDimitris/SmartX-Project) .
+  version: "1.0.0"
+  title: SmartX-City Project
+  contact:
+    name: "Xenias Dimitris"
+    email: dimitrisxenias@gmail.com
+servers:
+  - url: http://localhost:8000/api
+    description: SmartX City API server
+tags:
+  - name: Weather
+    description: Get info about weather records
+  - name: Parkings
+    description: Get info about Aarhus' Parking Areas
+  - name: Dokk1
+    description: Get sensors info about Dokk1 building
+  - name: Demographics
+    description: Get demographics for all local communities of Aarhus
+  - name: Traffic
+    description: Get info about Traffic Sensors
+  - name: Pollution
+    description: Get info about Pollution Sensors
+  - name: Events
+    description: Get events that happen in Town
+paths:
+  /weather/humidity:
+    get:
+      tags:
+        - Weather
+      summary: Get Humidity records
+      operationId: getHumidity
+      parameters:
+          - name: start
+            in: query
+            description: The first Date of requesting records. If it's not filled, it will be auto-filled the first available datetime (here  *2014-08-01*)
+            required: false
+            schema:
+              type: string
+            $ref: './parameters_examples/weather_start_end_example.yaml'
+          - name: end
+            in: query
+            description: The final Date of requesting records. If it's not filled, it will be auto-filled  the last available datetime. (here *2014-09-31*)  </br>
+              **!!!NOTE that end datetime  MUST be bigger than start datetime.**
+            required: false
+            schema:
+              type: string
+            $ref: './parameters_examples/weather_start_end_example.yaml'
+
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/WeatherFloat.yaml'
+              example:
+              - datetime: '2014-08-01T00:00:00'
+                value: 56
+              - datetime: '2014-08-01T00:20:00'
+                value: 68
+
+  /weather/temperature:
+    get:
+      tags:
+        - Weather
+      summary: Get Temperature records
+      operationId: getTemperature
+      parameters:
+          - name: start
+            in: query
+            description: The first Date of requesting records. If it's not filled, it will be auto-filled the first available datetime (here  *2014-08-01*)
+            required: false
+            schema:
+              type: string
+            $ref: './parameters_examples/weather_start_end_example.yaml'
+          - name: end
+            in: query
+            description: The final Date of requesting records. If it's not filled, it will be auto-filled  the last available datetime. (here *2014-09-31*)  </br>
+              **!!!NOTE that end datetime  MUST be bigger than start datetime.**
+            required: false
+            schema:
+              type: string
+            $ref: './parameters_examples/weather_start_end_example.yaml'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/WeatherFloat.yaml'
+              example:
+              - datetime: '2014-08-01T00:00:00'
+                value: 18.2
+              - datetime: '2014-08-01T00:20:00'
+                value: 19.5
+
+  /weather/pressure:
+    get:
+      tags:
+        - Weather
+      summary: Get Pressure records
+      operationId: getPressure
+      parameters:
+          - name: start
+            in: query
+            description: The first Date of requesting records. If it's not filled, it will be auto-filled the first available datetime (here  *2014-08-01*)
+            required: false
+            schema:
+              type: string
+            $ref: './parameters_examples/weather_start_end_example.yaml'
+          - name: end
+            in: query
+            description: The final Date of requesting records. If it's not filled, it will be auto-filled  the last available datetime. (here *2014-09-31*)  </br>
+              **!!!NOTE that end datetime  MUST be bigger than start datetime.**
+            required: false
+            schema:
+              type: string
+            $ref: './parameters_examples/weather_start_end_example.yaml'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/WeatherInt.yaml'
+              example:
+              - datetime: '2014-08-01T00:00:00'
+                value: 1012
+              - datetime: '2014-08-01T00:20:00'
+                value: 1013
+  /weather/wind_speed:
+    get:
+      tags:
+        - Weather
+      summary: Get Wind Speed records
+      operationId: getWindSpeed
+      parameters:
+          - name: start
+            in: query
+            description: The first Date of requesting records. If it's not filled, it will be auto-filled the first available datetime (here  *2014-08-01*)
+            required: false
+            schema:
+              type: string
+            examples:
+              YYYY-MM-dd:
+               value: '2014-08-01'
+              YYYY-MM:
+               value: '2014-08'
+              YYYY:
+               value: '2014'
+          - name: end
+            in: query
+            description: The final Date of requesting records. If it's not filled, it will be auto-filled  the last available datetime. (here *2014-09-31*)  </br>
+              **!!!NOTE that end datetime  MUST be bigger than start datetime.**
+            required: false
+            schema:
+              type: string
+            examples:
+              YYYY-MM-dd:
+               value: '2014-08-01'
+              YYYY-MM:
+               value: '2014-08'
+              YYYY:
+               value: '2014'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/WeatherFloat.yaml'
+              example:
+              - datetime: '2014-08-01T00:00:00'
+                value: 7.4
+              - datetime: '2014-08-01T00:20:00'
+                value: 7.5
+  /weather/wind_direction:
+    get:
+      tags:
+        - Weather
+      summary: Get Wind Direction records
+      operationId: getWindDirection
+      parameters:
+          - name: start
+            in: query
+            description: The first Date of requesting records. If it's not filled, it will be auto-filled the first available datetime (here  *2014-08-01*)
+            required: false
+            schema:
+              type: string
+            examples:
+              YYYY-MM-dd:
+               value: '2014-08-01'
+              YYYY-MM:
+               value: '2014-08'
+              YYYY:
+               value: '2014'
+          - name: end
+            in: query
+            description: The final Date of requesting records. If it's not filled, it will be auto-filled  the last available datetime. (here *2014-09-31*)  </br>
+              **!!!NOTE that end datetime  MUST be bigger than start datetime.**
+            required: false
+            schema:
+              type: string
+            examples:
+              YYYY-MM-dd:
+               value: '2014-08-01'
+              YYYY-MM:
+               value: '2014-08'
+              YYYY:
+               value: '2014'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/WeatherInt.yaml'
+              example:
+              - datetime: '2014-08-01T00:00:00'
+                value: 220
+              - datetime: '2014-08-01T00:20:00'
+                value: 210
+
+  /parkings/info:
+    get:
+      tags:
+        - Parkings
+      summary: Get metadata about Aarhus' Parking Areas
+      operationId: getParkingsInfo
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/ParkingsInfo.yaml'
+              example:
+                $ref: './response_example/ParkingsInfo.yaml'
+  /parkings/records:
+    get:
+      tags:
+        - Parkings
+      summary: Get Aarhus' Parking Areas Records
+      operationId: getParkingRecords
+      parameters:
+          - name: start
+            in: query
+            description: The first Date of requesting records. If it's not filled, it will be auto-filled the first available datetime (here  *2014-05-22*)
+            required: false
+            schema:
+              type: string
+            examples:
+              YYYY-MM-dd:
+               value: 2014-05-22'
+              YYYY-MM:
+               value: '2014-05'
+              YYYY:
+               value: '2014'
+          - name: end
+            in: query
+            description: The final Date of requesting records. If it's not filled, it will be auto-filled  the last available datetime. (here *2014-11-04*)  </br>
+              **!!!NOTE that end datetime  MUST be bigger than start datetime.**
+            required: false
+            schema:
+              type: string
+            examples:
+              YYYY-MM-dd:
+               value: '2014-11-04'
+              YYYY-MM:
+               value: '2014-11'
+              YYYY:
+               value: '2014'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/ParkingsRecs.yaml'
+              example:
+                $ref: './response_example/ParkingsRecs.yaml'
+  /dokk1/sensors:
+    get:
+      tags:
+        - Dokk1
+      summary: Get metadata about Dokk1's sensors
+      operationId: getDokk1Info
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/Dokk1Info.yaml'
+              example:
+                $ref: './response_example/Dokk1Info.yaml'
+  /dokk1/records:
+    get:
+      tags:
+        - Dokk1
+      summary: Get Dokk1's records for a particular sensor
+      operationId: getDokk1Records
+      parameters:
+          - name: start
+            in: query
+            description: The first Date of requesting records. If it's not filled, it will be auto-filled the first available datetime (here  *2020-05-04*)
+            required: false
+            schema:
+              type: string
+            examples:
+              YYYY-MM-dd:
+               value: '2020-05-04'
+              YYYY-MM:
+               value: '2020-05'
+              YYYY:
+               value: '2020'
+          - name: end
+            in: query
+            description: The final Date of requesting records. If it's not filled, it will be auto-filled  the last available datetime. (here *2020-09-19*)  </br>
+              **!!!NOTE that end datetime  MUST be bigger than start datetime.**
+            required: false
+            schema:
+              type: string
+            examples:
+              YYYY-MM-dd:
+               value: '2020-09-19'
+              YYYY-MM:
+               value: '2020-09'
+              YYYY:
+               value: '2020'
+          - name: id
+            in: query
+            required: true
+            schema:
+              type: string
+            description: The sensor's id from which to retrieve records.
+            examples:
+              Sensor:
+                value: '71c3e'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/Dokk1Recs.yaml'
+              example:
+                $ref: './response_example/Dokk1Recs.yaml'
+  /demographics:
+      get:
+        tags:
+          - Demographics
+        summary: Get demographics
+        operationId: Demographics
+        responses:
+          '200':
+            description: Successful operation
+            content:
+              application/json:
+                schema:
+                  $ref: './schemas/Demographics.yaml'
+                example:
+                  $ref: './response_example/Demographics.yaml'
+
+  /traffic/sensors:
+    get:
+      tags:
+        - Traffic
+      summary: Get Meta Data about Traffic Sensors across Town
+      operationId: TrafficSensors
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/TrafficSensors.yaml'
+              example:
+                $ref: './response_example/TrafficSensors.yaml'
+  /traffic/cor_sensors:
+    get:
+      tags:
+        - Traffic
+      summary: Get Meta Data about Traffic Records
+      operationId: TrafficCorSensors
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/TrafficCorSensors.yaml'
+              example:
+                $ref: './response_example/TrafficCorSensors.yaml'
+  /traffic/records:
+    get:
+      tags:
+        - Traffic
+      summary: Get Traffic records from a particular traffic report_id
+      operationId: TrafficRecords
+      parameters:
+        - name: start
+          in: query
+          description: The first Date of requesting records. If it's not filled, it will be auto-filled the first available datetime (here  *2014-08-01*)
+          required: false
+          schema:
+            type: string
+          examples:
+            YYYY-MM-dd:
+              value: '2014-08-01'
+            YYYY-MM:
+              value: '2014-08'
+            YYYY:
+              value: '2014'
+        - name: end
+          in: query
+          description: The final Date of requesting records. If it's not filled, it will be auto-filled  the last available datetime. (here *2014-09-31*)  </br>
+            **!!!NOTE that end datetime  MUST be bigger than start datetime.**
+          required: false
+          schema:
+            type: string
+          examples:
+            YYYY-MM-dd:
+              value: '2014-08-01'
+            YYYY-MM:
+              value: '2014-08'
+            YYYY:
+              value: '2014'
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The report id from which to retrieve records.
+          examples:
+            Sensor:
+              value: '158895'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/TrafficRecs.yaml'
+              example:
+                $ref: './response_example/TrafficRecs.yaml'
+
+  /pollution/sensors:
+    get:
+      tags:
+        - Pollution
+      summary: Get Meta Data about Pollution Sensors across Town
+      operationId: PollutionSensors
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/PollutionSensors.yaml'
+              example:
+                $ref: './response_example/PollutionSensors.yaml'
+  /pollution/records:
+    get:
+      tags:
+        - Pollution
+      summary: Get Pollution Records from a given report_id
+      operationId: PollutionRecords
+      parameters:
+        - name: start
+          in: query
+          description: The first Date of requesting records. If it's not filled, it will be auto-filled the first available datetime (here  *2014-08-01*)
+          required: false
+          schema:
+            type: string
+          examples:
+            YYYY-MM-dd:
+              value: '2014-08-01'
+            YYYY-MM:
+              value: '2014-08'
+            YYYY:
+              value: '2014'
+        - name: end
+          in: query
+          description: The final Date of requesting records. If it's not filled, it will be auto-filled  the last available datetime. (here *2014-09-31*)  </br>
+            **!!!NOTE that end datetime  MUST be bigger than start datetime.**
+          required: false
+          schema:
+            type: string
+          examples:
+            YYYY-MM-dd:
+              value: '2014-08-01'
+            YYYY-MM:
+              value: '2014-08'
+            YYYY:
+              value: '2014'
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The report id from which to retrieve records.
+          examples:
+            Sensor:
+              value: '158895'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/PollutionRecs.yaml'
+              example:
+                $ref: './response_example/PollutionRecs.yaml'
+
+  /events:
+    get:
+      tags:
+        - Events
+      summary: Get Events
+      operationId: Events
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/Events.yaml'
+              example:
+                $ref: './response_example/Events.yaml'

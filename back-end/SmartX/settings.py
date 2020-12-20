@@ -25,15 +25,16 @@ SECRET_KEY = ')5xuf&2a1@=c7*hl55(g3fyvexo)_rxfh9un&#ec(&))q)(lmw'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', ]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'corsheaders',
-    'rest_framework',
     'api',
+    'rest_framework',
+    'rest_framework_swagger',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

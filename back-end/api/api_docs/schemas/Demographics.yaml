@@ -1,0 +1,39 @@
+type: array
+items:
+  type: object
+  properties:
+    Local community:
+      type: string
+    Women:
+      type: number
+      format: int32
+    Men:
+      type: number
+      format: int32
+    Total:
+      type: number
+      format: int32
+    0-2 yr:
+      type: number
+      format: int32
+    3-5 yr:
+      type: number
+      format: int32
+    6-15:
+      type: number
+      format: int32
+    16-19 yr:
+      type: number
+      format: int32
+    20-24 yr:
+      type: number
+      format: int32
+    25-64 yr:
+      type: number
+      format: int32
+    65 yr -:
+      type: number
+      format: int32
+    total:
+      type: number
+      format: int32

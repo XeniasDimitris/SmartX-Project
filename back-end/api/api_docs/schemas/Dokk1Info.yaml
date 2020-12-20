@@ -1,0 +1,16 @@
+type: array
+items:
+  type: object
+  properties:
+    id:
+      type: string
+    location:
+      type: string
+    room:
+      type: string
+    latitude:
+      type: number
+      format: float
+    longtitude:
+      type: number
+      format: float

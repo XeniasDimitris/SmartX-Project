@@ -33,7 +33,7 @@ class TrafficRecordsView(APIView):
         end = request.query_params['end'] if 'end' in request.query_params else None
         report_id = request.query_params['id'] if 'id' in request.query_params else None
         if not report_id:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': 'no id is given'}, status=status.HTTP_400_BAD_REQUEST)
 
         res = get_traffic_records(data_dir, start, end, report_id)
         return Response(res, status=status.HTTP_200_OK)

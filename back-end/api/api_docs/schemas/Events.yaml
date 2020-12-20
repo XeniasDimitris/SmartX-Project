@@ -1,0 +1,38 @@
+type: array
+items:
+  type: object
+  properties:
+    city:
+      type: string
+    endtime:
+      type: string
+      format: date-time
+    title:
+      type: string
+    url:
+      type: string
+    price:
+      type: number
+      format: int32
+    content:
+      type: string
+    zipcode:
+      type: number
+      format: int32
+    library:
+      type: string
+    imageurl:
+      type: string
+    teaser:
+      type: string
+    street:
+      type: string
+    longitude:
+      type: number
+      format: float
+    starttime:
+      type: string
+      format: date-time
+    latitude:
+      type: number
+      format: float

@@ -22,7 +22,7 @@ def get_sensor_records(data_dir, start, end, report_id):
     df['datetime_pd'] = pd.to_datetime(df['timestamp'], infer_datetime_format=True)
     df.rename(columns={'timestamp': 'datetime'}, inplace=True)
     df.set_index('datetime_pd', inplace=True)
-    query = df.loc[start:end].sort_index()
+    query = df.loc[start:end].sort_index().drop( columns=['longitude', 'latitude'])
     res = query.to_dict('records')
 
     del df, query

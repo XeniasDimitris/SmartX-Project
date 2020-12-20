@@ -1,0 +1,14 @@
+- garagecode: "NORREPORT"
+  city: "Aarhus"
+  postalcode: 8000
+  street: "Kærlighedsstien"
+  housenumber: 0
+  latitude: 56.161840000000005
+  longitude: 10.21284
+- garagecode: "BUSGADEHUSET"
+  city: "Aarhus"
+  postalcode: 8000
+  street: "Frederiksgade"
+  housenumber: 25
+  latitude: 56.155609999999996
+  longitude: 10.206

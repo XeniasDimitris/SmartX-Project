@@ -1,0 +1,15 @@
+type: array
+items:
+  type: object
+  properties:
+    vehiclecount:
+      type: number
+      format: int32
+    datetime:
+      type: string
+      format: date-time
+    totalspaces:
+      type: number
+      format: int32
+    garagecode:
+      type: string

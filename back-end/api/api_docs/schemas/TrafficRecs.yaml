@@ -1,0 +1,19 @@
+type: array
+items:
+  type: object
+  properties:
+    avgMeasuredTime:
+      type: number
+      format: int32
+    avgSpeed:
+      type: number
+      format: int32
+    medianMeasuredTime:
+      type: number
+      format: int32
+    datetime:
+      type: string
+      format: date-time
+    vehicleCount:
+      type: number
+      format: int32

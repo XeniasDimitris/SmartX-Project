@@ -1,0 +1,7 @@
+examples:
+ YYYY-MM-dd:
+  value: '2014-08-01'
+ YYYY-MM:
+  value: '2014-08'
+ YYYY:
+  value: '2014'

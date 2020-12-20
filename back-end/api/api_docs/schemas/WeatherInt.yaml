@@ -1,0 +1,10 @@
+type: array
+items:
+  type: object
+  properties:
+    datetime:
+      type: string
+      format: date-time
+    value:
+      type: number
+      format: int32

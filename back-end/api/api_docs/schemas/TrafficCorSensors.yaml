@@ -1,0 +1,55 @@
+type: array
+items:
+  type: object
+  properties:
+    POINT_1_STREET:
+      type: string
+    DURATION_IN_SEC:
+      type: number
+      format: int32
+    POINT_1_NAME:
+      type: number
+      format: int32
+    POINT_1_CITY:
+      type: string
+    POINT_2_NAME:
+      type: number
+      format: int32
+    POINT_2_LNG:
+      type: number
+      format: float
+    POINT_2_STREET:
+      type: string
+    NDT_IN_KMH:
+      type: number
+      format: int32
+    POINT_2_POSTAL_CODE:
+      type: number
+      format: int32
+    POINT_2_COUNTRY:
+      type: string
+    POINT_1_STREET_NUMBER:
+      type: string
+    POINT_1_LAT:
+      type: number
+      format: float
+    POINT_2_LAT:
+      type: number
+      format: float
+    POINT_1_POSTAL_CODE:
+      type: number
+      format: int32
+    POINT_2_STREET_NUMBER:
+      type: string
+    POINT_2_CITY:
+      type: string
+    ROAD_TYPE:
+      type: string
+    POINT_1_LNG:
+      type: number
+      format: float
+    REPORT_ID:
+      type: number
+      format: int32
+    POINT_1_COUNTRY:
+      type: string

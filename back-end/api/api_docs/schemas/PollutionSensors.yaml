@@ -1,0 +1,12 @@
+items:
+  type: object
+  properties:
+    report_id:
+      type: number
+      format: int32
+    longitude:
+      type: number
+      format: float
+    latitude:
+      type: number
+      format: float
