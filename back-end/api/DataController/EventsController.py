@@ -10,7 +10,7 @@ def get_events(data_dir, start, end):
 
     if start is None: start = '2000-01'
     if end is None: end = '2030-12'
-    res = df.loc[((df['start_datetime_pd'] >= start) & (df['end_datetime_pd'] <= end))]
+    res = df.loc[((df['start_datetime_pd'] >= start) & (df['start_datetime_pd'] <= end))]
     res = res.to_dict('records')
     for x in res:
         x.pop('start_datetime_pd')

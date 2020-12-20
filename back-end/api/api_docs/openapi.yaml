@@ -35,14 +35,14 @@ paths:
       parameters:
           - name: start
             in: query
-            description: The first Date of requesting records. If it's not filled, it will be auto-filled the first available datetime (here  *2014-08-01*)
+            description: The first Date of requesting records. If it's not filled, it will be auto-filled with the first available datetime (here  *2014-08-01*)
             required: false
             schema:
               type: string
             $ref: './parameters_examples/weather_start_end_example.yaml'
           - name: end
             in: query
-            description: The final Date of requesting records. If it's not filled, it will be auto-filled  the last available datetime. (here *2014-09-31*)  </br>
+            description: The final Date of requesting records. If it's not filled, it will be auto-filled  with the last available datetime. (here *2014-09-31*)  </br>
               **!!!NOTE that end datetime  MUST be bigger than start datetime.**
             required: false
             schema:
@@ -71,14 +71,14 @@ paths:
       parameters:
           - name: start
             in: query
-            description: The first Date of requesting records. If it's not filled, it will be auto-filled the first available datetime (here  *2014-08-01*)
+            description: The first Date of requesting records. If it's not filled, it will be auto-filled with the first available datetime (here  *2014-08-01*)
             required: false
             schema:
               type: string
             $ref: './parameters_examples/weather_start_end_example.yaml'
           - name: end
             in: query
-            description: The final Date of requesting records. If it's not filled, it will be auto-filled  the last available datetime. (here *2014-09-31*)  </br>
+            description: The final Date of requesting records. If it's not filled, it will be auto-filled with  the last available datetime. (here *2014-09-31*)  </br>
               **!!!NOTE that end datetime  MUST be bigger than start datetime.**
             required: false
             schema:
@@ -106,14 +106,14 @@ paths:
       parameters:
           - name: start
             in: query
-            description: The first Date of requesting records. If it's not filled, it will be auto-filled the first available datetime (here  *2014-08-01*)
+            description: The first Date of requesting records. If it's not filled, it will be auto-filled with the first available datetime (here  *2014-08-01*)
             required: false
             schema:
               type: string
             $ref: './parameters_examples/weather_start_end_example.yaml'
           - name: end
             in: query
-            description: The final Date of requesting records. If it's not filled, it will be auto-filled  the last available datetime. (here *2014-09-31*)  </br>
+            description: The final Date of requesting records. If it's not filled, it will be auto-filled with  the last available datetime. (here *2014-09-31*)  </br>
               **!!!NOTE that end datetime  MUST be bigger than start datetime.**
             required: false
             schema:
@@ -140,7 +140,7 @@ paths:
       parameters:
           - name: start
             in: query
-            description: The first Date of requesting records. If it's not filled, it will be auto-filled the first available datetime (here  *2014-08-01*)
+            description: The first Date of requesting records. If it's not filled, it will be auto-filled with the first available datetime (here  *2014-08-01*)
             required: false
             schema:
               type: string
@@ -153,7 +153,7 @@ paths:
                value: '2014'
           - name: end
             in: query
-            description: The final Date of requesting records. If it's not filled, it will be auto-filled  the last available datetime. (here *2014-09-31*)  </br>
+            description: The final Date of requesting records. If it's not filled, it will be auto-filled with the last available datetime. (here *2014-09-31*)  </br>
               **!!!NOTE that end datetime  MUST be bigger than start datetime.**
             required: false
             schema:
@@ -186,7 +186,7 @@ paths:
       parameters:
           - name: start
             in: query
-            description: The first Date of requesting records. If it's not filled, it will be auto-filled the first available datetime (here  *2014-08-01*)
+            description: The first Date of requesting records. If it's not filled, it will be auto-filled with the first available datetime (here  *2014-08-01*)
             required: false
             schema:
               type: string
@@ -199,7 +199,7 @@ paths:
                value: '2014'
           - name: end
             in: query
-            description: The final Date of requesting records. If it's not filled, it will be auto-filled  the last available datetime. (here *2014-09-31*)  </br>
+            description: The final Date of requesting records. If it's not filled, it will be auto-filled with the last available datetime. (here *2014-09-31*)  </br>
               **!!!NOTE that end datetime  MUST be bigger than start datetime.**
             required: false
             schema:
@@ -248,20 +248,20 @@ paths:
       parameters:
           - name: start
             in: query
-            description: The first Date of requesting records. If it's not filled, it will be auto-filled the first available datetime (here  *2014-05-22*)
+            description: The first Date of requesting records. If it's not filled, it will be auto-filled with the first available datetime (here  *2014-05-22*)
             required: false
             schema:
               type: string
             examples:
               YYYY-MM-dd:
-               value: 2014-05-22'
+               value: '2014-05-22'
               YYYY-MM:
                value: '2014-05'
               YYYY:
                value: '2014'
           - name: end
             in: query
-            description: The final Date of requesting records. If it's not filled, it will be auto-filled  the last available datetime. (here *2014-11-04*)  </br>
+            description: The final Date of requesting records. If it's not filled, it will be auto-filled with the last available datetime. (here *2014-11-04*)  </br>
               **!!!NOTE that end datetime  MUST be bigger than start datetime.**
             required: false
             schema:
@@ -306,7 +306,7 @@ paths:
       parameters:
           - name: start
             in: query
-            description: The first Date of requesting records. If it's not filled, it will be auto-filled the first available datetime (here  *2020-05-04*)
+            description: The first Date of requesting records. If it's not filled, it will be auto-filled with the first available datetime (here  *2020-05-04*)
             required: false
             schema:
               type: string
@@ -319,7 +319,7 @@ paths:
                value: '2020'
           - name: end
             in: query
-            description: The final Date of requesting records. If it's not filled, it will be auto-filled  the last available datetime. (here *2020-09-19*)  </br>
+            description: The final Date of requesting records. If it's not filled, it will be auto-filled with the last available datetime. (here *2020-09-19*)  </br>
               **!!!NOTE that end datetime  MUST be bigger than start datetime.**
             required: false
             schema:
@@ -404,7 +404,7 @@ paths:
       parameters:
         - name: start
           in: query
-          description: The first Date of requesting records. If it's not filled, it will be auto-filled the first available datetime (here  *2014-08-01*)
+          description: The first Date of requesting records. If it's not filled, it will be auto-filled with the first available datetime (here  *2014-08-01*)
           required: false
           schema:
             type: string
@@ -417,7 +417,7 @@ paths:
               value: '2014'
         - name: end
           in: query
-          description: The final Date of requesting records. If it's not filled, it will be auto-filled  the last available datetime. (here *2014-09-31*)  </br>
+          description: The final Date of requesting records. If it's not filled, it will be auto-filled with the last available datetime. (here *2014-09-31*)  </br>
             **!!!NOTE that end datetime  MUST be bigger than start datetime.**
           required: false
           schema:
@@ -472,7 +472,7 @@ paths:
       parameters:
         - name: start
           in: query
-          description: The first Date of requesting records. If it's not filled, it will be auto-filled the first available datetime (here  *2014-08-01*)
+          description: The first Date of requesting records. If it's not filled, it will be auto-filled with the first available datetime (here  *2014-08-01*)
           required: false
           schema:
             type: string
@@ -485,7 +485,7 @@ paths:
               value: '2014'
         - name: end
           in: query
-          description: The final Date of requesting records. If it's not filled, it will be auto-filled  the last available datetime. (here *2014-09-31*)  </br>
+          description: The final Date of requesting records. If it's not filled, it will be auto-filled with the last available datetime. (here *2014-09-31*)  </br>
             **!!!NOTE that end datetime  MUST be bigger than start datetime.**
           required: false
           schema:
@@ -522,6 +522,34 @@ paths:
         - Events
       summary: Get Events
       operationId: Events
+      parameters:
+        - name: start
+          in: query
+          description: The first Date of requesting records. If it's not filled, it will be auto-filled with the first available datetime (here  *2013-11-04*)
+          required: false
+          schema:
+            type: string
+          examples:
+            YYYY-MM-dd:
+              value: '2013-11-04'
+            YYYY-MM:
+              value: '2013-11'
+            YYYY:
+              value: '2013'
+        - name: end
+          in: query
+          description: The final Date of requesting records. If it's not filled, it will be auto-filled with the last available datetime. (here *2015-03-11*)  </br>
+            **!!!NOTE that end datetime  MUST be bigger than start datetime.**
+          required: false
+          schema:
+            type: string
+          examples:
+            YYYY-MM-dd:
+              value: '2015-03-11'
+            YYYY-MM:
+              value: '2015-03'
+            YYYY:
+              value: '2015'
       responses:
         '200':
           description: Successful operation
