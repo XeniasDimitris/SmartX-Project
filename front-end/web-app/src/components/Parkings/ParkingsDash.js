@@ -7,7 +7,7 @@ import API from '../../api-services'
 import Map from './ParkingsMap'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Filters from './ParkingsFilters'
-import Chart from './Chart'
+import LineChart from './LineChart'
 import { useStyles }  from '../../css/DashboardCSS'
 
 function formatDate(start,end){
@@ -161,8 +161,8 @@ export default function ParkingDash(props){
                   <Grid item  xs={12} md={4} lg={12} >      
                     <Paper className={classes.paper}>
                       <CardContent >
-                        <Title> Parking Spaces at {selectedParking} </Title>
-                        <Chart field={['vehiclecount','totalspaces']} 
+                        <Title> Parking Spaces at <b>{selectedParking}</b> </Title>
+                        <LineChart field={['vehiclecount','totalspaces']} 
                               data={data} 
                               chartID='parkings'/> 
                       </CardContent>

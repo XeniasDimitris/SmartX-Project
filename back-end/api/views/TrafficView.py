@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.conf import settings
-from ..DataController.TrafficController import get_traffic_sensors, get_traffic_cor_sensors, get_traffic_records
+from ..controllers.TrafficController import get_traffic_sensors, get_traffic_cor_sensors, get_traffic_records
 
 data_dir = settings.DATA_DIR+'Traffic/'
 

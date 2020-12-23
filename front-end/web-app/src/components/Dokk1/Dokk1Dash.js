@@ -133,7 +133,7 @@ export default function Dokk1Dash(props){
                       <Grid item  xs={12} md={4} lg={12} >      
                         <Paper className={classes.paper}>
                           <CardContent >
-                            <Title> Humidity and Temperature of Sensor {selectedSensor.id}  </Title>
+                            <Title> Humidity and Temperature of Sensor <b>{selectedSensor.id}</b>  </Title>
                             <Chart  
                                   data={data} 
                                   field={['humidity', 'temperature']}
@@ -144,7 +144,7 @@ export default function Dokk1Dash(props){
                       <Grid item  xs={12} md={4} lg={12} >      
                         <Paper className={classes.paper}>
                           <CardContent >
-                            <Title> Co2 of Sensor {selectedSensor.id} </Title>
+                            <Title> Co2 of Sensor <b>{selectedSensor.id}</b> </Title>
                             <Chart 
                                   data={data} 
                                   field={['co2']}
@@ -155,7 +155,7 @@ export default function Dokk1Dash(props){
                       <Grid item  xs={12} md={4} lg={12} >      
                         <Paper className={classes.paper}>
                           <CardContent >
-                            <Title>Light Level and Color of Sensor {selectedSensor.id} </Title>
+                            <Title>Light Level and Color of Sensor {<b>{selectedSensor.id}</b>} </Title>
                             <Chart 
                                   data={data} 
                                   field={['light_level', 'light_colour']}
@@ -166,7 +166,7 @@ export default function Dokk1Dash(props){
                       <Grid item  xs={12} md={4} lg={12} >      
                         <Paper className={classes.paper}>
                           <CardContent >
-                            <Title> Occupancy of Sensor {selectedSensor.id} </Title>
+                            <Title> Occupancy of Sensor <b>{selectedSensor.id}</b> </Title>
                             <Chart 
                                   data={data} 
                                   field={['occupancy']}

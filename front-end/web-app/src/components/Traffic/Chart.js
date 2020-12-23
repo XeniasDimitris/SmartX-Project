@@ -12,7 +12,6 @@ export default function Chart(props) {
   const chartID = props.chartID
   const data = props.data
 
-  console.log('chart', data)
   useEffect(() => {
     
     if (!chartRef.current) {

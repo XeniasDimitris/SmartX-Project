@@ -60,7 +60,6 @@ export default function Chart(props) {
         series.dataFields.valueY = 'value';
         series.dataFields.dateX = "datetime";
         series.strokeWidth = 0.5; 
-        series.yAxis = yAxis;
         series.name = name;
         series.showOnInit = true;
         series.tensionX = 0.8;

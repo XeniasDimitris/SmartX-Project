@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.conf import settings
-from ..DataController.EventsController import get_events
+from ..controllers.EventsController import get_events
 
 data_dir = settings.DATA_DIR+'Events'
 

@@ -2,7 +2,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from ..DataController.WeatherController import get_weather_data
+from ..controllers.WeatherController import get_weather_data
 from django.conf import settings
 
 data_dir = settings.DATA_DIR

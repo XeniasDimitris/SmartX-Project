@@ -137,7 +137,7 @@ export default function TrafficDash(props){
                           <Grid key={index} item xs={12} md={4} lg={12} >
                               <Paper className={classes.paper}>
                                 <CardContent >
-                                  <Title> Average Speed and Vehicle Count from sensor {obj.item.point_1} to sensor {obj.item.point_2}</Title>
+                                  <Title> Average Speed and Vehicle Count from sensor <b>{obj.item.point_1}</b> to sensor <b>{obj.item.point_2}</b></Title>
                                   <Chart field={['vehicleCount','avgSpeed']} 
                                         data={obj.res} 
                                         chartID={obj.item.rep_id.toString()}/>

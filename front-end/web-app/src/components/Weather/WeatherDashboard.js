@@ -2,11 +2,13 @@ import React , { useEffect }from 'react';
 import clsx from 'clsx';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Chart from './Chart';
+import LineChart from './LineChart';
 import Data from './Data';
 import { CardContent } from '@material-ui/core';
 import Filters from './Filters'
 import Title from '../Title'
+import HeatChart from './HeatChart'
+import BoxPlotChart from './BoxPlotChart'
 import { useStyles }  from '../../css/DashboardCSS'
 import API from '../../api-services'
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -109,20 +111,66 @@ export default function WeatherDashboard(props) {
                   <React.Fragment>
                       {selectedDataset  && <Title>{measure[selectedDataset][0]} 
                         { filters.start ? 
-                          <React.Fragment> from {filters.start}  </React.Fragment>: 
-                          <React.Fragment> from the first record </React.Fragment>}
+                          <React.Fragment> from <b>{filters.start}</b>  </React.Fragment>: 
+                          <React.Fragment> from the first available record </React.Fragment>}
                         { filters.end ? 
-                          <React.Fragment> to {filters.end} </React.Fragment>: 
-                          <React.Fragment> to the last record </React.Fragment>}
+                          <React.Fragment> to <b>{filters.end}</b> </React.Fragment>: 
+                          <React.Fragment> to the last one </React.Fragment>}
                         </Title>
                       }
-                      <Chart data={data} chartID={measure[selectedDataset][0]} measure={measure[selectedDataset][1]}/>
+                      <LineChart data={data} chartID={measure[selectedDataset][0]} measure={measure[selectedDataset][1]}/>
+                    </React.Fragment>
+                )} 
+              </CardContent>
+            </Paper>
+
+          </Grid>} 
+          { filters && 
+            <Grid item xs={12} md={8} lg={6}>
+            <Paper className={classes.paper}>
+              <CardContent style={{height:500}}>
+                { loading ? 
+                    <CircularProgress color="secondary" className={classes.loading}/>
+                    : (
+                  <React.Fragment>
+                      {selectedDataset  && <Title>Average {measure[selectedDataset][0]} grouped by Day
+                        { filters.start ? 
+                          <React.Fragment> from <b>{filters.start}</b>  </React.Fragment>: 
+                          <React.Fragment> from the first available record </React.Fragment>}
+                        { filters.end ? 
+                          <React.Fragment> to <b>{filters.end}</b> </React.Fragment>: 
+                          <React.Fragment> to the last one </React.Fragment>}
+                        </Title>
+                      }
+                      <HeatChart data={data} chartID='heat'/>
                     </React.Fragment>
                 )} 
               </CardContent>
             </Paper>
           </Grid>} 
-           
+          { filters && 
+            <Grid item xs={12} md={8} lg={6}>
+            <Paper className={classes.paper}>
+              <CardContent style={{height:500}}>
+                { loading ? 
+                    <CircularProgress color="secondary" className={classes.loading}/>
+                    : (
+                  <React.Fragment>
+                      {selectedDataset  && <Title> {measure[selectedDataset][0]} grouped by Month
+                        { filters.start ? 
+                          <React.Fragment> from <b>{filters.start}</b>  </React.Fragment>: 
+                          <React.Fragment> from the first available record </React.Fragment>}
+                        { filters.end ? 
+                          <React.Fragment> to <b>{filters.end}</b> </React.Fragment>: 
+                          <React.Fragment> to the last one </React.Fragment>}
+                        </Title>
+                      }
+                      <BoxPlotChart data={data} chartID='boxplot'/>
+                    </React.Fragment>
+                )} 
+              </CardContent>
+            </Paper>
+          </Grid>} 
 
         </Grid>
 
@@ -131,7 +179,7 @@ export default function WeatherDashboard(props) {
         {/* ----------------------------------------- */}
         {/* Raw Data Component */}
         {/* ----------------------------------------- */}
-        {filters && 
+        {/* {filters && 
         <Grid container style={{paddingTop:10}}spacing={2}>
           <Grid item xs={12} md={12} lg={12}>
             <Paper square={true} >
@@ -149,7 +197,7 @@ export default function WeatherDashboard(props) {
                 
             </Paper>
           </Grid>
-        </Grid>}
+        </Grid>} */}
         
 
 
