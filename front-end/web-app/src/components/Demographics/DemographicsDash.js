@@ -10,18 +10,48 @@ import Typography from '@material-ui/core/Typography';
 import PieChart from './PieChart'
 import Filters from './Filters'
 import BarChart from './BarChart';
+import Pyramid from './Pyramid'
 import { makeStyles } from '@material-ui/core/styles';
 import { useStyles }  from '../../css/DashboardCSS'
 
 const useStyles2 = makeStyles((theme)=>({
   fixedHeightChart:{
-    height: 500,
+    height: 700,
   },
   section:{
     backgroundColor: '#4faaff'
   }
 }))
 
+const fillData = (dat, item) =>{
+  dat.gender[0]['value'] += item['Men']
+  dat.gender[1]['value'] += item['Women']
+  dat.gender[2].push({
+    'community': item['Local community'],
+    'male': item['Men'],
+    'female': item['Women']
+  })
+  dat.years[0]['value'] += item['0-2  yr']
+  dat.years[0][item['Local community']] = item['0-2  yr']
+
+  dat.years[1]['value'] += item['3-5 yr']
+  dat.years[1][item['Local community']] = item['3-5 yr']
+
+  dat.years[2]['value'] += item['6-15 yr']
+  dat.years[2][item['Local community']] = item['6-15 yr']
+  
+  dat.years[3]['value'] += item['16-19 yr']
+  dat.years[3][item['Local community']] = item['16-19 yr']
+
+  dat.years[4]['value'] += item['20-24 yr']
+  dat.years[4][item['Local community']] = item['20-24 yr']
+
+  dat.years[5]['value'] += item["25-64 yr"]
+  dat.years[5][item['Local community']] = item['25-64 yr']
+  
+  dat.years[6]['value'] += item["65 yr -"]
+  dat.years[5][item['Local community']] = item['65 yr -']
+}
 export default function DemographicsDashboard(props) {
 
   
@@ -56,7 +86,8 @@ export default function DemographicsDashboard(props) {
       setTimeout( ()=>{
             let dat = { 
               gender: [ { 'gender' : 'Men','value' : 0}, 
-                        { 'gender' : 'Women','value' : 0},]
+                        { 'gender' : 'Women','value' : 0},
+                        []]
               , years: [ { 'year': '0-2 yr', 'value': 0},
                          { 'year': '3-5 yr', 'value': 0},
                          { 'year': '6-15 yr', 'value': 0},
@@ -68,18 +99,9 @@ export default function DemographicsDashboard(props) {
             API.demographicsAPI()
             .then(resp => {
                 for (let key in filters){
-                  console.log('mpika')
                   if ((key==='All') && (filters[key]===true)){
                     resp.forEach( (item)=>{
-                      dat.gender[0]['value'] += item['Men']
-                      dat.gender[1]['value'] += item['Women']
-                      dat.years[0]['value'] += item['0-2  yr']
-                      dat.years[1]['value'] += item['3-5 yr']
-                      dat.years[2]['value'] += item['6-15 yr']
-                      dat.years[3]['value'] += item['16-19 yr']
-                      dat.years[4]['value'] += item['20-24 yr']
-                      dat.years[5]['value'] += item["25-64 yr"]
-                      dat.years[6]['value'] += item["65 yr -"]
+                      fillData(dat,item)
                     })
                     break;
                   }
@@ -87,15 +109,7 @@ export default function DemographicsDashboard(props) {
                     for (var i = 0; i < resp.length; i++) {
                       let item = resp[i]
                       if (key === item['Local community']){
-                        dat.gender[0]['value'] += item['Men']
-                        dat.gender[1]['value'] += item['Women']
-                        dat.years[0]['value'] += item['0-2  yr']
-                        dat.years[1]['value'] += item['3-5 yr']
-                        dat.years[2]['value'] += item['6-15 yr']
-                        dat.years[3]['value'] += item['16-19 yr']
-                        dat.years[4]['value'] += item['20-24 yr']
-                        dat.years[5]['value'] += item["25-64 yr"]
-                        dat.years[6]['value'] += item["65 yr -"]
+                        fillData(dat,item)
                         break;
                       }
                     }
@@ -148,28 +162,28 @@ export default function DemographicsDashboard(props) {
                 </Grid>
                 <Grid item xs={12} md={12} lg={5}>
                   <Paper className={classes.paper}>
-                    <CardContent className={fixedHeightPaper} >
+                    <CardContent style={{height:400}} className={clsx(classes.paper)}>
                       { loading ? 
                           <CircularProgress color="secondary" className={classes.loading}/>
                           : (
                         <React.Fragment>
                             <Title>Pie chart of gender distribution</Title> 
-                            <PieChart data={data.gender} category='gender'  chartID='gender pie'/>
+                            <PieChart data={data.gender.slice(0,2)} category='gender'  chartID='gender pie'/>
                           </React.Fragment>
                       )} 
                     </CardContent>
                   </Paper>
                 </Grid>
                 
-                <Grid item xs={12} md={12} lg={7}>
+                <Grid item xs={12} md={12} lg={12}>
                   <Paper className={classes.paper}>
                     <CardContent className={fixedHeightPaper} >
                       { loading ? 
                           <CircularProgress color="secondary" className={classes.loading}/>
                           : (
                         <React.Fragment>
-                            <Title>Bar chart of gender distribution</Title> 
-                            <BarChart data={data.gender} category='gender'  chartID='gender bar'/>
+                            <Title>Pyramid of gender distribution</Title> 
+                            <Pyramid data={data.gender[2]}  chartID='gender bar'/>
                           </React.Fragment>
                       )} 
                     </CardContent>
@@ -184,7 +198,7 @@ export default function DemographicsDashboard(props) {
                 </Grid>
                 <Grid item xs={12} md={12} lg={5}>
                   <Paper className={classes.paper}>
-                    <CardContent className={fixedHeightPaper} >
+                    <CardContent style={{height:400}}  >
                       { loading ? 
                           <CircularProgress color="secondary" className={classes.loading}/>
                           : (
@@ -196,7 +210,7 @@ export default function DemographicsDashboard(props) {
                     </CardContent>
                   </Paper>
                 </Grid>
-                <Grid item xs={12} md={12} lg={7}>
+                <Grid item xs={12} md={12} lg={12}>
                   <Paper className={classes.paper}>
                     <CardContent className={fixedHeightPaper} >
                       { loading ? 

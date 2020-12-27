@@ -17,22 +17,40 @@ export default function BarChart(props) {
         
         chartRef.current = am4core.create(chartID, am4charts.XYChart);
         chartRef.current.data = data;
-        
-        //----------------------------------------------------
-        // Create Category Axis (xAxis) and Value Axis (yAxis)
-        //-----------------------------------------------------
-        let categoryAxis = chartRef.current.xAxes.push(new am4charts.CategoryAxis());
-        categoryAxis.dataFields.category = props.category;
-        
-        var valueAxis = chartRef.current.yAxes.push(new am4charts.ValueAxis());
-        
-        //---------------------
-        // Create Series
-        //---------------------
-        var series = chartRef.current.series.push(new am4charts.ColumnSeries());
-        series.dataFields.valueY = "value";
-        series.dataFields.categoryX = props.category;
-        series.columns.template.tooltipText = "Category: {categoryX}\nValue: {valueY}";
+        let chart = chartRef.current
+        var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+
+        categoryAxis.dataFields.category = "year";
+        categoryAxis.title.text = "Ages";
+        categoryAxis.renderer.grid.template.location = 0;
+        categoryAxis.renderer.minGridDistance = 20;
+        categoryAxis.renderer.cellStartLocation = 0.1;
+        categoryAxis.renderer.cellEndLocation = 0.9;
+
+        var  valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        valueAxis.min = 0;
+        valueAxis.title.text = "Number";
+
+        // Create series
+        function createSeries(field, name) {
+          var series = chart.series.push(new am4charts.ColumnSeries());
+          series.dataFields.valueY = field;
+          series.dataFields.categoryX = "year";
+          series.name = name;
+          series.columns.template.tooltipText = "{name}: [bold]{valueY}[/]";
+          series.stacked = true;
+          series.columns.template.width = am4core.percent(95);
+        }
+
+        Object.keys(data[0]).forEach( key =>{
+          
+          if (key!=='year' && key!=='value'){
+            createSeries(key, key);
+          }
+        })
+
+        // Add legend
+        chart.legend = new am4charts.Legend();
 
     }
 
