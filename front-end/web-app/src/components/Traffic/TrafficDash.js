@@ -7,7 +7,7 @@ import API from '../../api-services'
 import Map from './Map'
 import Filters from './TrafficFilters'
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Chart from './Chart'
+import TabContainer from './TabContainer' 
 import { useStyles }  from '../../css/DashboardCSS'
 
 function formatDate(start,end){
@@ -15,6 +15,7 @@ function formatDate(start,end){
   start =  start ? `${start.getFullYear()}-${start.getMonth()+1}-${start.getDate()}` : null
   return {start,end}
 }
+
 
 
 export default function TrafficDash(props){
@@ -31,7 +32,7 @@ export default function TrafficDash(props){
     const [disabledMap, setDisabledMap] = useState(true)
     const [disabledFilters, setDisabledFilters] = useState(true)
     const [loading, setLoading] = useState(null)
-
+ 
     
     /* ----------------------------------- */
     /* Handle Filter Submission */
@@ -68,6 +69,7 @@ export default function TrafficDash(props){
             })
             data.push({item, res})
           }))
+          console.log(data)
           setData(data)
           setLoading(false)
         }
@@ -120,6 +122,8 @@ export default function TrafficDash(props){
             {/* ----------------------------------------- */}
             {/* if we have a submitted sensor, load charts */}
             {/* ----------------------------------------- */}
+            
+            
             { filters && (
                 loading ? 
                   <Grid item  xs={12} md={4} lg={9} >
@@ -130,23 +134,11 @@ export default function TrafficDash(props){
                     </Paper>
                   </Grid>
                 :
-                  <Grid item  xs={12} md={4} lg={9} >      
-                    <Grid container spacing={2}>
-                      {data.map((obj,index)=> {
-                          return (
-                          <Grid key={index} item xs={12} md={4} lg={12} >
-                              <Paper className={classes.paper}>
-                                <CardContent >
-                                  <Title> Average Speed and Vehicle Count from sensor <b>{obj.item.point_1}</b> to sensor <b>{obj.item.point_2}</b></Title>
-                                  <Chart field={['vehicleCount','avgSpeed']} 
-                                        data={obj.res} 
-                                        chartID={obj.item.rep_id.toString()}/>
-                                </CardContent>
-                              </Paper>
-                          </Grid>
-                          )})}
-                    </Grid>
-                  </Grid> )
+                <Grid item  xs={12} md={4} lg={9}>
+                  <Paper>
+                    <TabContainer data={data}/>     
+                  </Paper>  
+                </Grid> )
             }
           </Grid>
         

@@ -99,9 +99,11 @@ export default function WeatherDashboard(props) {
 
           
             {/* ----------------------------------------- */}
-            {/* Chart Component */}
+            {/* Charts Component */}
             {/* ----------------------------------------- */}
            { filters && 
+
+            // Line Chart with raw Data
             <Grid item xs={12} md={8} lg={9}>
             <Paper className={classes.paper}>
               <CardContent className={fixedHeightPaper} >
@@ -126,6 +128,7 @@ export default function WeatherDashboard(props) {
 
           </Grid>} 
           { filters && 
+            // HeatChart grouped by Day
             <Grid item xs={12} md={8} lg={6}>
             <Paper className={classes.paper}>
               <CardContent style={{height:500}}>
@@ -149,6 +152,7 @@ export default function WeatherDashboard(props) {
             </Paper>
           </Grid>} 
           { filters && 
+            // Box plot grouped by Month
             <Grid item xs={12} md={8} lg={6}>
             <Paper className={classes.paper}>
               <CardContent style={{height:500}}>

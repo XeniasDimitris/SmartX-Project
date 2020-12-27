@@ -6,15 +6,19 @@ import { CardContent } from '@material-ui/core';
 import Title from '../Title'
 import API from '../../api-services'
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Typography from '@material-ui/core/Typography';
 import PieChart from './PieChart'
 import Filters from './Filters'
 import BarChart from './BarChart';
 import { makeStyles } from '@material-ui/core/styles';
 import { useStyles }  from '../../css/DashboardCSS'
 
-const useStyles2 = makeStyles(()=>({
+const useStyles2 = makeStyles((theme)=>({
   fixedHeightChart:{
     height: 500,
+  },
+  section:{
+    backgroundColor: '#4faaff'
   }
 }))
 
@@ -135,8 +139,14 @@ export default function DemographicsDashboard(props) {
            { filters && 
             <Grid item xs={12} md={8} lg={9}>
               <Grid container spacing={2}>
-                
-                <Grid item xs={12} md={12} lg={6}>
+                <Grid item xs={12} md={12} lg={12}>
+                  <Paper className={clsx(classes.paper, classes2.section)}>
+                    <Typography component="span" variant="h6" style={{color:'white'}} gutterBottom>
+                    Gender Distribution
+                    </Typography>
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} md={12} lg={5}>
                   <Paper className={classes.paper}>
                     <CardContent className={fixedHeightPaper} >
                       { loading ? 
@@ -151,7 +161,7 @@ export default function DemographicsDashboard(props) {
                   </Paper>
                 </Grid>
                 
-                <Grid item xs={12} md={12} lg={6}>
+                <Grid item xs={12} md={12} lg={7}>
                   <Paper className={classes.paper}>
                     <CardContent className={fixedHeightPaper} >
                       { loading ? 
@@ -165,8 +175,14 @@ export default function DemographicsDashboard(props) {
                     </CardContent>
                   </Paper>
                 </Grid>
-
-                <Grid item xs={12} md={12} lg={6}>
+                <Grid item xs={12} md={12} lg={12}>
+                  <Paper className={clsx(classes.paper, classes2.section)}>
+                    <Typography component="span" variant="h6" style={{color:'white'}} gutterBottom>
+                          Age Distribution
+                    </Typography>
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} md={12} lg={5}>
                   <Paper className={classes.paper}>
                     <CardContent className={fixedHeightPaper} >
                       { loading ? 
@@ -180,7 +196,7 @@ export default function DemographicsDashboard(props) {
                     </CardContent>
                   </Paper>
                 </Grid>
-                <Grid item xs={12} md={12} lg={6}>
+                <Grid item xs={12} md={12} lg={7}>
                   <Paper className={classes.paper}>
                     <CardContent className={fixedHeightPaper} >
                       { loading ? 
