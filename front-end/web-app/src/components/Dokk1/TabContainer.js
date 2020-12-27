@@ -79,7 +79,7 @@ export default function TableContainer (props){
   const classes = useStyles()
   const classes2 = useStyles2();
   const [value, setValue] = React.useState(0);
-
+  const filters = props.filters
   /* ----------------------------------- */
   /* Handle Tabs */
   /* ----------------------------------- */
@@ -107,7 +107,13 @@ export default function TableContainer (props){
                 <Grid item  xs={12} md={4} lg={12} >      
                 <Paper className={classes.paper}>
                     <CardContent >
-                    <Title> Humidity and Temperature of Sensor <b>{id}</b>  </Title>
+                    <Title> Humidity and Temperature of Sensor <b>{id}</b> 
+                      { filters.start ? 
+                      <React.Fragment> from <b>{filters.start}</b>  </React.Fragment>: 
+                      <React.Fragment> from the first available record </React.Fragment>}
+                    { filters.end ? 
+                      <React.Fragment> to <b>{filters.end}</b> </React.Fragment>: 
+                      <React.Fragment> to the last one </React.Fragment>}</Title>
                     <LineChart  
                             data={data} 
                             field={['humidity', 'temperature']}
@@ -118,7 +124,13 @@ export default function TableContainer (props){
                 <Grid item  xs={12} md={4} lg={12} >      
                 <Paper className={classes.paper}>
                     <CardContent >
-                    <Title> Co2 of Sensor <b>{id}</b> </Title>
+                    <Title> Co2 of Sensor <b>{id}</b>
+                    { filters.start ? 
+                    <React.Fragment> from <b>{filters.start}</b>  </React.Fragment>: 
+                    <React.Fragment> from the first available record </React.Fragment>}
+                  { filters.end ? 
+                    <React.Fragment> to <b>{filters.end}</b> </React.Fragment>: 
+                    <React.Fragment> to the last one </React.Fragment>}</Title>
                     <LineChart 
                             data={data} 
                             field={['co2']}
@@ -129,7 +141,13 @@ export default function TableContainer (props){
                 <Grid item  xs={12} md={4} lg={12} >      
                 <Paper className={classes.paper}>
                     <CardContent >
-                    <Title>Light Level and Color of Sensor {<b>{id}</b>} </Title>
+                    <Title>Light Level and Color of Sensor {<b>{id}</b>} 
+                    { filters.start ? 
+                    <React.Fragment> from <b>{filters.start}</b>  </React.Fragment>: 
+                    <React.Fragment> from the first available record </React.Fragment>}
+                  { filters.end ? 
+                    <React.Fragment> to <b>{filters.end}</b> </React.Fragment>: 
+                    <React.Fragment> to the last one </React.Fragment>}</Title>
                     <LineChart 
                             data={data} 
                             field={['light_level', 'light_colour']}
@@ -140,7 +158,13 @@ export default function TableContainer (props){
                 <Grid item  xs={12} md={4} lg={12} >      
                 <Paper className={classes.paper}>
                     <CardContent >
-                    <Title> Occupancy of Sensor <b>{id}</b> </Title>
+                    <Title> Occupancy of Sensor <b>{id}</b> 
+                    { filters.start ? 
+                    <React.Fragment> from <b>{filters.start}</b>  </React.Fragment>: 
+                    <React.Fragment> from the first available record </React.Fragment>}
+                  { filters.end ? 
+                    <React.Fragment> to <b>{filters.end}</b> </React.Fragment>: 
+                    <React.Fragment> to the last one </React.Fragment>}</Title>
                     <LineChart 
                             data={data} 
                             field={['occupancy']}
@@ -168,7 +192,13 @@ export default function TableContainer (props){
                   <Grid key={index} item xs={12} md={4} lg={6} >
                       <Paper elevation={3} className={classes.paper}>
                         <CardContent style={{height:700}}>
-                          <Title> Grouped by Day and Time</Title>
+                          <Title> Grouped by Day and Time
+                          { filters.start ? 
+                          <React.Fragment> from <b>{filters.start}</b>  </React.Fragment>: 
+                          <React.Fragment> from the first available record </React.Fragment>}
+                        { filters.end ? 
+                          <React.Fragment> to <b>{filters.end}</b> </React.Fragment>: 
+                          <React.Fragment> to the last one </React.Fragment>}</Title>
                           <HeatChart field={helper[item]}
                                 data={data} 
                                 chartID={item+'heat'}/>
@@ -178,7 +208,13 @@ export default function TableContainer (props){
                   <Grid key={index} item xs={12} md={4} lg={6} >
                       <Paper elevation={3} className={classes.paper}>
                         <CardContent style={{height:700}}>
-                          <Title>Grouped by Month and Day</Title>
+                          <Title>Grouped by Month and Day
+                          { filters.start ? 
+                          <React.Fragment> from <b>{filters.start}</b>  </React.Fragment>: 
+                          <React.Fragment> from the first available record </React.Fragment>}
+                        { filters.end ? 
+                          <React.Fragment> to <b>{filters.end}</b> </React.Fragment>: 
+                          <React.Fragment> to the last one </React.Fragment>}</Title>
                           <BoxPlotChart field={helper[item]}
                                 data={data} 
                                 chartID={item+'boxplot'}/>

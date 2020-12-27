@@ -130,7 +130,7 @@ export default function Dokk1Dash(props){
 
                   <Grid item  xs={12} md={4} lg={9} >      
                     <Paper>
-                      <TabContainer data={data} id={selectedSensor.id}/>     
+                      <TabContainer data={data} id={selectedSensor.id} filters={filters}/>     
                     </Paper>  
                   </Grid>
             )}

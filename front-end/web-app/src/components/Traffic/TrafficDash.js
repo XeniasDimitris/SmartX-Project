@@ -136,7 +136,7 @@ export default function TrafficDash(props){
                 :
                 <Grid item  xs={12} md={4} lg={9}>
                   <Paper>
-                    <TabContainer data={data}/>     
+                    <TabContainer data={data} filters={filters}/>     
                   </Paper>  
                 </Grid> )
             }

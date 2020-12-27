@@ -70,7 +70,7 @@ export default function TableContainer (props){
   const classes = useStyles()
   const classes2 = useStyles2();
   const [value, setValue] = React.useState(0);
-
+  const filters = props.filters
   /* ----------------------------------- */
   /* Handle Tabs */
   /* ----------------------------------- */
@@ -108,7 +108,14 @@ export default function TableContainer (props){
                 <Grid key={index} item xs={12} md={4} lg={12} >
                     <Paper elevation={3} className={classes.paper}>
                       <CardContent >
-                        <Title> Average Speed and Vehicle Count</Title>
+                        <Title> Average Speed and Vehicle Count
+                        { filters.start ? 
+                          <React.Fragment> from <b>{filters.start}</b>  </React.Fragment>: 
+                          <React.Fragment> from the first available record </React.Fragment>}
+                        { filters.end ? 
+                          <React.Fragment> to <b>{filters.end}</b> </React.Fragment>: 
+                          <React.Fragment> to the last one </React.Fragment>}
+                        </Title>
                         <LineChart field={['vehicleCount','avgSpeed']} 
                               data={obj.res} 
                               chartID={obj.item.rep_id.toString()}/>
@@ -137,7 +144,14 @@ export default function TableContainer (props){
                   <Grid key={index} item xs={12} md={4} lg={6} >
                       <Paper elevation={3} className={classes.paper}>
                         <CardContent style={{height:700}}>
-                          <Title>Vehicles grouped by Day and Time</Title>
+                          <Title>Vehicles grouped by Day and Time
+                          { filters.start ? 
+                          <React.Fragment> from <b>{filters.start}</b>  </React.Fragment>: 
+                          <React.Fragment> from the first available record </React.Fragment>}
+                        { filters.end ? 
+                          <React.Fragment> to <b>{filters.end}</b> </React.Fragment>: 
+                          <React.Fragment> to the last one </React.Fragment>}
+                          </Title>
                           <HeatChart 
                                 data={obj.res} 
                                 chartID={obj.item.rep_id.toString()+'heat'}/>
@@ -147,7 +161,14 @@ export default function TableContainer (props){
                   <Grid key={index} item xs={12} md={4} lg={6} >
                       <Paper elevation={3} className={classes.paper}>
                         <CardContent style={{height:700}}>
-                          <Title>Vehicles grouped by Month and Day</Title>
+                          <Title>Vehicles grouped by Month and Day
+                          { filters.start ? 
+                          <React.Fragment> from <b>{filters.start}</b>  </React.Fragment>: 
+                          <React.Fragment> from the first available record </React.Fragment>}
+                        { filters.end ? 
+                          <React.Fragment> to <b>{filters.end}</b> </React.Fragment>: 
+                          <React.Fragment> to the last one </React.Fragment>}
+                          </Title>
                           <BoxPlotChart 
                                 data={obj.res} 
                                 chartID={obj.item.rep_id.toString()+'boxplot'}/>

@@ -30,6 +30,7 @@ export default function Chart(props) {
         yAxis.renderer.grid.template.disabled = true;
         yAxis.renderer.inversed = true;
         yAxis.renderer.minGridDistance = 30;
+        yAxis.title.text = 'Time';
 
         var series = chart.series.push(new am4charts.ColumnSeries());
         series.dataFields.categoryX = "day";

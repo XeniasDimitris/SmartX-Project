@@ -13,7 +13,7 @@ export default function Chart(props) {
   const chartRef= useRef(null);
   const chartID = props.chartID
   const data = transform_data_heat(props.data)
-
+  const measure = props.measure
   useEffect(() => {
     
     if (!chartRef.current) {
@@ -32,6 +32,7 @@ export default function Chart(props) {
         xAxis.renderer.grid.template.disabled = true;
         xAxis.renderer.minGridDistance = 40;
 
+        yAxis.title.text = measure;
         yAxis.renderer.grid.template.disabled = true;
         yAxis.renderer.inversed = true;
         yAxis.renderer.minGridDistance = 30;

@@ -31,7 +31,7 @@ export default function Chart(props) {
 
         var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
         valueAxis.tooltip.disabled = true;
-
+        valueAxis.title.text = props.measure;
         var series = chart.series.push(new am4charts.CandlestickSeries());
         series.dataFields.dateX = "date";
         series.dataFields.valueY = "q3";

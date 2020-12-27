@@ -145,7 +145,7 @@ export default function WeatherDashboard(props) {
                           <React.Fragment> to the last one </React.Fragment>}
                         </Title>
                       }
-                      <HeatChart data={data} chartID='heat'/>
+                      <HeatChart data={data} chartID='heat' measure={measure[selectedDataset][1]}/>
                     </React.Fragment>
                 )} 
               </CardContent>
@@ -169,7 +169,7 @@ export default function WeatherDashboard(props) {
                           <React.Fragment> to the last one </React.Fragment>}
                         </Title>
                       }
-                      <BoxPlotChart data={data} chartID='boxplot'/>
+                      <BoxPlotChart data={data} chartID='boxplot' measure={measure[selectedDataset][1]}/>
                     </React.Fragment>
                 )} 
               </CardContent>
