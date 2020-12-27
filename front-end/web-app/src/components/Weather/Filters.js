@@ -13,6 +13,8 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
 import { Typography } from '@material-ui/core';
 
 export default function Filters(props) {
@@ -139,7 +141,7 @@ export default function Filters(props) {
          label="Wind Direction"
         />        
         <FormControlLabel
-        control={<Checkbox checked={wind_speed} onChange={handleCheckboxChange} name="wind_speed" />}
+        control={<Checkbox checked={wind_speed}  onChange={handleCheckboxChange} name="wind_speed" />}
         label="Wind Speed"
        />
      </FormGroup>

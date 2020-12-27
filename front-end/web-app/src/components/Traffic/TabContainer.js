@@ -138,7 +138,7 @@ export default function TableContainer (props){
                       <Paper elevation={3} className={classes.paper}>
                         <CardContent style={{height:700}}>
                           <Title>Vehicles grouped by Day and Time</Title>
-                          <HeatChart field={['vehicleCount','avgSpeed']} 
+                          <HeatChart 
                                 data={obj.res} 
                                 chartID={obj.item.rep_id.toString()+'heat'}/>
                         </CardContent>
@@ -148,7 +148,7 @@ export default function TableContainer (props){
                       <Paper elevation={3} className={classes.paper}>
                         <CardContent style={{height:700}}>
                           <Title>Vehicles grouped by Month and Day</Title>
-                          <BoxPlotChart field={['vehicleCount','avgSpeed']} 
+                          <BoxPlotChart 
                                 data={obj.res} 
                                 chartID={obj.item.rep_id.toString()+'boxplot'}/>
                         </CardContent>

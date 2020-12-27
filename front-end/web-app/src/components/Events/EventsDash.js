@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import clsx from 'clsx';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import { CardContent, Tab } from '@material-ui/core';
+import { CardContent} from '@material-ui/core';
 import Filters from './EventsFilters'
 import Title from '../Title'
 import { useStyles }  from '../../css/DashboardCSS'

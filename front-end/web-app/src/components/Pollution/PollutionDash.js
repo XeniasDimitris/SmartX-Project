@@ -7,7 +7,7 @@ import API from '../../api-services'
 import Map from './PollutionMap'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Filters from './PollutionFilters'
-import Chart from './PollutionChart'
+import TabContainer from './TabContainer'
 import { useStyles }  from '../../css/DashboardCSS'
 
 function formatDate(start,end){
@@ -128,34 +128,11 @@ export default function PollutionDash(props){
                     </Paper>
                   </Grid>
                 :
-                  <Grid item  xs={12} md={4} lg={9} >    
-                    <Grid container spacing={2}>  
-                      <Grid item xs={12} md={4} lg={12}>
-                        <Paper className={classes.paper}>
-                        <CardContent >
-                          <Title>Carbon Monoxide, Nitrogen Dioxide and Sulfure Dioxide </Title>
-                          <Chart  
-                                data={data} 
-                                field={['carbon_monoxide', 'nitrogen_dioxide','sulfure_dioxide']}
-                                chartID='carbon_nitr_diox'/> 
-
-                        </CardContent>
-                        </Paper>
-                      </Grid>
-                      <Grid item xs={12} md={4} lg={12}>
-                        <Paper className={classes.paper}>
-                        <CardContent >
-                          <Title>Ozone and particullate matter </Title>
-                          <Chart 
-                                data={data} 
-                                field={['ozone','particullate_matter']}
-                                chartID='ozone_parmat'/> 
-
-                        </CardContent>
-                        </Paper>
-                      </Grid>
-                    </Grid>
-                  </Grid>
+                <Grid item  xs={12} md={4} lg={9} >    
+                  <Paper>
+                    <TabContainer data={data}/>     
+                  </Paper>  
+                </Grid>
             )}
 
           </Grid>

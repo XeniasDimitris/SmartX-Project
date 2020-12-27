@@ -1,26 +1,5 @@
+import {Q1,Median,Q3} from '../utils'
 
-const Median = (array) =>{
-    let pos = (array.length -1 )* .5
-    let base = Math.floor(pos)
-    if (pos===base){
-        return array[pos]
-    }
-    return (array[base]+array[base+1])/2
-}
-
-const Q1 = (array) =>{
-    let pos = (array.length -1 )* .5
-    let base = Math.floor(pos)
-    if (pos===base){
-        return Median(array.slice(0,base))
-    }
-    return Median(array.slice(0,base+1))
-}
-const Q3 = (array) =>{
-    let pos = (array.length -1 )* .5
-    let base = Math.floor(pos)
-    return Median(array.slice(base+1, array.length))
-}
 
 export const transform_data_heat = (data)=>{
     let months = {0:'Jan', 1:'Feb', 2:'Mar', 3:'Apr', 4:'May', 5:'Jun', 6:'Jul', 7:'Aug', 8:'Sept', 9:'Oct', 10:'Nov', 11:'Dec'}
@@ -43,7 +22,7 @@ export const transform_data_heat = (data)=>{
     for (let i=0; i< data.length; i++){
         let datetime = data[i]['datetime']
         let date = datetime.getDate()
-        if (i==0){
+        if (i===0){
             base_date =  datetime.getDate()
             base_month =  datetime.getMonth()
             if (data[i]['value']) {
@@ -52,7 +31,7 @@ export const transform_data_heat = (data)=>{
             }
             continue;
         }
-        if ( date != base_date){
+        if ( date !== base_date){
             res.push({
                 'month': months[base_month],
                 'date': base_date,
@@ -63,7 +42,7 @@ export const transform_data_heat = (data)=>{
             value = 0
             count = 0
         }
-        if (i==data.length-1){
+        if (i===data.length-1){
             if (data[i]['value']) {
                 value += data[i]['value']
                 count++
@@ -90,7 +69,7 @@ export const transform_data_box = (data) => {
     // Create an array for each month and add every value in a month-array in ascenting order
     let arr = []
     Object.keys(months).forEach( () =>{
-        arr.push(new Array())
+        arr.push([])
     })
     data.forEach( item =>{
         let base_month =  item['datetime'].getMonth()

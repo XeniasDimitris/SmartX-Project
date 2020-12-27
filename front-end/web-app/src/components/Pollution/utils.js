@@ -1,7 +1,6 @@
 import {Q1,Median,Q3} from '../utils'
 
-
-export const transform_data_heat = (data)=>{
+export const transform_data_heat = (data,field)=>{
     let days = {0:'Sun', 1:'Mon', 2:'Tue', 3:'Wed', 4:'Thu', 5:'Fri', 6:'Sat'}
     let res = {0:{}, 1:{}, 2:{}, 3:{}, 4:{}, 5:{}, 6:{}}
 
@@ -17,10 +16,12 @@ export const transform_data_heat = (data)=>{
         if (minutes === 0){ minutes = '00'}
         let time= `${hours}:${minutes}`
         if (res[day][time]){
-            res[day][time]+= data[i]['vehicleCount']
+            res[day][time]['value']+= data[i][field]
+            res[day][time]['count']+= 1
             continue
         }
-        res[day][time] = data[i]['vehicleCount']
+        res[day][time] = { 'value': data[i][field],
+                           'count': 1}
     }
     let response = []
     Object.keys(res).forEach( key =>{
@@ -28,14 +29,14 @@ export const transform_data_heat = (data)=>{
             response.push({
                 'day': days[key],
                 'time': x,
-                'value': res[key][x]
+                'value': res[key][x]['value'] / res[key][x]['count'] 
             })
        })
     }) 
     return response
 }
 
-export const transform_data_box = (data) => {
+export const transform_data_box = (data,field) => {
 
     let months = {1:'Jan', 2:'Feb', 3:'Mar', 4:'Apr', 5:'May', 6:'Jun', 7:'Jul', 8:'Aug', 9:'Sept', 10:'Oct', 11:'Nov', 12:'Dec'}
 
@@ -44,34 +45,12 @@ export const transform_data_box = (data) => {
     Object.keys(months).forEach( () =>{
         arr.push([])
     })
-    let base_month = -1
-    let base_date = -1
-    let value = 0 
-    for (let i=0; i< data.length; i++){
-        let datetime = data[i]['datetime']
-        let date = datetime.getDate()
-        if (i===0){
-            base_date =  datetime.getDate()
-            base_month =  datetime.getMonth()
-            if (data[i]['vehicleCount']) {
-                value += data[i]['vehicleCount']
-            }
-            continue;
+    data.forEach( item =>{
+        let base_month =  item['datetime'].getMonth()
+        if (item[field]) {
+            arr[base_month].push(item[field])
         }
-        if ( date !== base_date){
-            arr[base_month].push(value)
-            base_month =  datetime.getMonth()
-            base_date = date
-            value = 0
-        }
-        if (i===data.length-1){
-            arr[base_month].push(value)
-            break;
-        }
-        
-        value += data[i]['vehicleCount']
-        
-    }
+    })
     arr.forEach( newarr =>{
         newarr.sort((a, b) => a - b);
     })
