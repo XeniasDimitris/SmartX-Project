@@ -7,7 +7,7 @@ import API from '../../api-services'
 import Map from './Dokk1Map'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Filters from './Dokk1Filters'
-import Chart from './Dokk1Chart'
+import TabContainer from './TabContainer'
 import { useStyles }  from '../../css/DashboardCSS'
 
 function formatDate(start,end){
@@ -129,52 +129,9 @@ export default function Dokk1Dash(props){
                 :
 
                   <Grid item  xs={12} md={4} lg={9} >      
-                    <Grid container spacing={2}>
-                      <Grid item  xs={12} md={4} lg={12} >      
-                        <Paper className={classes.paper}>
-                          <CardContent >
-                            <Title> Humidity and Temperature of Sensor <b>{selectedSensor.id}</b>  </Title>
-                            <Chart  
-                                  data={data} 
-                                  field={['humidity', 'temperature']}
-                                  chartID='hum_temp'/> 
-                          </CardContent>
-                        </Paper>
-                      </Grid>
-                      <Grid item  xs={12} md={4} lg={12} >      
-                        <Paper className={classes.paper}>
-                          <CardContent >
-                            <Title> Co2 of Sensor <b>{selectedSensor.id}</b> </Title>
-                            <Chart 
-                                  data={data} 
-                                  field={['co2']}
-                                  chartID='co2'/> 
-                          </CardContent>
-                        </Paper>
-                      </Grid>
-                      <Grid item  xs={12} md={4} lg={12} >      
-                        <Paper className={classes.paper}>
-                          <CardContent >
-                            <Title>Light Level and Color of Sensor {<b>{selectedSensor.id}</b>} </Title>
-                            <Chart 
-                                  data={data} 
-                                  field={['light_level', 'light_colour']}
-                                  chartID='light'/> 
-                          </CardContent>
-                        </Paper>
-                      </Grid>
-                      <Grid item  xs={12} md={4} lg={12} >      
-                        <Paper className={classes.paper}>
-                          <CardContent >
-                            <Title> Occupancy of Sensor <b>{selectedSensor.id}</b> </Title>
-                            <Chart 
-                                  data={data} 
-                                  field={['occupancy']}
-                                  chartID='occ'/> 
-                          </CardContent>
-                        </Paper>
-                      </Grid>
-                    </Grid>
+                    <Paper>
+                      <TabContainer data={data} id={selectedSensor.id}/>     
+                    </Paper>  
                   </Grid>
             )}
 
