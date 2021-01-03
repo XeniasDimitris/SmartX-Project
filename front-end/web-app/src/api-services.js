@@ -78,8 +78,8 @@ export default class API{
       .then( resp => resp.json())
     }
 
-    static async ParkingsRecsAPI(queries){
-      let url = baseURL+`parkings/records?groupBy=D`
+    static async ParkingsRecsAPI(queries, group){
+      let url = baseURL+`parkings/records?groupBy=${group}`
       if (queries.start)  {url+=`start=${queries.start}`}
       if (queries.end) {url+=`&end=${queries.end}`}
       if (queries.parking) {url+=`&parking=${queries.parking}`}

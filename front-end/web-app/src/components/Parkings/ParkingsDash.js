@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import { CardContent  } from '@material-ui/core';
+import { CardContent, recomposeColor  } from '@material-ui/core';
 import Title from '../Title'
 import API from '../../api-services'
 import Map from './ParkingsMap'
@@ -60,7 +60,7 @@ export default function ParkingDash(props){
               }
               else if (datasets[key] === true || all === true){
                 let parking = key
-                let response = await API.ParkingsRecsAPI({start,end,parking})
+                let response = await API.ParkingsRecsAPI({start,end,parking},'D')
                 response.map( item => {
                   if (res[item['datetime']]){
                     res[item['datetime']][key] = item.vehiclecount
@@ -75,7 +75,34 @@ export default function ParkingDash(props){
             })
           )
           res = transform_data(res)
-          setData(res)
+          let data = {dataD : res}
+          
+          res = {}
+          await Promise.all(
+            Object.keys(datasets).map( async key =>{
+              if (datasets[key] === true && key==='All'){
+                all = true
+              }
+              else if (datasets[key] === true || all === true){
+                let parking = key
+                let response = await API.ParkingsRecsAPI({start,end,parking},'30min')
+                response.map( item => {
+                  if (res[item['datetime']]){
+                    res[item['datetime']][key] = item.vehiclecount
+                  }
+                  else{
+                    res[item['datetime']] = new Object()
+                    res[item['datetime']][key] = item.vehiclecount
+                 }
+                })
+              }
+              
+            })
+          )
+          res = transform_data(res)
+          data.dataH = res
+          console.log(data)
+          setData(data)
           setLoading(false)
 
           }
@@ -142,11 +169,9 @@ export default function ParkingDash(props){
                   </Grid>
                 :
                   <Grid item  xs={12} md={4} lg={12} >      
-                    <Paper className={classes.paper}>
-                      <CardContent >
-                        <TabContainer data={data} />
-                      </CardContent>
-                    </Paper>
+                   <Paper>
+                      <TabContainer data={data} filters={filters} />
+                   </Paper>
                   </Grid>
             )}
 
