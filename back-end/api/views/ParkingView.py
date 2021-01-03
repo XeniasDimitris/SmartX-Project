@@ -23,6 +23,8 @@ class ParkingRecordsView(APIView):
 
         start = request.query_params['start'] if 'start' in request.query_params else None
         end = request.query_params['end'] if 'end' in request.query_params else None
-        res = get_parkings_records(data_dir, start, end)
+        parking = request.query_params['parking'] if 'parking' in request.query_params else None
+        groupby = request.query_params['groupBy'] if 'groupBy' in request.query_params else None
+        res = get_parkings_records(data_dir, start, end, parking, groupby)
         return Response(res, status=status.HTTP_200_OK)
 

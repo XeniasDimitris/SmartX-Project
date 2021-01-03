@@ -11,7 +11,6 @@ export default function Chart(props) {
   const chartRef= useRef(null);
   const chartID = props.chartID
   const data = transform_data_box(props.data)
-  console.log(data)
   useEffect(() => {
     
     if (!chartRef.current) {

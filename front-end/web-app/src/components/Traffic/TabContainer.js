@@ -144,7 +144,7 @@ export default function TableContainer (props){
                   <Grid key={index} item xs={12} md={4} lg={6} >
                       <Paper elevation={3} className={classes.paper}>
                         <CardContent style={{height:700}}>
-                          <Title>Vehicles grouped by Day and Time
+                          <Title>Cumulative Vehicle frequency per hour of day
                           { filters.start ? 
                           <React.Fragment> from <b>{filters.start}</b>  </React.Fragment>: 
                           <React.Fragment> from the first available record </React.Fragment>}
@@ -161,7 +161,7 @@ export default function TableContainer (props){
                   <Grid key={index} item xs={12} md={4} lg={6} >
                       <Paper elevation={3} className={classes.paper}>
                         <CardContent style={{height:700}}>
-                          <Title>Vehicles grouped by Month and Day
+                          <Title> Analytics for daily cumulative data per month
                           { filters.start ? 
                           <React.Fragment> from <b>{filters.start}</b>  </React.Fragment>: 
                           <React.Fragment> from the first available record </React.Fragment>}

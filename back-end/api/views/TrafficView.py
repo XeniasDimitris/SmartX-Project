@@ -32,8 +32,10 @@ class TrafficRecordsView(APIView):
         start = request.query_params['start'] if 'start' in request.query_params else None
         end = request.query_params['end'] if 'end' in request.query_params else None
         report_id = request.query_params['id'] if 'id' in request.query_params else None
+        groupby = request.query_params['groupBy'] if 'groupBy' in request.query_params else None
+
         if not report_id:
             return Response({'error': 'no id is given'}, status=status.HTTP_400_BAD_REQUEST)
 
-        res = get_traffic_records(data_dir, start, end, report_id)
+        res = get_traffic_records(data_dir, start, end, report_id, groupby)
         return Response(res, status=status.HTTP_200_OK)

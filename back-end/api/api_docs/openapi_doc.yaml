@@ -375,6 +375,28 @@ paths:
               value: 2014-11
             YYYY:
               value: '2014'
+        - name: parking
+          in: query
+          description: 'If filled, the records are only about this particular parking area'
+          required: false
+          schema:
+            type: string
+          examples:
+            Parking:
+              value: NORREPORT
+        - name: groupBy
+          in: query
+          description: 'If filled, the records will be returned grouped by the given frequency'
+          required: false
+          schema:
+            type: string
+          examples:
+            Day:
+              value: D
+            Month:
+              value: M
+            Hour:
+              value: H
       responses:
         '200':
           description: Successful operation
@@ -486,6 +508,19 @@ paths:
           examples:
             Sensor:
               value: 71c3e
+        - name: groupBy
+          in: query
+          description: 'If filled, the records will be returned grouped by the given frequency'
+          required: false
+          schema:
+            type: string
+          examples:
+            Day:
+              value: D
+            Month:
+              value: M
+            Hour:
+              value: H
       responses:
         '200':
           description: Successful operation
@@ -785,6 +820,19 @@ paths:
           examples:
             Sensor:
               value: '158895'
+        - name: groupBy
+          in: query
+          description: 'If filled, the records will be returned grouped by the given frequency'
+          required: false
+          schema:
+            type: string
+          examples:
+            Day:
+              value: D
+            Month:
+              value: M
+            Hour:
+              value: H
       responses:
         '200':
           description: Successful operation
@@ -886,6 +934,19 @@ paths:
           examples:
             Sensor:
               value: '158895'
+        - name: groupBy
+          in: query
+          description: 'If filled, the records will be returned grouped by the given frequency'
+          required: false
+          schema:
+            type: string
+          examples:
+            Day:
+              value: D
+            Month:
+              value: M
+            Hour:
+              value: H
       responses:
         '200':
           description: Successful operation

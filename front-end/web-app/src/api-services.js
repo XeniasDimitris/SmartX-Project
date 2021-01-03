@@ -53,7 +53,7 @@ export default class API{
     }
 
     static async trafficRecordsAPI(queries){
-      let url = baseURL+`traffic/records/?id=${queries.rep_id}`
+      let url = baseURL+`traffic/records/?id=${queries.rep_id}&groupBy=30min`
       if (queries.start)  {url+=`&start=${queries.start}`}
       if (queries.end) {url+=`&end=${queries.end}`}
       const resp = await fetch(url, {
@@ -78,17 +78,20 @@ export default class API{
       .then( resp => resp.json())
     }
 
-    static ParkingsRecsAPI(queries){
-      let url = baseURL+`parkings/records?`
+    static async ParkingsRecsAPI(queries){
+      let url = baseURL+`parkings/records?groupBy=D`
       if (queries.start)  {url+=`start=${queries.start}`}
       if (queries.end) {url+=`&end=${queries.end}`}
-      return fetch(url, {
+      if (queries.parking) {url+=`&parking=${queries.parking}`}
+
+      let res = await fetch(url, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         },
       })
-      .then( resp => resp.json())
+      res = await res.json()
+      return res
     }
 
     static SensorsDokk1API(){
@@ -104,7 +107,7 @@ export default class API{
 
 
     static Dokk1RecsAPI(queries){
-      let url = baseURL+`dokk1/records?`
+      let url = baseURL+`dokk1/records?groupBy=30min`
       if (queries.start)  {url+=`start=${queries.start}`}
       if (queries.end) {url+=`&end=${queries.end}`}
       if (queries.id) {url+=`&id=${queries.id}`}
@@ -130,8 +133,8 @@ export default class API{
 
 
     static PollutionRecsAPI(queries){
-      let url = baseURL+`pollution/records?`
-      if (queries.start)  {url+=`start=${queries.start}`}
+      let url = baseURL+`pollution/records?groupBy=30min`
+      if (queries.start)  {url+=`&start=${queries.start}`}
       if (queries.end) {url+=`&end=${queries.end}`}
       if (queries.report_id) {url+=`&id=${queries.report_id}`}
       return fetch(url, {
@@ -148,7 +151,6 @@ export default class API{
       let url = baseURL + 'events?'
       if (queries.start)  {url+=`start=${queries.start}`}
       if (queries.end) {url+=`&end=${queries.end}`}
-      console.log(url)
       return fetch(url, {
         method: 'GET',
         headers: {

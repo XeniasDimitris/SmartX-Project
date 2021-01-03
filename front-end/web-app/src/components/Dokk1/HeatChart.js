@@ -8,7 +8,6 @@ export default function Chart(props) {
   const chartRef= useRef(null);
   const chartID = props.chartID
   const data = transform_data_heat(props.data, props.field)
-
   useEffect(() => {
     
     if (!chartRef.current) {

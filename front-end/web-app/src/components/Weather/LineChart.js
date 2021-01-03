@@ -13,7 +13,6 @@ export default function Chart(props) {
   const data = props.data
   const measure = props.measure
   
-  console.log('chart', data)
   useEffect(() => {
     
     if (!chartRef.current) {

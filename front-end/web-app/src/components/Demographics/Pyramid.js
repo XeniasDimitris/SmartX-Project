@@ -17,7 +17,6 @@ const max = (array) =>{
         }
         count += item['male']
     })
-    console.log(max,count)
     return max / count * 100 + 2
 }
 

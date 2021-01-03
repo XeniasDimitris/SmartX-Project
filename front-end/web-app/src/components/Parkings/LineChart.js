@@ -12,7 +12,6 @@ export default function Chart(props) {
   const chartID = props.chartID
   const data = props.data
 
-  console.log('chart', data)
   useEffect(() => {
     
     if (!chartRef.current) {
@@ -30,8 +29,6 @@ export default function Chart(props) {
       xAxis.renderer.labels.template.fill = am4core.color('#ced1e0');
       xAxis.renderer.labels.template.fontSize = 14;
       xAxis.title.text = "DateTime";
-      xAxis.groupData = true;
-      xAxis.groupCount = 1500;
       
       //--------------------------
       // Add Y Axis
@@ -41,7 +38,7 @@ export default function Chart(props) {
       yAxis.renderer.labels.template.fill = am4core.color('#ced1e0');
       yAxis.renderer.labels.template.fontSize = 14;
       yAxis.renderer.grid.template.strokeOpacity = 1;
-      yAxis.title.text = 'Spaces';
+      yAxis.title.text = 'Vehicles';
       yAxis.cursorTooltipEnabled = false;
 
 
@@ -58,7 +55,6 @@ export default function Chart(props) {
         series.yAxis = yAxis;
         series.name = name;
         series.showOnInit = true;
-        series.tensionX = 0.8;
         series.fillOpacity = 0.1;
         series.connect = false
         series.autoGapCount = 40
@@ -73,8 +69,7 @@ export default function Chart(props) {
 
       }
       
-      createSeries(props.field[0], props.field[0], false);
-      createSeries(props.field[1], props.field[1], true);
+      createSeries('sum','Vehicles', false);
 
       //--------------------------
       // Add cursor

@@ -7,8 +7,10 @@ import API from '../../api-services'
 import Map from './ParkingsMap'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Filters from './ParkingsFilters'
-import LineChart from './LineChart'
+import { transform_data } from './utils'
+import TabContainer from './TabContainer'
 import { useStyles }  from '../../css/DashboardCSS'
+
 
 function formatDate(start,end){
   end = end ? `${end.getFullYear()}-${end.getMonth()+1}-${end.getDate()}`: null
@@ -27,7 +29,6 @@ export default function ParkingDash(props){
     const [filters,setFilters] = useState(null)
     const [loading, setLoading] = useState(null)
     const [data, setData] = useState(null)
-    const [selectedParking, setSelectedParking] = useState(null)
 
     
     /* ----------------------------------- */
@@ -48,56 +49,38 @@ export default function ParkingDash(props){
     /* ---------------------------------------------------------- */
     useEffect( () =>{
       if (filters){
-        let {start, end, datasets} = filters
-        setTimeout( ()=>{
-              API.ParkingsRecsAPI({start,end})
-              .then(resp => {
-                  let cum_data = [] 
-                  for (let key in datasets){
-                    /* ---------------------------------------------------------- */
-                    /* if 'All' is selected,  calculate cumulative results   */
-                    /* ---------------------------------------------------------- */
-                    if  ((key==='All') && (datasets[key]===true)){
-                      setSelectedParking('All')
-                      for (let i = 0; i < resp.length; i++){ 
-                          let item = resp[i]
-                          item.datetime = new Date(item.datetime)
-                          if (cum_data.length===0) {
-                            cum_data.push(item)
-                            continue
-                          }
-                          if(item.datetime.toString() === cum_data[cum_data.length-1].datetime.toString()){
-                            cum_data[cum_data.length-1].totalspaces += item.totalspaces
-                            cum_data[cum_data.length-1].vehiclecount += item.vehiclecount
-                            continue
-                          }
-                          cum_data.push(item)
-                          
-                      }
+        const fetchdata = async () =>{
+          let {start, end, datasets} = filters
+          let res = {}
+          let all = false
+          await Promise.all(
+            Object.keys(datasets).map( async key =>{
+              if (datasets[key] === true && key==='All'){
+                all = true
+              }
+              else if (datasets[key] === true || all === true){
+                let parking = key
+                let response = await API.ParkingsRecsAPI({start,end,parking})
+                response.map( item => {
+                  if (res[item['datetime']]){
+                    res[item['datetime']][key] = item.vehiclecount
+                  }
+                  else{
+                    res[item['datetime']] = new Object()
+                    res[item['datetime']][key] = item.vehiclecount
+                 }
+                })
+              }
+              
+            })
+          )
+          res = transform_data(res)
+          setData(res)
+          setLoading(false)
 
-                      break;
-                    }
-                    /* ---------------------------------------------------------- */
-                    /* if particular Parking Area is selected, calculate results  */
-                    /* ---------------------------------------------------------- */
-                    // TODO multiple parking area selection
-                    if (datasets[key]===true){ 
-                      setSelectedParking(key)
-                      for (let i = 0; i < resp.length; i++) {
-                        let item = resp[i]
-                        if (key === item['garagecode']){
-                          item.datetime = new Date(item.datetime)
-                          cum_data.push(item)
-                        }
-                      }
-                      break;
-                    }
-                  }   
-                  setData(cum_data)
-                  setLoading(false)
-              })
-              .catch(error => error)
-            }, 500 )} 
+          }
+        fetchdata() 
+       } 
       },[filters])
 
     
@@ -161,10 +144,7 @@ export default function ParkingDash(props){
                   <Grid item  xs={12} md={4} lg={12} >      
                     <Paper className={classes.paper}>
                       <CardContent >
-                        <Title> Parking Spaces at <b>{selectedParking}</b> </Title>
-                        <LineChart field={['vehiclecount','totalspaces']} 
-                              data={data} 
-                              chartID='parkings'/> 
+                        <TabContainer data={data} />
                       </CardContent>
                     </Paper>
                   </Grid>

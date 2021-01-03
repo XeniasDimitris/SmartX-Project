@@ -50,7 +50,7 @@ const fillData = (dat, item) =>{
   dat.years[5][item['Local community']] = item['25-64 yr']
   
   dat.years[6]['value'] += item["65 yr -"]
-  dat.years[5][item['Local community']] = item['65 yr -']
+  dat.years[6][item['Local community']] = item['65 yr -']
 }
 export default function DemographicsDashboard(props) {
 

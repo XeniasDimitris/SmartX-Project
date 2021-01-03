@@ -18,40 +18,37 @@ export default function BarChart(props) {
         chartRef.current = am4core.create(chartID, am4charts.XYChart);
         chartRef.current.data = data;
         let chart = chartRef.current
-        var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
 
-        categoryAxis.dataFields.category = "year";
-        categoryAxis.title.text = "Ages";
+        var categoryAxis = chart.xAxes.push(new am4charts.DateAxis());
+        categoryAxis.title.text = "Date";
         categoryAxis.renderer.grid.template.strokeOpacity = 0;
-        categoryAxis.renderer.grid.template.location = 0;
-        categoryAxis.renderer.minGridDistance = 20;
+        categoryAxis.renderer.minGridDistance = 50;
         categoryAxis.renderer.cellStartLocation = 0.1;
         categoryAxis.renderer.cellEndLocation = 0.9;
         categoryAxis.renderer.labels.template.fill = am4core.color('#ced1e0');
 
-
         var  valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
         valueAxis.min = 0;
-        valueAxis.title.text = "Number";
+        valueAxis.title.text = "Vehicles";
         valueAxis.renderer.grid.template.stroke = am4core.color('#f0f2fa');
         valueAxis.renderer.grid.template.strokeOpacity = 1;
         valueAxis.renderer.labels.template.fill = am4core.color('#ced1e0');
 
         // Create series
-        function createSeries(field, name) {
+        function createSeries(field) {
           var series = chart.series.push(new am4charts.ColumnSeries());
           series.dataFields.valueY = field;
-          series.dataFields.categoryX = "year";
-          series.name = name;
-          series.columns.template.tooltipText = "{name}: [bold]{valueY}[/]";
+          series.dataFields.dateX = "datetime";
+          series.name = field;
+          series.columns.template.tooltipText = "[bold]{name}[/] -> {dateX}: [bold]{valueY}[/]";
           series.stacked = true;
           series.columns.template.width = am4core.percent(95);
         }
 
         Object.keys(data[0]).forEach( key =>{
           
-          if (key!=='year' && key!=='value'){
-            createSeries(key, key);
+          if (key!=='datetime' && key!=='sum'){
+            createSeries(key);
           }
         })
 

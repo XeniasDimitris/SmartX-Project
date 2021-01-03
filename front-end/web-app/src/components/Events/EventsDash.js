@@ -45,7 +45,6 @@ export default function EventsDash(props){
         setTimeout( ()=>{
          API.EventsAPI(filters)
          .then( res =>{
-             console.log(res)
              setData(res)
              setLoading(false)
          })

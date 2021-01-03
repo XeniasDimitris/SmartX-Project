@@ -10,7 +10,6 @@ export default function PieChart(props) {
   const chartRef= useRef(null);
   const chartID = props.chartID
   const data = props.data
-  console.log(data)
 
   useEffect(() => {
     

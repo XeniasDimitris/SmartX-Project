@@ -11,14 +11,32 @@ def get_sensors_info(data_dir):
     return res
 
 
-def get_sensor_records(data_dir, start, end, id):
+def get_sensor_records(data_dir, start, end, id, groupby):
     df = pd.read_csv(f'{data_dir}/DOKK1_Sensors.csv').rename(columns={'date': 'datetime'})
     df['datetime_pd'] = pd.to_datetime(df['datetime'], infer_datetime_format=True)
     df.set_index(['datetime_pd'], inplace=True)
 
     query1 = df.loc[start:end]
     query2 = query1.loc[query1['sensor'] == id]
-    res = query2.to_dict('records')
+    if groupby:
+        agg = {
+            "temperature": 'mean',
+            "humidity": 'mean',
+            "co2": 'mean',
+            "voc": 'mean',
+            "light_level": 'mean',
+            "light_colour": 'mean',
+            "sound": 'mean',
+            "sound_low": 'mean',
+            "sound_high": 'mean',
+            "occupancy": 'sum',
+            "voltage": 'mean',
+            "rssi": 'mean'
+        }
+        query2 = query2.groupby(pd.Grouper(freq=groupby)).agg(agg)
+        query2['datetime'] = query2.index.astype(str)
+
+    res = query2.dropna().to_dict('records')
     del df, query2, query1
     gc.collect()
     return res

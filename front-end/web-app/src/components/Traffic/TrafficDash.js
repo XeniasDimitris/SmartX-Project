@@ -69,7 +69,6 @@ export default function TrafficDash(props){
             })
             data.push({item, res})
           }))
-          console.log(data)
           setData(data)
           setLoading(false)
         }

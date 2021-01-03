@@ -136,7 +136,7 @@ export default function WeatherDashboard(props) {
                     <CircularProgress color="secondary" className={classes.loading}/>
                     : (
                   <React.Fragment>
-                      {selectedDataset  && <Title>Average {measure[selectedDataset][0]} grouped by Day
+                      {selectedDataset  && <Title>Average {measure[selectedDataset][0]} per day of month
                         { filters.start ? 
                           <React.Fragment> from <b>{filters.start}</b>  </React.Fragment>: 
                           <React.Fragment> from the first available record </React.Fragment>}
@@ -160,7 +160,7 @@ export default function WeatherDashboard(props) {
                     <CircularProgress color="secondary" className={classes.loading}/>
                     : (
                   <React.Fragment>
-                      {selectedDataset  && <Title> {measure[selectedDataset][0]} grouped by Month
+                      {selectedDataset  && <Title> Analytics for daily cumulative data per month 
                         { filters.start ? 
                           <React.Fragment> from <b>{filters.start}</b>  </React.Fragment>: 
                           <React.Fragment> from the first available record </React.Fragment>}

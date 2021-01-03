@@ -24,7 +24,9 @@ class Dokk1RecordsView(APIView):
         start = request.query_params['start'] if 'start' in request.query_params else None
         end = request.query_params['end'] if 'end' in request.query_params else None
         id = request.query_params['id'] if 'id' in request.query_params else None
+        groupby = request.query_params['groupBy'] if 'groupBy' in request.query_params else None
+
         if not id:
             return Response({'error': 'no id is given'}, status=status.HTTP_400_BAD_REQUEST)
-        res = get_sensor_records(data_dir, start, end, id)
+        res = get_sensor_records(data_dir, start, end, id, groupby)
         return Response(res, status=status.HTTP_200_OK)

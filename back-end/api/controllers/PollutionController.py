@@ -17,14 +17,16 @@ def get_sensors_info(data_dir):
     return arr
 
 
-def get_sensor_records(data_dir, start, end, report_id):
+def get_sensor_records(data_dir, start, end, report_id, groupby):
     df = pd.read_csv(f'{data_dir}/pollutionData{report_id}.csv')
     df['datetime_pd'] = pd.to_datetime(df['timestamp'], infer_datetime_format=True)
     df.rename(columns={'timestamp': 'datetime'}, inplace=True)
     df.set_index('datetime_pd', inplace=True)
-    query = df.loc[start:end].sort_index().drop( columns=['longitude', 'latitude'])
-    res = query.to_dict('records')
-
+    query = df.loc[start:end].sort_index().drop(columns=['longitude', 'latitude'])
+    if groupby:
+        query = query.groupby(pd.Grouper(freq=groupby)).mean()
+        query['datetime'] = query.index.astype(str)
+    res = query.dropna().to_dict('records')
     del df, query
     gc.collect()
     return res
