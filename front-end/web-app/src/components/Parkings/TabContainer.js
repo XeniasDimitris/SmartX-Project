@@ -90,7 +90,7 @@ export default function TableContainer (props){
             indicatorColor="primary"  
             onChange={handleChange}
             aria-label="simple tabs example">
-        <Tab label="Timeline Series" {...a11yProps(0)} />
+        <Tab label="Time Series" {...a11yProps(0)} />
         <Tab label="Grouped Analytics" {...a11yProps(1)} />
       </Tabs>
       </AppBar>
