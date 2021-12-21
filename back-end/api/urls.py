@@ -22,5 +22,8 @@ urlpatterns = [
     path('pollution/sensors/', views.PollutionSensorsView.as_view()),
     path('demographics/', views.DemographicsView.as_view()),
     path('events/', views.EventsView.as_view()),
-    ]
+    path('prediction/ses', views.PredictionSESView.as_view()),
+    path('prediction/mlr', views.PredictionMLRView.as_view()),
+
+]
 urlpatterns = format_suffix_patterns(urlpatterns)

@@ -5,3 +5,4 @@ from .TrafficView import *
 from .PollutionView import *
 from .DemographicsView import *
 from .EventsView import *
+from .PredictionView import *
