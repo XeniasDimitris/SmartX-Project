@@ -131,7 +131,7 @@ export default function WeatherDashboard(props) {
             // HeatChart grouped by Day
             <Grid item xs={12} md={8} lg={6}>
             <Paper className={classes.paper}>
-              <CardContent style={{height:500}}>
+              <CardContent style={{height:700}}>
                 { loading ? 
                     <CircularProgress color="secondary" className={classes.loading}/>
                     : (

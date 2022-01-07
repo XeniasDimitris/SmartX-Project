@@ -17,6 +17,7 @@
     "mapbox-gl": "^1.13.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
+    "react-jupyter-notebook": "^0.3.2",
     "react-map-gl": "^5.2.10",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.4",

@@ -159,4 +159,15 @@ export default class API{
       })
       .then( resp => resp.json())
     }
+
+    static Prediction(queries){
+      let url = baseURL + `prediction/${queries}`
+      return fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+      .then( resp => resp.json())
+    }
   }

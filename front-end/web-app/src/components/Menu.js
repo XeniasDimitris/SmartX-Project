@@ -16,6 +16,7 @@ import EcoIcon from '@material-ui/icons/Eco';
 import TrafficIcon from '@material-ui/icons/Traffic';
 import PeopleIcon from '@material-ui/icons/People';
 import CloudIcon from '@material-ui/icons/Cloud';
+import MemoryIcon from '@material-ui/icons/Memory';
 import { makeStyles } from '@material-ui/core/styles';
 
 
@@ -90,7 +91,7 @@ export default function MainListItems(props) {
   return (
     <List>
         <ListItem button onClick={handleClick} className={clsx(classes.button)}>
-        <ListItemIcon  style={{minWidth:"40px"}}>
+          <ListItemIcon  style={{minWidth:"40px"}}>
             <DashboardIcon className={classes.icons} />
           </ListItemIcon>
           <ListItemText primary='Dashboard'/>
@@ -136,7 +137,16 @@ export default function MainListItems(props) {
                           nested={true} />
           </List>
         </Collapse>
-        
+        <ListItemLink to="/predictions" primary="Predictions" 
+                          setListItemClicked={setListItemClicked} 
+                          listItemClicked={listItemClicked} 
+                          icon={<MemoryIcon className={classes.icons}/>}
+                          nested={false} />
+        <ListItemLink to="/jupyter" primary="Jupyter" 
+                          setListItemClicked={setListItemClicked} 
+                          listItemClicked={listItemClicked} 
+                          icon={<MemoryIcon className={classes.icons}/>}
+                          nested={false} />
         
       {/* <ListItemLink to="/hey2" primary="Hey2" 
                     setListItemClicked={setListItemClicked} 
